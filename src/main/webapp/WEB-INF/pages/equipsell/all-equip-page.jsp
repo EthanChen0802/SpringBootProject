@@ -49,84 +49,7 @@
   		background-color: skyblue;
   		color: white;
 	}
-  </style>
-<script>
-  
-  <!-- ajax 載入內容 -->
-	
-	// 設定頁數
-  	var indexPage = 2;
-  
-  
- 	$(function(){
-	 // 分頁啟動時載入
-	 load(indexPage); 
-  })
-  
-  
-  
-	 // 換頁時更動資料
-	 function change(page){ 
-	   	indexPage = page;
-	  	load(indexPage);
-	 }
-		 
-
-  
-	// 主要的function
-	function load(indexPage){
-		
-		$.ajax({
-			
-			type:"post",
-			url:"/consumer/findallforConsumerByPage/" + indexPage,
-			dataType:'JSON',
-			contentType:'application/json',
-			
-			success : function(data){
-				 var json = JSON.stringify(data, null, 4);
-			     //console.log("SUCCESS : ", json);
-			     
-				 var parsedObjinArray = JSON.parse(json);
-				 
-				 
-				 // 清除div下的所有子內容
-				 $(".site-section .container .row").empty();
-				 
-				 var div =  $(".site-section .container .row");
-				
-					
-				 
-				 var content =""
-				 // 資料迴圈寫出
-				 $.each(parsedObjinArray,function(i,n){
-					 
-					 content += 
-						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
-					 +	"<div class='service' style='background-color:light-grey'>"	
-					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
-					 +  "<img src='../../EquipImg/" + n.photo +"'"
-					 +  "alt='Image' class='img-fluid' style='height:220px; width:220px;  margin-left: 15px'></a>"
-					 +	"<div class='service-inner' style='height:100px'>"
-					 +  "<h3>" + n.name + "</h3>"
-					 +  "<p style='color:red'> $" + n.price +"</P>"
-					 +  "</div>"
-					 +  "</div>"
-					 +  "</div>"
-					 
-				 })
-				 
-				 // append
-				div.append(content);
-
-			}
-		
-		})
-
-	}
-
-</script>
-  
+  </style>  
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -324,10 +247,84 @@
   <script src="${pageContext.request.contextPath}/js/jquery.fancybox.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
   <script src="${pageContext.request.contextPath}/js/isotope.pkgd.min.js"></script>
-
-
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
+  
+<script>
+  
+  <!-- ajax 載入內容 -->
+	
+	// 設定頁數
+  	var indexPage = 2;
+  
+  
+ 	$(function(){
+	 // 分頁啟動時載入
+	 load(indexPage); 
+  })
+  
+  
+  
+	 // 換頁時更動資料
+	 function change(page){ 
+	   	indexPage = page;
+	  	load(indexPage);
+	 }
+		 
 
+  
+	// 主要的function
+	function load(indexPage){
+		
+		$.ajax({
+			
+			type:"post",
+			url:"/consumer/findallforConsumerByPage/" + indexPage,
+			dataType:'JSON',
+			contentType:'application/json',
+			
+			success : function(data){
+				 var json = JSON.stringify(data, null, 4);
+			     //console.log("SUCCESS : ", json);
+			     
+				 var parsedObjinArray = JSON.parse(json);
+				 
+				 
+				 // 清除div下的所有子內容
+				 $(".site-section .container .row").empty();
+				 
+				 var div =  $(".site-section .container .row");
+				
+					
+				 
+				 var content =""
+				 // 資料迴圈寫出
+				 $.each(parsedObjinArray,function(i,n){
+					 
+					 content += 
+						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+					 +	"<div class='service' style='background-color:light-grey'>"	
+					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+					 +  "<img src='../../EquipImg/" + n.photo +"'"
+					 +  "alt='Image' class='img-fluid' style='height:220px; width:220px;  margin-left: 15px'></a>"
+					 +	"<div class='service-inner' style='height:100px'>"
+					 +  "<h3>" + n.name + "</h3>"
+					 +  "<p style='color:red'> $" + n.price +"</P>"
+					 +  "</div>"
+					 +  "</div>"
+					 +  "</div>"
+					 
+				 })
+				 
+				 // append
+				div.append(content);
+
+			}
+		
+		})
+
+	}
+
+</script>
 
 
 </body>
