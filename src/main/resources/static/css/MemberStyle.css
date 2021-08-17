@@ -1,0 +1,70 @@
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+
+
+fieldset {
+    font-family: "cwTeXYen", sans-serif;
+    width: 700px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    margin: 10px;
+
+}
+
+legend {
+    color: #0000C6;
+    margin-left: 30px;
+    font-size: 26pt;
+}
+
+.divItem {
+    width: 650px;
+    /* border-bottom: 3px dashed #BEBEBE; */
+    margin: 20px;
+    padding-bottom: 10px;
+    font-size: 16pt;
+}
+
+.itemTitle{
+    width: 110px;
+    float: left;
+    text-align: right;
+    margin-right:5px ;
+}
+
+.sub{
+    width: 450px;
+    margin: 20px;
+    text-align: center;
+}
+
+.btn{
+    font-family: "cwTeXYen", sans-serif;
+    font-size: 16pt;
+    margin:0 20px;
+}
+
+textarea {
+    resize: none; /*讓使用者無法自己拖拉表單範圍*/
+    font-family: "cwTeXYen", sans-serif;
+    font-size: 16pt;
+}
+
+input[type=text]{
+    font-family: "cwTeXYen", sans-serif;
+    font-size: 16pt;
+}
+
+input[type=password]{
+    font-family: "cwTeXYen", sans-serif;
+    font-size: 16pt;
+}
+
+input[type=file]{
+    font-family: "cwTeXYen", sans-serif;
+    font-size: 10pt;
+}
+
+select{
+    font-family: "cwTeXYen", sans-serif;
+    font-size: 16pt;
+}
