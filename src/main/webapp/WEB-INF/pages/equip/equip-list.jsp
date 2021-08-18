@@ -50,7 +50,7 @@
 					<li><a class="dropdown-item" href="#!">Settings</a></li>
 					<li><a class="dropdown-item" href="#!">Activity Log</a></li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a class="dropdown-item" href="PostLoginAP">登出</a></li>
+					<li><a class="dropdown-item" href="/logout">登出</a></li>
 				</ul></li>
 		</ul>
 	</nav>
@@ -61,7 +61,7 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">會員中心</div>
-						<a class="nav-link" href="searchAllHealthAction.controller">
+						<a class="nav-link" href="/HealthProject/ManagerHealth/searchAllManagerAction.controller">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 會員系統
@@ -80,8 +80,8 @@
 						<div class="collapse" id="collapseLayouts1"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="taxisystemEntry.controller">計程車資訊</a> 
-								<a class="nav-link" href="locsystemEntry.controller">店家資訊</a>
+								<a class="nav-link" href="${pageContext.request.contextPath}/taxi/taximainpage.controller">計程車資訊</a> 
+								<a class="nav-link" href="${pageContext.request.contextPath}/taxi/locmainpage.controller">店家資訊</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -118,8 +118,8 @@
 						<div class="collapse" id="collapseLayouts3"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="layout-static.html">營養餐管理</a> <a
-									class="nav-link" href="layout-sidenav-light.html">食品資料管理</a>
+								<a class="nav-link" href="${pageContext.request.contextPath}/meals/mealView.controller">營養餐管理</a> <a
+									class="nav-link" href="${pageContext.request.contextPath}/diet/dietView.controller">食品資料管理</a>
 
 							</nav>
 						</div>
@@ -136,8 +136,8 @@
 						<div class="collapse" id="collapseLayouts4"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="Drugs">藥品辨識系統</a> 
-								<a class="nav-link" href="DrugsProduct">藥品包裝變更</a>
+								<a class="nav-link" href="${pageContext.request.contextPath}/Drug/findalldrug">藥品辨識系統</a> 
+								<a class="nav-link" href="${pageContext.request.contextPath}/DrugProduct/findalldrugproduct">藥品包裝變更</a>
 							</nav>
 						</div>
 

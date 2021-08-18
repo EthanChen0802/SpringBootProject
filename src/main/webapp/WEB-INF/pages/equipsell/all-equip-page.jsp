@@ -133,7 +133,7 @@
 	}
 	
 	
-	// 創建第一次的button
+	// 創建button
 	function createInitialButton(indexPage){
 		
 			$("#button").empty();
@@ -256,9 +256,11 @@
 		
 
 	<div id="button">
+		<!-- 
 		<c:forEach var="i" begin="1" end="${totalPages}" step="1">
 			<button id="myPage" value="${i}" onclick="change(${i})">${i}</button>
 		</c:forEach>
+		 -->
     </div>
 
     
