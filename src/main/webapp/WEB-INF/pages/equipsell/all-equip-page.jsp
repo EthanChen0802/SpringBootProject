@@ -30,10 +30,7 @@
   <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.js"></script>
   
   <style>
-  
-  	*{
-  		z-index:1;
-  	}
+  	
   	#button{
   		width:200px;
   		margin: 0 auto 20px auto;
@@ -72,6 +69,25 @@
 	}
 	
 	
+	.sort{
+	    position: absolute;  /*固定在網頁上不隨卷軸移動，若要隨卷軸移動用absolute*/
+	    top: 113%;  /*設置垂直位置*/
+	    left: -17px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
+	    background: transparent;  /*背景顏色*/
+		transition-duration:1s;
+	}
+	
+	
+	.btn{
+		font-size:16px;
+		font-family:serif;
+		border-radius:0;
+	}
+	
+	.btn-dark{
+		font-size:18px;
+		font-family:serif;
+	}
   </style>  
   
    
@@ -129,12 +145,12 @@
 					 
 					 content += 
 						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
-					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px'>"	
+					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
 					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
 					 +  "<img src='../../EquipImg/" + n.photo +"'"
-					 +  "alt='Image' class='img-fluid' style='height:250px; width:100%;'></a>"
-					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px'>"
-					 +  "<h3>" + n.name + "</h3>"
+					 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px;'>"
+					 +  "<p style='font-size:18px; font-weight:bold; color:black'>" + n.name + "<p>"
 					 +  "<p style='color:red; font-size:18px; "
 					 +  " margin-top:50px; text-align:left; font-weight:bold'> $" + n.price +"</P>"
 					 +  "</div>"
@@ -168,6 +184,68 @@
 			$("#button").append(button);
 	}
 	
+	
+	// 依據輔具種類搜索
+	function sort(sort){ 
+		
+		$.ajax({
+			
+			type:"post",
+			url:"/consumer/findSortforConsumerByPage/" +  sort,
+			dataType:'JSON',
+			contentType:'application/json',
+			
+			success : function(data){
+				 var json = JSON.stringify(data, null, 4);
+			     //console.log("SUCCESS : ", json);
+			     
+				 var parsedObjinArray = JSON.parse(json);
+				 
+				 
+				 // 清除div下的所有子內容
+				 $(".site-section .container .row").empty();
+				 
+				 var div =  $(".site-section .container .row");
+				
+
+				 var content =""
+				 
+				 // 資料迴圈寫出
+				 $.each(parsedObjinArray,function(i,n){
+					 
+					 content += 
+						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+					 +  "<img src='../../EquipImg/" + n.photo +"'"
+					 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px;'>"
+					 +  "<p style='font-size:18px; font-weight:bold; color:black'>" + n.name + "<p>"
+					 +  "<p style='color:red; font-size:18px; "
+					 +  " margin-top:50px; text-align:left; font-weight:bold'> $" + n.price +"</P>"
+					 +  "</div>"
+					 +  "</div>"
+					 +  "</div>"
+					 
+				 })
+				 
+			
+	
+				 // append
+				div.append(content);		 
+			}
+		
+		})
+
+		createInitialButton(1);
+	}
+	
+	
+	// 重新再用全部搜索
+	function reset(){
+		createInitialButton(2);
+		change(1);
+	}
 	
 </script>
   
@@ -228,7 +306,6 @@
                 <li class="has-children">
                   <a href="services.html" class="nav-link">長者專區</a>
                   <ul class="dropdown">
-                    <li><a href="#" class="nav-link">看護服務</a></li>
                     <li><a href="#" class="nav-link">輔具購買</a></li>
                   </ul>
                 </li>
@@ -291,14 +368,30 @@
     
     
 
-    
+    <!-- 最上面 -->
     <div id="top">
 		  <a href="#"><img src="${pageContext.request.contextPath}/images/top.png" width="50px" height="50px"/></a>
 	</div>	
-
+	
+	<!-- 購物車 -->
 	<div id="cart-icon">
 		  <a href="${pageContext.request.contextPath}/cart"><img src="${pageContext.request.contextPath}/images/checklist.png" width="60px" height="60px"/></a>
 	</div>	
+	
+	<!-- 搜索列 -->	
+	<div class="sort btn-group-vertical">
+		<span class="btn btn-dark btn-lg">搜索列</span>
+		<input type="button" value="全部搜索" class="btn btn-outline-secondary btn-lg" onclick="reset()">
+		<input type="button" value="個人照護輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('個人照護輔具')">
+		<input type="button" value="個人醫療輔具" class="btn btn-outline-secondary btn-lg"  onclick="sort('個人醫療輔具')"> 
+		<input type="button" value="個人行動輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('個人行動輔具')">
+		<input type="button" value="矯正輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('矯正輔具')">
+		<input type="button" value="溝通與資訊輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('溝通與資訊輔具')">
+		
+		<button type="button" class="btn btn-outline-secondary btn-lg" onclick="sort('住家及其他場所之家具與改裝組件')">
+		住家及其他場所<br>之家具與改裝組件 </button>
+
+	</div>
 
 
     <div class="site-section">

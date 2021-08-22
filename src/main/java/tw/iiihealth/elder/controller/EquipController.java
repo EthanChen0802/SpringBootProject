@@ -97,9 +97,10 @@ public class EquipController {
 			// 抓取檔案名稱
 			String fileName = multipartFile.getOriginalFilename();
 			
+			// 抓取檔案格式
 			String suffixName = fileName.substring(fileName.lastIndexOf("."));
 			
-			//生成檔名稱通用方法(加入現在的時間以及亂數100)
+			//生成檔名稱通用方法(加入現在的時間以及亂數 0-100)
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
 	        Random r = new Random();
 	        StringBuilder tempName = new StringBuilder();

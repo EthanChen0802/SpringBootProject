@@ -73,4 +73,23 @@ public class EquipConsumerController {
 		model.addAttribute("equip", equip);
 		return "equipsell/equip-detail-page";
 	}
+	
+	
+	// Ajax請求商品內容(依商品種類)
+	@PostMapping(path="/findSortforConsumerByPage/{type}")
+	@ResponseBody
+	public List<Equip> findSortforConsumerByPage(@PathVariable("type") String type){
+		
+		// 每頁幾筆
+		int pageSize = 8;
+				
+		// 要查詢幾頁 (因為是從0算起，所以要減掉1)， 每頁幾筆
+		Pageable pageable = PageRequest.of(0, pageSize);
+			
+		// 開始查詢
+		Page<Equip> page = equipService.findSortByPage(type, pageable);
+		
+
+		return page.getContent();
+	}
 }

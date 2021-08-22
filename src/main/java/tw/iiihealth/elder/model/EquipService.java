@@ -50,4 +50,11 @@ public class EquipService {
 		return equipRepository.findAll(pageable);
 	}
 
+
+	
+	// 商品瀏覽分頁查詢(依照商品種類)
+	public Page<Equip> findSortByPage(String type, Pageable pageable) {
+		return equipRepository.findSortByPage(type, pageable);
+	}
+
 }
