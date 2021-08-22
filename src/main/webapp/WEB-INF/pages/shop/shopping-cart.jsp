@@ -29,148 +29,29 @@
   
   <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.js"></script>
   
-  <style>
-  
-  	*{
-  		z-index:1;
-  	}
-  	#button{
-  		width:200px;
-  		margin: 0 auto 20px auto;
-  	}
-  	
-  	#myPage{
-  		border-radius:10px;
-  		margin:5px;
-  		font-size:25px;
-  		transition-duration: 0.4s;
-  		border:none;
-  		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  		outline:none;
+<style>
+.minus , .plus{
+	border:0; 
+	font-size:20px;
+	background-color: transparent;
 
-  	}
-  	
-  	#myPage:hover {
-  		background-color: skyblue;
-  		color: white;
-	}
-	
-	
-	
-	
-	#cart-icon {
-	  position: fixed;
-	  bottom: 80px;
-	  right: 10px;
-	}
-	
-	
-	#top {
-	  position: fixed;
-	  bottom: 170px;
-	  right: 10px;
-	}
-	
-	
-  </style>  
-  
-   
-<script>
-  
-    <!-- ajax 載入內容 -->
-	
-    // 設定頁數
-  	var indexPage = 2;
-  
-  
-	// 啟動時載入，顯示在第一頁
-	$(function(){
-		createInitialButton(indexPage);
-		change(1);
-	})
+}
 
-	   
-  
-	 // 換頁時更動資料
-	 function change(page){ 
-	   	indexPage = page;
-	  	load(indexPage);
-	 }
-		 
 
-  
-	// 向資料庫要取分頁資料的function
-	function load(indexPage){
-		
-		$.ajax({
-			
-			type:"post",
-			url:"/consumer/findallforConsumerByPage/" + indexPage,
-			dataType:'JSON',
-			contentType:'application/json',
-			
-			success : function(data){
-				 var json = JSON.stringify(data, null, 4);
-			     //console.log("SUCCESS : ", json);
-			     
-				 var parsedObjinArray = JSON.parse(json);
-				 
-				 
-				 // 清除div下的所有子內容
-				 $(".site-section .container .row").empty();
-				 
-				 var div =  $(".site-section .container .row");
-				
+.text-box{
+	font-size:14px;
+	text-align:center;
+	width:35px;
+	height:30px;
 
-				 var content =""
-				 
-				 // 資料迴圈寫出
-				 $.each(parsedObjinArray,function(i,n){
-					 
-					 content += 
-						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
-					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px'>"	
-					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
-					 +  "<img src='../../EquipImg/" + n.photo +"'"
-					 +  "alt='Image' class='img-fluid' style='height:250px; width:100%;'></a>"
-					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px'>"
-					 +  "<h3>" + n.name + "</h3>"
-					 +  "<p style='color:red; font-size:18px; "
-					 +  " margin-top:50px; text-align:left; font-weight:bold'> $" + n.price +"</P>"
-					 +  "</div>"
-					 +  "</div>"
-					 +  "</div>"
-					 
-				 })
-				 
-			
-	
-				 // append
-				div.append(content);		 
-			}
-		
-		})
+}
 
-	}
-	
-	
-	// 創建button
-	function createInitialButton(indexPage){
-		
-			$("#button").empty();
-					 
-			var button = "";
-					
-			for (var i=1; i <= indexPage; i++){
-				button += "<button id='myPage' value='" + i +"'  onclick='change("+i+")'>" +i +"</button>";   
-			}
 
-			$("#button").append(button);
-	}
-	
-	
-</script>
-  
+
+
+</style>
+
+
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -277,7 +158,7 @@
 
 
     <!-- MAIN -->
-    <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-2.jpg')">
+   <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-2.jpg')">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 align-self-center">
@@ -288,44 +169,104 @@
         </div>
       </div>  
     </div>
-    
-    
-
-    
-    <div id="top">
-		  <a href="#"><img src="${pageContext.request.contextPath}/images/top.png" width="50px" height="50px"/></a>
-	</div>	
-
-	<div id="cart-icon">
-		  <a href="${pageContext.request.contextPath}/cart"><img src="${pageContext.request.contextPath}/images/checklist.png" width="60px" height="60px"/></a>
-	</div>	
 
 
-    <div class="site-section">
-	    	  
+
+
+  
+   <div class="site-section">
       <div class="container">
-      		
-        <div class="row">
-	       
-        </div>
+	      <div class="row">
+	          <div class="col-md-1"></div>
+	   
+	          <div class="col-md-10">
+	          	<table class="table table-hover">
+	          		<thead style="background-color:#F5F5F5">
+	          			<tr>
+	          				<th>商品照</th>
+	          				<th>商品名稱</th>
+	          				<th>單價</th>
+	          				<th>數量</th>
+	          				<th>小計</th>
+	          				<th></th>
+	          			</tr>
+	          		</thead>
+	          		
+			    <c:choose>
+					<c:when test="${not empty cartItems}">
+			          		<c:forEach var="item" items="${cartItems}" >
+				          		<tbody id="row${item.equip.id}">
+				          			<tr>
+										<td><img src="${pageContext.request.contextPath}/EquipImg/${item.equip.photo}" style="width:100px; height:100px"/></td>
+										<td>
+											<a href="${pageContext.request.contextPath}/consumer/findByIdforCustomer/${item.equip.id}">
+												${item.equip.name}
+											</a>
+										</td>
+										<td> $${item.equip.price}</td>
+										<td>
+											<input type="button" value="-"  class="minus" onclick="minus(${item.equip.id})">
+					            			<input type="text" value="${item.quantity}" class="text-box" id="text-box${item.equip.id}">
+					            			<input type="button" value="+" class="plus" onclick="plus(${item.equip.id})">
+										</td>
+										<td class="subtotal" id="subtotal${item.equip.id}" >
+											 $${item.subtotal}	
+										</td>
+										<td>
+											<input type="image" src="${pageContext.request.contextPath}/images/delete.png"  onclick="deletefromcart(${item.equip.id})">
+										</td>
+				          			</tr>
+				          		</tbody>
+			          		</c:forEach>
+			          	</c:when>
+			          	
+			            <c:otherwise>
+							<tbody>
+								<tr>
+									<td> <span>購物車目前為空</span> </td>
+								</tr>
+							</tbody>
+						</c:otherwise>
+					</c:choose>
+					
+					<tfoot style="background-color:#F5F5F5">
+						<tr>
+	          				<td></td>
+	          				<td></td>
+	          				<td></td>
+	          				<td></td>
+	          				<td>商品總金額:</td>
+	          				<td id="totalAmount" style="color:red; font-size:22px"></td>
+	          			</tr>	
+	          			<tr style="border-top-style:hidden;">
+	          				<td></td>
+	          				<td></td>
+	          				<td></td>
+	          				<td></td>
+	          				<td>
+	          					<a href="${pageContext.request.contextPath}/consumer/toTheFrontPage" class="btn btn-info" style="font-weight:bold; font-size:14px; border-radius:0px">返回商品頁</a>
+	          				</td>
+	          				<td>
+	          					<form action="${pageContext.request.contextPath}/checkout" method="get" id="submit">
+	          						<input type="button" value="前往結帳" class="btn btn-dark" id="checkout" style="font-weight:bold; font-size:14px; border-radius:0px">
+	          					</form>
+	          				</td>
+
+	          			</tr>	
+					</tfoot>
+
+	         </table>
+	         
+	         
+	         
+	         
+	         
+	         
+	          </div><div class="col-md-1"></div>	
+	        </div>
       </div>
-      
-      
     </div>
-		
-		
-
-	<div id="button">
-		<!-- 
-		<c:forEach var="i" begin="1" end="${totalPages}" step="1">
-			<button id="myPage" value="${i}" onclick="change(${i})">${i}</button>
-		</c:forEach>
-		 -->
-    </div>
-
-    
-    
-    
+  
     <!-- Footer -->
 
 
@@ -405,8 +346,148 @@
   <script src="${pageContext.request.contextPath}/js/jquery.fancybox.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
   <script src="${pageContext.request.contextPath}/js/isotope.pkgd.min.js"></script>
+
+
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
- 
+  
+  <!--  sweet alert -->
+  <script src="/js/sweetalert2.all.min.js"></script>
+	
+	
+<script>
+	
+	updateTotal();
+	
+	
+
+
+	// 增加數量的按鈕
+	function plus(eid){
+		
+		var o1 = $("#text-box"+eid).val()
+		var o2 = parseInt(o1);
+		if (o2 < 20){
+			var qty  = o2  + 1;
+			$("#text-box"+eid).val(qty);
+			updateQuantity(eid , qty)
+		}
+	}
+	
+	
+	// 減少數量的按鈕
+	function minus(eid){
+		
+		var o1 = $("#text-box"+eid).val();
+		var o2 = parseInt(o1);
+		
+		if (o2 > 1){
+			var qty  = o2  - 1;
+			$("#text-box"+eid).val(qty);
+			updateQuantity(eid , qty)
+		}	
+	}
+	
+	
+	// 計算總數量	
+	function updateTotal(){
+		total=0.0;
+		
+		
+		$(".subtotal").each(function(index, element){	
+			total =  total + parseInt(element.innerHTML.replace("$",""));
+		})
+		
+		$("#totalAmount").text("$"+total);	
+		
+		console.log($("#totalAmount").val());
+	}
+	
+	
+	
+	
+	// 動態更新個別數量(資料庫)
+	function updateQuantity(eid, qty){
+
+		$.ajax({
+			type:"post",
+			url: "${pageContext.request.contextPath}/cart/update/" + eid + "/" + qty,
+			
+			success: function(newSubtotal){
+				updateSubtotal(newSubtotal, eid);
+				updateTotal()
+			}
+		})	
+	}
+	
+	
+	// 動態更新個別數量(顯示)
+	function updateSubtotal(newSubtotal, eid){
+		$("#subtotal"+eid).text("$"+newSubtotal);
+	}
+
+	
+	
+	// 刪除
+	function deletefromcart(eid){
+		
+		Swal.fire({
+			  title: '從購物車中移除?',
+			  text: "移除後無法復原!",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '移除',
+			  cancelButtonText: '取消'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  
+				  Swal.fire(
+						  '刪除!',
+					      '商品已從購物車中移除',
+					      'success'
+					    )
+					
+
+					$.ajax({
+						type:"post",
+						url: "${pageContext.request.contextPath}/cart/remove/" + eid,
+						success: function(data){
+							$("#row"+eid).remove();
+							console.log(data);
+							updateTotal();
+						 }					
+					})
+					
+					
+					
+			  }
+
+		})	
+	}
+	
+	
+	// 前往結帳頁面
+	$("#checkout").click(function(){
+		
+		if($("#totalAmount").text() == "$0"){
+			
+			Swal.fire({
+				  icon: 'error',
+				  title: 'Oops...',
+				  text: '無任何商品'
+			})
+	
+		}
+		
+		else{
+			
+			$("#submit").submit()
+		}
+		
+		
+	})
+</script>
 
 </body>
 </html>

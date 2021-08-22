@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.iiihealth.elder.model.Equip;
 import tw.iiihealth.elder.model.EquipService;
 
 @Controller
 @RequestMapping(path="/consumer")
-@SessionAttributes(names = {"totalPages","totalElements"})
+// @SessionAttributes(names = {"totalPages","totalElements"})
 public class EquipConsumerController {
 
 	
@@ -40,7 +39,7 @@ public class EquipConsumerController {
 	// Ajax請求商品內容
 	@PostMapping(path="/findallforConsumerByPage/{pageNo}")
 	@ResponseBody
-	public List<Equip> findallforConsumerByPage(@PathVariable("pageNo") int pageNo, Model m){
+	public List<Equip> findallforConsumerByPage(@PathVariable("pageNo") int pageNo){
 		
 		// 每頁幾筆
 		int pageSize = 8;
@@ -51,18 +50,16 @@ public class EquipConsumerController {
 		// 開始查詢
 		Page<Equip> page = equipService.findAllByPage(pageable);
 		
-		// 總共頁數
-		int totalPages = page.getTotalPages();
+		// 總頁數
+		// int totalPages = page.getTotalPages();
 				
 		// 總共幾筆
-		long totalElements = page.getTotalElements();
+		// long totalElements = page.getTotalElements();
+			
+		//m.addAttribute("totalPages", totalPages);
 		
-		
-		m.addAttribute("totalPages", totalPages);
-		
-		m.addAttribute("totalElements", totalElements);
-		
-		
+		//m.addAttribute("totalElements", totalElements);
+
 		return page.getContent();
 	}
 	

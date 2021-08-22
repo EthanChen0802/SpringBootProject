@@ -34,7 +34,7 @@ public class OrderDetail {
 	private int total;
 	
 	
-	@ManyToOne( cascade = { CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
+	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinColumn(name="order_id")
 	private Order order;
 

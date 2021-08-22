@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Elderly &mdash; Website Template by Colorlib</title>
+  <title>健康優生網</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
 
@@ -77,10 +77,22 @@ p{
 	height:30px;
 
 }
+
+#cart-icon {
+  position: fixed;
+  bottom: 80px;
+  right: 10px;
+}
+
+#top {
+  position: fixed;
+  bottom: 170px;
+  right: 10px;
+}
+
 </style>
 
 </head>
-
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
 
@@ -117,36 +129,62 @@ p{
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html" class="active nav-link">首頁</a></li>
+
+
                 <li class="has-children">
-                  <a href="services.html" class="active nav-link">Services</a>
+                  <a href="services.html" class="nav-link">叫車專區</a>
                   <ul class="dropdown">
-                    <li><a href="#" class="nav-link">Amazing Atmosphere</a></li>
-                    <li><a href="#" class="nav-link">Courteous & Caring Staff</a></li>
-                    <li><a href="#" class="nav-link">Hospice Care</a></li>
-                    <li><a href="#" class="nav-link">Quality Medical Care</a></li>
-                    <li><a href="#" class="nav-link">Excellent Cuisine</a></li>
+                    <li><a href="#" class="nav-link">附近店家資訊</a></li>
                     <li class="has-children">
-                      <a href="#">More Links</a>
+                      <a href="#">我要叫車</a>
                       <ul class="dropdown">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
+                        <li><a href="#">立即叫車</a></li>
+                        <li><a href="#">預約叫車</a></li>
                       </ul>
                     </li>
                   </ul>
                 </li>
-                <li><a href="testimonial.html" class="nav-link">Testimonials</a></li>
+
+                <li class="has-children">
+                  <a href="services.html" class="nav-link">長者專區</a>
+                  <ul class="dropdown">
+                    <li><a href="#" class="nav-link">看護服務</a></li>
+                    <li><a href="#" class="nav-link">輔具購買</a></li>
+                  </ul>
+                </li>
 
 
-                <li><a href="blog.html" class="nav-link">Blog</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                 <li class="has-children">
+                  <a href="services.html" class="nav-link">營養專區</a>
+                  <ul class="dropdown">
+                    <li><a href="#" class="nav-link">營養餐</a></li>
+                    <li><a href="#" class="nav-link">食品資料</a></li>
+                  </ul>
+                </li>
 
-                <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-facebook"></span></a></li>
-                <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-twitter"></span></a></li>
-                <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-linkedin"></span></a></li>
+
+                <li class="has-children">
+                  <a href="services.html" class="nav-link">用藥查詢</a>
+                  <ul class="dropdown">
+                    <li><a href="#" class="nav-link">藥品辨識</a></li>
+                    <li><a href="#" class="nav-link">藥品包裝</a></li>
+                  </ul>
+                </li>
+
+                <!-- <li><a href="contact.html" class="nav-link">會員登入</a></li> -->
+                <li class="has-children">
+                  <a href="services.html" class="nav-link">登入</a>
+                  <ul class="dropdown">
+                    <li><a href="#" class="nav-link">會員登入</a></li>
+                    <li><a href="#" class="nav-link">廠商登入</a></li>
+                  </ul>
+                </li>
+                
+                
+                <li><a href="contact.html" class="nav-link">聯絡我們</a></li>
               </ul>
+
             </nav>
           </div>
 
@@ -160,18 +198,27 @@ p{
 
 
     <!-- MAIN -->
-    <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-2.jpg')">
+   <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-2.jpg')">
       <div class="container">
-        <div class="row justify-content-center text-center">
+        <div class="row">
           <div class="col-lg-6 align-self-center">
-            <h1 class="heading mb-3">Our Services</h1>
-            <p class="lead text-white mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum totam alias iusto?</p>
-            <p><a href="#" class="btn btn-primary">Get In Touch</a></p>
+            <h1 class="heading mb-3">健康悠生伴你一生</h1>
+            <p class="lead text-white mb-5">健康一生 悠活一生</p>
+            <p><a href="about.html" class="btn btn-primary">關於我們</a></p>
           </div>
         </div>
       </div>  
     </div>
+	
+	
+	
+	 <div id="top">
+		  <a href="#"><img src="${pageContext.request.contextPath}/images/top.png" width="50px" height="50px"/></a>
+	</div>	
 
+	<div id="cart-icon">
+		  <a href="${pageContext.request.contextPath}/cart"><img src="${pageContext.request.contextPath}/images/checklist.png" width="60px" height="60px"/></a>
+	</div>	
 
 
 
@@ -234,27 +281,22 @@ p{
 	            			<input type="button" value="-" id="minus" >
 	            			<input type="text" value="1" id="text-box">
 	            			<input type="button" value="+" id="plus">	            		
-	            			<!--  
-	            			<select>
-	            				<option>1</option>
-				         		<option>2</option>
-				         		<option>3</option>
-				         		<option>4</option>
-				         		<option>5</option>
-				         		<option>6</option>
-				         		<option>7</option>
-				         		<option>8</option>
-				         		<option>9</option>
-				         		<option>10</option>
-				         	</select>
-				         	-->
 		         		</p>
 	            			
 		         		<p>.......................</p>
 		         	</div>
 		         	
+		         	
 		         	<div>
-		         		<input type="button" value="加入購物車">
+		         		<a href="${pageContext.request.contextPath}/consumer/toTheFrontPage" 
+		         				class="btn btn-outline-primary" style="font-weight:bold; font-size:14px">返回商品頁</a>
+		         		
+		         		<p>.......................</p>
+		         	</div>
+		         	
+		         	
+		         	<div>
+		         		<input type="button" value="加入購物車" id="buttonAddToCart" class="btn btn-outline-dark" style="font-weight:bold; font-size:14px">
 		         	</div>
 		         	
 	        	</div>
@@ -350,17 +392,23 @@ p{
 
 
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
+  
+  <!--  sweet alert -->
+  <script src="/js/sweetalert2.all.min.js"></script>
+	
 
 <script>
-
 	$("#plus").click(function(){
 		
 		var o1 = $("#text-box").val();
 		var o2 = parseInt(o1);
-		var n  = o2  + 1;
-		$("#text-box").val(n);
+		if (o2 < 20){
+			var n  = o2  + 1;
+			$("#text-box").val(n);
+		}
 		
 	})
+	
 	
 	
 	$("#minus").click(function(){
@@ -374,6 +422,35 @@ p{
 		}
 		
 	})
+	
+	
+	
+	
+	// 新增到購物車
+	$("#buttonAddToCart").click(function(){
+		var eid	= ${equip.id}
+		var qty= parseInt($("#text-box").val());
+
+		$.ajax({
+			type:"post",
+			url: "${pageContext.request.contextPath}/cart/add/" + eid + "/" + qty,
+			
+			success: function(data){
+				Swal.fire({
+					  position: 'top',
+					  icon: 'success',
+					  title: '商品已加入購物車',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+				}
+		})
+	
+	
+	
+	
+	})
+
 </script>
 
 </body>

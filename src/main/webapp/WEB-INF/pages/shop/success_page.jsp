@@ -29,148 +29,8 @@
   
   <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.js"></script>
   
-  <style>
-  
-  	*{
-  		z-index:1;
-  	}
-  	#button{
-  		width:200px;
-  		margin: 0 auto 20px auto;
-  	}
-  	
-  	#myPage{
-  		border-radius:10px;
-  		margin:5px;
-  		font-size:25px;
-  		transition-duration: 0.4s;
-  		border:none;
-  		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  		outline:none;
 
-  	}
-  	
-  	#myPage:hover {
-  		background-color: skyblue;
-  		color: white;
-	}
-	
-	
-	
-	
-	#cart-icon {
-	  position: fixed;
-	  bottom: 80px;
-	  right: 10px;
-	}
-	
-	
-	#top {
-	  position: fixed;
-	  bottom: 170px;
-	  right: 10px;
-	}
-	
-	
-  </style>  
-  
-   
-<script>
-  
-    <!-- ajax 載入內容 -->
-	
-    // 設定頁數
-  	var indexPage = 2;
-  
-  
-	// 啟動時載入，顯示在第一頁
-	$(function(){
-		createInitialButton(indexPage);
-		change(1);
-	})
 
-	   
-  
-	 // 換頁時更動資料
-	 function change(page){ 
-	   	indexPage = page;
-	  	load(indexPage);
-	 }
-		 
-
-  
-	// 向資料庫要取分頁資料的function
-	function load(indexPage){
-		
-		$.ajax({
-			
-			type:"post",
-			url:"/consumer/findallforConsumerByPage/" + indexPage,
-			dataType:'JSON',
-			contentType:'application/json',
-			
-			success : function(data){
-				 var json = JSON.stringify(data, null, 4);
-			     //console.log("SUCCESS : ", json);
-			     
-				 var parsedObjinArray = JSON.parse(json);
-				 
-				 
-				 // 清除div下的所有子內容
-				 $(".site-section .container .row").empty();
-				 
-				 var div =  $(".site-section .container .row");
-				
-
-				 var content =""
-				 
-				 // 資料迴圈寫出
-				 $.each(parsedObjinArray,function(i,n){
-					 
-					 content += 
-						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
-					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px'>"	
-					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
-					 +  "<img src='../../EquipImg/" + n.photo +"'"
-					 +  "alt='Image' class='img-fluid' style='height:250px; width:100%;'></a>"
-					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px'>"
-					 +  "<h3>" + n.name + "</h3>"
-					 +  "<p style='color:red; font-size:18px; "
-					 +  " margin-top:50px; text-align:left; font-weight:bold'> $" + n.price +"</P>"
-					 +  "</div>"
-					 +  "</div>"
-					 +  "</div>"
-					 
-				 })
-				 
-			
-	
-				 // append
-				div.append(content);		 
-			}
-		
-		})
-
-	}
-	
-	
-	// 創建button
-	function createInitialButton(indexPage){
-		
-			$("#button").empty();
-					 
-			var button = "";
-					
-			for (var i=1; i <= indexPage; i++){
-				button += "<button id='myPage' value='" + i +"'  onclick='change("+i+")'>" +i +"</button>";   
-			}
-
-			$("#button").append(button);
-	}
-	
-	
-</script>
-  
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -277,7 +137,7 @@
 
 
     <!-- MAIN -->
-    <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-2.jpg')">
+   <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-2.jpg')">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 align-self-center">
@@ -288,46 +148,117 @@
         </div>
       </div>  
     </div>
-    
-    
-
-    
-    <div id="top">
-		  <a href="#"><img src="${pageContext.request.contextPath}/images/top.png" width="50px" height="50px"/></a>
-	</div>	
-
-	<div id="cart-icon">
-		  <a href="${pageContext.request.contextPath}/cart"><img src="${pageContext.request.contextPath}/images/checklist.png" width="60px" height="60px"/></a>
-	</div>	
 
 
-    <div class="site-section">
-	    	  
+
+
+  
+   <div class="site-section">
       <div class="container">
-      		
-        <div class="row">
-	       
-        </div>
+      
+      	<!-- 第一列 -->
+      	  <div class="row">
+	          <div class="col-md-1"></div>
+	   		  
+	          <div class="col-md-10">
+	          		<h3>訂單已送出， 資訊如下</h3>
+	          		<table class="table table-hover" style="margin-top:50px">
+		          		<thead style="background-color:#F5F5F5">
+		          			<tr>
+		          				<th colspan="2">訂購人資訊</th>
+		          			</tr>
+		          		</thead>
+		          		<tbody>
+			          		<tr>
+			          			<td><label>收件人姓名:</label></td>
+				          		<td>${order.name}</td>
+			          		</tr>
+			          		<tr>
+				          		<td><label>收件人電話:</label></td>
+				          		<td>${order.number}</td>
+			          		</tr>
+			          		<tr>
+				          		<td><label>收件人email:</label></td>
+				          		<td>${order.email}</td>
+			          		</tr>
+			          		<tr>
+				          		<td><label>收件人地址:</label></td>
+				          		<td>${order.address}</td>
+			          		</tr>
+			          		<tr>
+				          		<td><label>訂單編號:</label></td>
+				          		<td>${order.id}</td>
+			          		</tr>
+		          		</tbody>
+		          	</table>
+	          
+	          
+	          </div>	
+      			
+      		<div class="col-md-1"></div>
+      	</div>	
+     	<!--  -->
+      
+      
+      	<!-- 第二列 -->
+	      <div class="row" style="margin-top:50px">
+	          <div class="col-md-1"></div>
+	   
+	          <div class="col-md-10">
+	          	
+	          	<table class="table table-hover">
+	          		<thead style="background-color:#F5F5F5">
+	          			<tr>
+	          				<th>商品名稱</th>
+	          				<th>單價</th>
+	          				<th>數量</th>
+	          				<th>小計</th>
+	          			</tr>
+	          		</thead>
+		          		<c:forEach var="detail" items="${order.orderDetail}" >
+			          		<tbody id="row${item.equip.id}">
+			          			<tr>
+									<td>${detail.product}</td>
+									<td>${detail.price}</td>
+									<td>${detail.quantity}</td>
+									<td class=single>${detail.total}</td>
+			          			</tr>
+			          		</tbody>
+		          		</c:forEach>
+			  
+			  				
+					<tfoot style="background-color:#F5F5F5">
+						<tr>
+	          				<td></td>
+	          				<td></td>
+	          				<td>商品總金額:</td>
+	          				<td id=all style="font-weight:bold; font-size:22px"></td>
+	          			</tr>	
+
+	          			<tr style="border-top-style:hidden;">
+	          				<td></td>
+	          				<td></td>
+	          				<td></td>
+	          				<td>
+	          					<a href="${pageContext.request.contextPath}/consumer/toTheFrontPage" class="btn btn-info" id="checkout" style="font-weight:bold; font-size:14px; border-radius:0px">
+	          						返回商品頁
+	          					</a>
+	          				</td>
+	          			</tr>		
+					</tfoot>
+	         	</table>
+	       	</div>
+	        <div class="col-md-1"></div>	
+	    </div>
+       	<!--  -->
+      
       </div>
-      
-      
     </div>
-		
-		
-
-	<div id="button">
-		<!-- 
-		<c:forEach var="i" begin="1" end="${totalPages}" step="1">
-			<button id="myPage" value="${i}" onclick="change(${i})">${i}</button>
-		</c:forEach>
-		 -->
-    </div>
-
-    
-    
-    
+  
+  
+  
+  
     <!-- Footer -->
-
 
     <div class="site-footer bg-light">
       <div class="container">
@@ -405,8 +336,26 @@
   <script src="${pageContext.request.contextPath}/js/jquery.fancybox.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
   <script src="${pageContext.request.contextPath}/js/isotope.pkgd.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/main.js"></script>
- 
 
+
+  <script src="${pageContext.request.contextPath}/js/main.js"></script>
+  
+  <!--  sweet alert -->
+  <script src="/js/sweetalert2.all.min.js"></script>
+	
+	
+	
+
+<script>
+		var result = 0;
+		$(".single").each(function(){
+			result += parseInt($(this).html())
+			
+		});	
+			
+		$("#all").text(result);
+
+</script>
+	
 </body>
 </html>
