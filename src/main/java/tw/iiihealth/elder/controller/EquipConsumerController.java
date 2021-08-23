@@ -19,7 +19,6 @@ import tw.iiihealth.elder.model.EquipService;
 
 @Controller
 @RequestMapping(path="/consumer")
-// @SessionAttributes(names = {"totalPages","totalElements"})
 public class EquipConsumerController {
 
 	
@@ -39,7 +38,7 @@ public class EquipConsumerController {
 	// Ajax請求商品內容
 	@PostMapping(path="/findallforConsumerByPage/{pageNo}")
 	@ResponseBody
-	public List<Equip> findallforConsumerByPage(@PathVariable("pageNo") int pageNo){
+	public List<Equip> findallforConsumerByPage(@PathVariable("pageNo") int pageNo, Model m){
 		
 		// 每頁幾筆
 		int pageSize = 8;
@@ -50,16 +49,6 @@ public class EquipConsumerController {
 		// 開始查詢
 		Page<Equip> page = equipService.findAllByPage(pageable);
 		
-		// 總頁數
-		// int totalPages = page.getTotalPages();
-				
-		// 總共幾筆
-		// long totalElements = page.getTotalElements();
-			
-		//m.addAttribute("totalPages", totalPages);
-		
-		//m.addAttribute("totalElements", totalElements);
-
 		return page.getContent();
 	}
 	
@@ -75,16 +64,17 @@ public class EquipConsumerController {
 	}
 	
 	
+	
 	// Ajax請求商品內容(依商品種類)
-	@PostMapping(path="/findSortforConsumerByPage/{type}")
+	@PostMapping(path="/findSortforConsumerByPage/{type}/{pageNo}")
 	@ResponseBody
-	public List<Equip> findSortforConsumerByPage(@PathVariable("type") String type){
+	public List<Equip> findSortforConsumerByPage(@PathVariable("type") String type, @PathVariable("pageNo") int pageNo){
 		
 		// 每頁幾筆
 		int pageSize = 8;
 				
 		// 要查詢幾頁 (因為是從0算起，所以要減掉1)， 每頁幾筆
-		Pageable pageable = PageRequest.of(0, pageSize);
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
 			
 		// 開始查詢
 		Page<Equip> page = equipService.findSortByPage(type, pageable);

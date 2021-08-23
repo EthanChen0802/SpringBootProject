@@ -50,9 +50,7 @@
   	#myPage:hover {
   		background-color: skyblue;
   		color: white;
-	}
-	
-	
+	} 
 	
 	
 	#cart-icon {
@@ -92,7 +90,6 @@
   
    
 <script>
-  
     <!-- ajax 載入內容 -->
 	
     // 設定頁數
@@ -185,13 +182,24 @@
 	}
 	
 	
-	// 依據輔具種類搜索
-	function sort(sort){ 
+	
+	
+	
+	// 依據輔具種類搜索，創建button，並顯示在第一頁
+	function sort(sort){
+		var indexPage = 1;
+		createSortButton(sort, indexPage);
+		sortchange(sort, 1)
+	}
+	
+	
+	// ajax依照輔具種類搜索
+	function findsort(sort, indexPage){ 
 		
 		$.ajax({
 			
 			type:"post",
-			url:"/consumer/findSortforConsumerByPage/" +  sort,
+			url:"/consumer/findSortforConsumerByPage/" +  sort + "/" +indexPage,
 			dataType:'JSON',
 			contentType:'application/json',
 			
@@ -228,25 +236,43 @@
 					 +  "</div>"
 					 
 				 })
-				 
-			
-	
-				 // append
+				// append
 				div.append(content);		 
 			}
 		
 		})
-
-		createInitialButton(1);
 	}
 	
 	
-	// 重新再用全部搜索
+
+	// 搜索後創建button
+	function createSortButton(sort, indexPage){
+		
+			$("#button").empty();
+					 
+			var button = "";
+					
+			for (var i=1; i <= indexPage; i++){
+				button += "<button  id='myPage' value='" + i + "' onclick='sortchange("+ '"'+sort + '"'+ ", " + i +" )' >" + i +  "</button>";   
+			}
+			
+			$("#button").append(button);
+	}
+	
+	
+	
+	// 點擊sort button的時候換頁
+	function sortchange(sort, indexPage){
+		findsort(sort, indexPage);
+	}
+	
+	
+	
+	// 重新使用全搜索
 	function reset(){
 		createInitialButton(2);
 		change(1);
 	}
-	
 </script>
   
 </head>
