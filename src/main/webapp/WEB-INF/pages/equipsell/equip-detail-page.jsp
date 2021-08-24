@@ -147,9 +147,9 @@ p{
                 </li>
 
                 <li class="has-children">
-                  <a href="services.html" class="nav-link">長者專區</a>
+                  <a href="#" class="nav-link">長者專區</a>
                   <ul class="dropdown">
-                    <li><a href="#" class="nav-link">輔具購買</a></li>
+                    <li><a href="${pageContext.request.contextPath}/consumer/toTheFrontPage" class="nav-link">輔具購買</a></li>
                   </ul>
                 </li>
 
@@ -415,7 +415,7 @@ p{
 		var o1 = $("#text-box").val();
 		var o2 = parseInt(o1);
 		
-		if (o2 > 0){
+		if (o2 > 1){
 			var n  = o2  - 1;
 			$("#text-box").val(n);
 		}

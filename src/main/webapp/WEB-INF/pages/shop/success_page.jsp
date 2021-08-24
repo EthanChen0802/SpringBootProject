@@ -86,9 +86,9 @@
                 </li>
 
                 <li class="has-children">
-                  <a href="services.html" class="nav-link">長者專區</a>
+                  <a href="#" class="nav-link">長者專區</a>
                   <ul class="dropdown">
-                    <li><a href="#" class="nav-link">輔具購買</a></li>
+                    <li><a href="${pageContext.request.contextPath}/consumer/toTheFrontPage" class="nav-link">輔具購買</a></li>
                   </ul>
                 </li>
 

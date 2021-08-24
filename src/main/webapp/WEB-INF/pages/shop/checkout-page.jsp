@@ -29,10 +29,10 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   
   <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.js"></script>
-  
-
-
+ 
+ 
 </head>
+
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
 
@@ -87,9 +87,9 @@
                 </li>
 
                 <li class="has-children">
-                  <a href="services.html" class="nav-link">長者專區</a>
+                  <a href="#" class="nav-link">長者專區</a>
                   <ul class="dropdown">
-                    <li><a href="#" class="nav-link">輔具購買</a></li>
+                    <li><a href="${pageContext.request.contextPath}/consumer/toTheFrontPage" class="nav-link">輔具購買</a></li>
                   </ul>
                 </li>
 
@@ -156,7 +156,7 @@
    <div class="site-section">
       <div class="container">
       
-			<form action="${pageContext.request.contextPath}/saveOrder" method="get">
+			<form action="${pageContext.request.contextPath}/saveOrder" method="get" id="submit">
 			
       		<!-- 第一列 -->
 	      	<div class="row">
@@ -171,19 +171,19 @@
 		          		<tbody>
 			          		<tr>
 			          			<td><label>收件人姓名:</label></td>
-				          		<td><input name="name" value="${customer.name}"/></td>
+				          		<td><input name="name" value="${customer.name}" id="name"/></td>
 			          		</tr>
 			          		<tr>
 				          		<td><label>收件人電話:</label></td>
-				          		<td><input name="number" value="${customer.number}"/></td>
+				          		<td><input name="number" value="${customer.number}" id="number"/></td>
 			          		</tr>
 			          		<tr>
 				          		<td><label>收件人email:</label></td>
-				          		<td><input name="email" value="${customer.email}"/></td>
+				          		<td><input name="email" value="${customer.email}" id="email"/></td>
 			          		</tr>
 			          		<tr>
 				          		<td><label>收件人地址:</label></td>
-				          		<td><input name="address" value="${customer.address}"/></td>
+				          		<td><input name="address" value="${customer.address}" id="address"/></td>
 			          		</tr>
 		          		</tbody>
 		          	</table>
@@ -239,14 +239,18 @@
 	          				<td></td>
 	          				<td></td>
 	          				<td></td>
+	          				<td></td>
 	          				<td>
 	          					<a href="${pageContext.request.contextPath}/cart" class="btn btn-info" id="checkout" style="font-weight:bold; font-size:14px; border-radius:0px">
 	          						返回購物車
 	          					</a>
 	          				</td>
-	          				<td>
+	          				
+	          				<!--  
 			          			<input type="submit" value="確定下單" class="btn btn-danger" style="font-weight:bold; font-size:14px;border-radius:0px" >
 	          				</td>
+	          				-->
+	          				
 	          			</tr>	
 					 </tfoot>
 	              </table>
@@ -257,6 +261,24 @@
 	    </form>
 	    <!--  -->
 	    
+	    <div class="row" style="margin-top:50px; ">
+	        <div class="col-md-1"></div>
+	           <div class="col-md-10">
+		          	<table class="table table-hover" style="width:400px;" >
+		          		<thead style="background-color:#F5F5F5">
+		          			<tr>
+		          				<th>確認付款</th>
+		          			<tr>
+			          	</thead>
+			          	<tbody>
+			          		<tr>
+			          			<td id="paypal-button-container"></td>
+			          		</tr>
+			          	</tbody>
+		          	</table>
+	          	</div>
+	    	<div class="col-md-3"></div>
+	   </div>
 	   
 	    
 	    
@@ -352,9 +374,10 @@
   <!--  sweet alert -->
   <script src="/js/sweetalert2.all.min.js"></script>
 	
+  <!-- Paypal  -->
+  <script src="https://www.paypal.com/sdk/js?client-id=Ae1kvJ13veg5f-jN3vNGxKcQiamIML_WdggWjEG0tfP6Iy1xP5QAnGhyuGbGOBkKphwLjmwbpckDtzGY&currency=TWD"></script>
 	
-	
-<script>
+  <script>
 	updateTotal();
 
 
@@ -370,6 +393,96 @@
 		$("#totalAmount").text("$"+total);	
 	}	
 
-	</script>
+	
+	 
+
+
+
+	// paypal 按鈕
+	paypal.Buttons({
+		
+		style: {
+		    layout:  'vertical',
+		    color:   'blue',
+		    shape:   'rect',
+		    label:   'paypal',
+		    size:    'small'
+		  },
+		
+		
+		
+		createOrder: function(data, actions) {
+			
+			var surname = $("#name").val().substring(0,1);
+			var firstname = $("#name").val().substring(1);
+			var email = $("#email").val();
+			var number = $("#number").val();
+			var totalAmount = $("#totalAmount").text().substring(1);
+				
+
+			
+			return actions.order.create({
+				intent: "CAPTURE", // 捕捉買家付款行為
+				
+				payer: {
+					name:{
+						given_name: firstname,
+						surname: surname
+					},
+					email_address: email,
+					phone: { 
+						phone_type: "MOBILE",
+						country_code:"TW",
+						phone_number:{
+							national_number: number
+						}
+						
+					},
+					address:{
+						country_code:"TW",
+					}
+				},
+				application_context: {
+		              shipping_preference: 'NO_SHIPPING'
+		            },
+		        purchase_units: [{
+			          amount: {
+			            value: totalAmount
+			          }
+			      }]
+			
+			});
+		},
+		
+		// 付款成功
+		onApprove: function(data, actions){
+			
+			return actions.order.capture().then(function(details){
+				
+				console.log(details);
+				
+				setTimeout(function() {
+					submit.submit();
+				}, 1800);
+				
+				
+				Swal.fire({
+					  position: 'top-end',
+					  icon: 'success',
+					  title: '付款成功，將為您跳轉',
+					  showConfirmButton: false,
+					  timer: 2000
+					})
+			})
+		}
+		
+		
+	
+		
+		
+		
+	}).render("#paypal-button-container");
+
+  </script>
 </body>
 </html>

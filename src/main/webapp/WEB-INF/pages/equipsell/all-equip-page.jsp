@@ -69,7 +69,7 @@
 	
 	.sort{
 	    position: absolute;  /*固定在網頁上不隨卷軸移動，若要隨卷軸移動用absolute*/
-	    top: 113%;  /*設置垂直位置*/
+	    top: 118%;  /*設置垂直位置*/
 	    left: -17px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
 	    background: transparent;  /*背景顏色*/
 		transition-duration:1s;
@@ -330,9 +330,9 @@
                 </li>
 
                 <li class="has-children">
-                  <a href="services.html" class="nav-link">長者專區</a>
+                  <a href="#" class="nav-link">長者專區</a>
                   <ul class="dropdown">
-                    <li><a href="#" class="nav-link">輔具購買</a></li>
+                    <li><a href="${pageContext.request.contextPath}/consumer/toTheFrontPage" class="nav-link">輔具購買</a></li>
                   </ul>
                 </li>
 
