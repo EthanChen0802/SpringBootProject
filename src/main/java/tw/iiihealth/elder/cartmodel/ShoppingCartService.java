@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import tw.iiihealth.elder.model.Equip;
 import tw.iiihealth.elder.model.EquipRepository;
+import tw.iiihealth.membersystem.member.model.Member;
 
 
 @Service
@@ -22,20 +23,20 @@ public class ShoppingCartService {
 		private EquipRepository equipRepository;
 		
 		
-		public List<CartItem> listCartItems(Customer customer){
-			return cartItemRepository.findByCustomer(customer);
+		public List<CartItem> listCartItems(Member member){
+			return cartItemRepository.findByMember(member);
 		}
 		
 		
 		
 		// 新增產品(數量)
-		public Integer addProduct(Integer equipId, Integer quantity, Customer customer) {
+		public Integer addProduct(Integer equipId, Integer quantity, Member member) {
 			
 			Integer addedQuantity = quantity;
 			
 			Equip equip = equipRepository.findById(equipId).get();
 			
-			CartItem cartItem =  cartItemRepository.findByCustomerAndEquip(customer, equip);
+			CartItem cartItem =  cartItemRepository.findByMemberAndEquip(member, equip);
 			
 			if(cartItem != null) {
 				addedQuantity = cartItem.getQuantity() + quantity;
@@ -44,7 +45,7 @@ public class ShoppingCartService {
 			else {
 				cartItem = new CartItem();
 				cartItem.setQuantity(addedQuantity);
-				cartItem.setCustomer(customer);
+				cartItem.setMember(member);
 				cartItem.setEquip(equip);
 			}
 			
@@ -56,8 +57,8 @@ public class ShoppingCartService {
 
 		
 		// 更新數量
-		public int updateQuantity(Integer equipId, Integer quantity, Customer customer) {
-			cartItemRepository.updateQuantity(quantity, equipId, customer.getId());
+		public int updateQuantity(Integer equipId, Integer quantity, Member member) {
+			cartItemRepository.updateQuantity(quantity, equipId, member.getMemberid());
 			Equip equip = equipRepository.findById(equipId).get();
 			int subtotal = Integer.parseInt(equip.getPrice())* quantity ;
 			
@@ -66,14 +67,14 @@ public class ShoppingCartService {
 		
 		
 		// 從shoppingCart刪除產品
-		public void removeEquip(Customer customer, Integer equipId) {
-			cartItemRepository.deleteByCustomerAndEquip(customer.getId() , equipId );	
+		public void removeEquip(Member member, Integer equipId) {
+			cartItemRepository.deleteByMemberAndEquip(member.getMemberid() , equipId );	
 		}
 		
 		
 		// 儲存訂單時，清除這個會員的購物車
-		public void removeCart(Customer customer) {
-			cartItemRepository.deleteByCustomer(customer.getId());
+		public void removeCart(Member member) {
+			cartItemRepository.deleteByMember(member.getMemberid());
 		}
 		
 

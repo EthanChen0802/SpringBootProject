@@ -156,7 +156,7 @@
    <div class="site-section">
       <div class="container">
       
-			<form action="${pageContext.request.contextPath}/saveOrder" method="get" id="submit">
+			<form action="${pageContext.request.contextPath}/cart/saveOrder" method="get" id="submit">
 			
       		<!-- 第一列 -->
 	      	<div class="row">
@@ -171,19 +171,19 @@
 		          		<tbody>
 			          		<tr>
 			          			<td><label>收件人姓名:</label></td>
-				          		<td><input name="name" value="${customer.name}" id="name"/></td>
+				          		<td><input name="name" value="${member.membername}" id="name"/></td>
 			          		</tr>
 			          		<tr>
 				          		<td><label>收件人電話:</label></td>
-				          		<td><input name="number" value="${customer.number}" id="number"/></td>
+				          		<td><input name="number" value="${member.memberphone}" id="number"/></td>
 			          		</tr>
 			          		<tr>
 				          		<td><label>收件人email:</label></td>
-				          		<td><input name="email" value="${customer.email}" id="email"/></td>
+				          		<td><input name="email" value="${member.memberemail}" id="email"/></td>
 			          		</tr>
 			          		<tr>
 				          		<td><label>收件人地址:</label></td>
-				          		<td><input name="address" value="${customer.address}" id="address"/></td>
+				          		<td><input name="address" value="${member.membercity}${member.membertown}${member.memberaddress}" id="address"/></td>
 			          		</tr>
 		          		</tbody>
 		          	</table>
@@ -246,9 +246,9 @@
 	          					</a>
 	          				</td>
 	          				
+	          				
 	          				<!--  
 			          			<input type="submit" value="確定下單" class="btn btn-danger" style="font-weight:bold; font-size:14px;border-radius:0px" >
-	          				</td>
 	          				-->
 	          				
 	          			</tr>	
@@ -258,6 +258,7 @@
 	          </div>
 		    <div class="col-md-1"></div>	
 	    </div>
+	   	<input type="hidden" name="memberid" value="${member.memberid}">
 	    </form>
 	    <!--  -->
 	    
@@ -459,7 +460,6 @@
 			
 			return actions.order.capture().then(function(details){
 				
-				console.log(details);
 				
 				setTimeout(function() {
 					submit.submit();
@@ -467,7 +467,7 @@
 				
 				
 				Swal.fire({
-					  position: 'top-end',
+					  position: 'top',
 					  icon: 'success',
 					  title: '付款成功，將為您跳轉',
 					  showConfirmButton: false,

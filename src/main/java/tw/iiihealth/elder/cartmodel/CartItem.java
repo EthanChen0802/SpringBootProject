@@ -10,7 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 import tw.iiihealth.elder.model.Equip;
+import tw.iiihealth.membersystem.member.model.Member;
 
 
 
@@ -28,8 +30,8 @@ public class CartItem {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="customer_id")
-	private Customer customer;
+	@JoinColumn(name="member_id")
+	private Member member;
 	
 	
 	private int quantity;
@@ -55,13 +57,14 @@ public class CartItem {
 	}
 
 
-	public Customer getCustomer() {
-		return customer;
+
+	public Member getMember() {
+		return member;
 	}
 
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 

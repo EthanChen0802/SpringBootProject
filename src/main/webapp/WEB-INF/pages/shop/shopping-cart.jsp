@@ -246,7 +246,7 @@
 	          					<a href="${pageContext.request.contextPath}/consumer/toTheFrontPage" class="btn btn-info" style="font-weight:bold; font-size:14px; border-radius:0px">返回商品頁</a>
 	          				</td>
 	          				<td>
-	          					<form action="${pageContext.request.contextPath}/checkout" method="get" id="submit">
+	          					<form action="${pageContext.request.contextPath}/cart/checkout" method="get" id="submit">
 	          						<input type="button" value="前往結帳" class="btn btn-dark" id="checkout" style="font-weight:bold; font-size:14px; border-radius:0px">
 	          					</form>
 	          				</td>

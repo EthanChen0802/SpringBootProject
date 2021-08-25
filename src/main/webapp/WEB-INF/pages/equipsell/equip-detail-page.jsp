@@ -433,16 +433,32 @@ p{
 		$.ajax({
 			type:"post",
 			url: "${pageContext.request.contextPath}/cart/add/" + eid + "/" + qty,
-			
+			datatype: "json",
 			success: function(data){
-				Swal.fire({
-					  position: 'top',
-					  icon: 'success',
-					  title: '商品已加入購物車',
-					  showConfirmButton: false,
-					  timer: 1500
-					})
+				
+				if (data == "success"){
+					
+					Swal.fire({
+						  position: 'top',
+						  icon: 'success',
+						  title: '商品已加入購物車',
+						  showConfirmButton: false,
+						  timer: 1500
+						})
+					}
+					
+				else{
+					
+					Swal.fire({
+						  icon: 'error',
+						  title: 'Oops...',
+						  text: '請先登入會員!',
+						})
 				}
+				
+				}
+
+				
 		})
 	
 	

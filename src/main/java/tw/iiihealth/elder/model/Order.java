@@ -38,6 +38,9 @@ public class Order {
 	@Column(name="status")
 	private String status;
 	
+	@Column(name="memberid")
+	private int member_id;
+	
 	
 	@OneToMany(mappedBy = "order", cascade = { CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH },
 	fetch = FetchType.EAGER)
@@ -94,6 +97,17 @@ public class Order {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	
+	
+	
+	public int getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(int member_id) {
+		this.member_id = member_id;
 	}
 
 	public List<OrderDetail> getOrderDetail() {

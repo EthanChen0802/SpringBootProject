@@ -2,23 +2,24 @@ package tw.iiihealth.elder.shoppingCartController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.iiihealth.elder.cartmodel.CartItem;
-import tw.iiihealth.elder.cartmodel.Customer;
-import tw.iiihealth.elder.cartmodel.CustomerRepository;
 import tw.iiihealth.elder.cartmodel.ShoppingCartService;
 import tw.iiihealth.elder.model.Order;
 import tw.iiihealth.elder.model.OrderDetail;
 import tw.iiihealth.elder.model.OrderService;
+import tw.iiihealth.membersystem.member.model.Member;
+import tw.iiihealth.membersystem.member.service.MemberService;
 
 @Controller
 @Transactional
@@ -28,7 +29,7 @@ public class ShoppingCartController {
 	private ShoppingCartService shoppingCartService;
 	
 	@Autowired
-	private CustomerRepository CustomerRepository;
+	private MemberService memberService;
 	
 	@Autowired
 	private OrderService orderService;
@@ -39,10 +40,12 @@ public class ShoppingCartController {
 	@GetMapping("/cart")
 	public String showShoppingCart(Model model) {
 		
-		Optional<Customer> cRep = CustomerRepository.findById(3);
-		Customer customer = cRep.get();
-		List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
+	
+		Member member = memberService.getCurrentlyLoggedInMember(auth);
+		
+		List<CartItem> cartItems = shoppingCartService.listCartItems(member);
 		
 		model.addAttribute("cartItems", cartItems);
 		
@@ -52,15 +55,20 @@ public class ShoppingCartController {
 	
 	
 	
-	@GetMapping("/checkout")
-	public String checkOutPage(Model model) {
+	@GetMapping("/cart/checkout")
+	public String checkOutPage(Model model){
 		
-		Optional<Customer> cRep = CustomerRepository.findById(3);
-		Customer customer = cRep.get();
-		List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		Member member = memberService.getCurrentlyLoggedInMember(auth);
+
+		List<CartItem> cartItems = shoppingCartService.listCartItems(member);
 		
 		model.addAttribute("cartItems", cartItems);
-		model.addAttribute("customer", customer);
+		model.addAttribute("member", member);
+		
+		
 		
 		return "shop/checkout-page";
 	}
@@ -68,17 +76,20 @@ public class ShoppingCartController {
 	
 	
 	
-	@GetMapping("/saveOrder")
+	@GetMapping("/cart/saveOrder")
 	public String  saveOrder(Model model 
 							, @RequestParam(name="name") String name
 							, @RequestParam(name="number") String number
 							, @RequestParam(name="address") String address
-							, @RequestParam(name="email") String email) {
+							, @RequestParam(name="email") String email
+							, @RequestParam(name="memberid") int memberid) {
 		
 		
-		Optional<Customer> cRep = CustomerRepository.findById(3);
-		Customer customer = cRep.get();
-		List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		Member member = memberService.getCurrentlyLoggedInMember(auth);
+		
+		List<CartItem> cartItems = shoppingCartService.listCartItems(member);
 		
 		
 		// 將訂購的收件人資料存入訂單
@@ -89,13 +100,14 @@ public class ShoppingCartController {
 		order.setAddress(address);
 		order.setEmail(email);
 		order.setStatus("尚未出貨");
+		order.setMember_id(memberid);
 		
 		
 		// 將會員的購物車存入訂單細項
 		List<OrderDetail> list = new ArrayList<OrderDetail>();
 		
 		
-		for (CartItem item: cartItems ) {
+		for (CartItem item: cartItems) {
 			
 			OrderDetail orderDetail = new OrderDetail();
 			
@@ -121,7 +133,7 @@ public class ShoppingCartController {
 		orderService.save(order);
 		
 		// 清除資料庫的購物車資料
-		shoppingCartService.removeCart(customer);
+		shoppingCartService.removeCart(member);
 				
 		
 		//取得訂單編號

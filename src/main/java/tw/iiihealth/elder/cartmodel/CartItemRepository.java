@@ -8,29 +8,30 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import tw.iiihealth.elder.model.Equip;
+import tw.iiihealth.membersystem.member.model.Member;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 	
 	
-	 public List<CartItem> findByCustomer(Customer customer); 
+	 public List<CartItem> findByMember(Member member); 
 	 
 	 
-	 public CartItem findByCustomerAndEquip(Customer customer, Equip equip);
+	 public CartItem findByMemberAndEquip(Member member, Equip equip);
 	 
 	 
-	 @Query("UPDATE CartItem c SET c.quantity = ?1 WHERE c.equip.id = ?2  AND c.customer.id = ?3")
+	 @Query("UPDATE CartItem c SET c.quantity = ?1 WHERE c.equip.id = ?2  AND c.member.id = ?3")
 	 @Modifying
-	 public void updateQuantity(Integer quantity, Integer equipId, Integer customerId);
+	 public void updateQuantity(Integer quantity, Integer equipId, Integer memberId);
 	 
 	 
-	 @Query("DELETE FROM CartItem c where c.customer.id = ?1 AND c.equip.id = ?2")
+	 @Query("DELETE FROM CartItem c where c.member.id = ?1 AND c.equip.id = ?2")
 	 @Modifying
-	 public void deleteByCustomerAndEquip(Integer CustomerId, Integer equipId);
+	 public void deleteByMemberAndEquip(Integer memberId, Integer equipId);
 
 	 
 	 
-	 @Query("DELETE FROM CartItem c where c.customer.id = ?1")
+	 @Query("DELETE FROM CartItem c where c.member.id = ?1")
 	 @Modifying
-	 public void deleteByCustomer(Integer CustomerId);
+	 public void deleteByMember(Integer memberId);
 }

@@ -4,13 +4,15 @@ package tw.iiihealth.elder.shoppingCartController;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tw.iiihealth.elder.cartmodel.Customer;
-import tw.iiihealth.elder.cartmodel.CustomerRepository;
 import tw.iiihealth.elder.cartmodel.ShoppingCartService;
+import tw.iiihealth.membersystem.member.model.Member;
+import tw.iiihealth.membersystem.member.service.MemberService;
 
 @RestController
 @Transactional
@@ -21,21 +23,23 @@ public class ShoppingCartRestController {
 	private ShoppingCartService shoppingCartService;
 	
 	@Autowired
-	private CustomerRepository CustomerRepository;
+	private MemberService memberService;
 	
 	
 	
 	
-	@PostMapping("/cart/add/{eid}/{qty}")
+	@PostMapping("cart/add/{eid}/{qty}")
 	public String addEquipToCart(@PathVariable("eid") Integer equipId, 
-									@PathVariable("qty") Integer quantity){
+									@PathVariable("qty") Integer quantity) {
 										
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
-		Customer customer = CustomerRepository.findById(3).get();
+	
+		Member member = memberService.getCurrentlyLoggedInMember(auth);
 		
-		Integer addedQuantity = shoppingCartService.addProduct(equipId, quantity, customer);
+		shoppingCartService.addProduct(equipId, quantity, member);
 
-		return addedQuantity + " items of this product were added to your shopping cart";
+		return "success";
 	}
 	
 	
@@ -43,11 +47,14 @@ public class ShoppingCartRestController {
 	@PostMapping("/cart/update/{eid}/{qty}")
 	public String updateEquipToCart(@PathVariable("eid") Integer equipId, 
 									@PathVariable("qty") Integer quantity){
+									
 										
 		
-		Customer customer = CustomerRepository.findById(3).get();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+				
+		Member member = memberService.getCurrentlyLoggedInMember(auth);		
 		
-		Integer subtotal = shoppingCartService.updateQuantity(equipId, quantity, customer);
+		Integer subtotal = shoppingCartService.updateQuantity(equipId, quantity, member);
 
 		return String.valueOf(subtotal);	
 	}
@@ -55,12 +62,13 @@ public class ShoppingCartRestController {
 	
 	
 	@PostMapping("/cart/remove/{eid}")
-	public String updateEquipToCart(@PathVariable("eid") Integer equipId){
+	public String updateEquipToCart(@PathVariable("eid") Integer equipId) {
 										
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	
+		Member member = memberService.getCurrentlyLoggedInMember(auth);	
 		
-		Customer customer = CustomerRepository.findById(3).get();
-		
-		shoppingCartService.removeEquip(customer, equipId);
+		shoppingCartService.removeEquip(member, equipId);
 
 		return "The product has been removed from the shopping cart";	
 	}
