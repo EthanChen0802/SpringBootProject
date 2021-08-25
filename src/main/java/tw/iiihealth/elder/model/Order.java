@@ -39,7 +39,7 @@ public class Order {
 	private String status;
 	
 	@Column(name="memberid")
-	private int member_id;
+	private int memberId;
 	
 	
 	@OneToMany(mappedBy = "order", cascade = { CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH },
@@ -102,12 +102,12 @@ public class Order {
 	
 	
 	
-	public int getMember_id() {
-		return member_id;
+	public int getMemberId() {
+		return memberId;
 	}
 
-	public void setMember_id(int member_id) {
-		this.member_id = member_id;
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
 	}
 
 	public List<OrderDetail> getOrderDetail() {

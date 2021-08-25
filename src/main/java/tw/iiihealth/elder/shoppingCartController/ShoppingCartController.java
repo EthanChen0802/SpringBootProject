@@ -82,7 +82,7 @@ public class ShoppingCartController {
 							, @RequestParam(name="number") String number
 							, @RequestParam(name="address") String address
 							, @RequestParam(name="email") String email
-							, @RequestParam(name="memberid") int memberid) {
+							, @RequestParam(name="memberid") int memberId) {
 		
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -100,7 +100,7 @@ public class ShoppingCartController {
 		order.setAddress(address);
 		order.setEmail(email);
 		order.setStatus("尚未出貨");
-		order.setMember_id(memberid);
+		order.setMemberId(memberId);
 		
 		
 		// 將會員的購物車存入訂單細項

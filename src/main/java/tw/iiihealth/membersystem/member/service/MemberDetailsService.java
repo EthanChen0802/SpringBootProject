@@ -42,9 +42,4 @@ public class MemberDetailsService implements UserDetailsService {
 
 	}
 
-	public Member getMember() {
-		return null;
-	}
-
-	
 }
