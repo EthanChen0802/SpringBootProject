@@ -42,7 +42,6 @@ public class ShoppingCartController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
-	
 		Member member = memberService.getCurrentlyLoggedInMember(auth);
 		
 		List<CartItem> cartItems = shoppingCartService.listCartItems(member);
@@ -62,7 +61,7 @@ public class ShoppingCartController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		Member member = memberService.getCurrentlyLoggedInMember(auth);
-
+		
 		List<CartItem> cartItems = shoppingCartService.listCartItems(member);
 		
 		model.addAttribute("cartItems", cartItems);

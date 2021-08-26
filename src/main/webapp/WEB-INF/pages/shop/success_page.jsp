@@ -120,7 +120,7 @@
                 </li>
                 
                 
-                <li><a href="contact.html" class="nav-link">聯絡我們</a></li>
+                <li><a href="${pageContext.request.contextPath}/contact" class="nav-link">聯絡我們</a></li>
               </ul>
 
             </nav>

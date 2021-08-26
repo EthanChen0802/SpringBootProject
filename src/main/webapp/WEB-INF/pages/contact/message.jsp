@@ -29,252 +29,8 @@
   
   <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.js"></script>
   
-  <style>
-  	
-  	#button{
-  		width:200px;
-  		margin: 0 auto 20px auto;
-  	}
-  	
-  	#myPage{
-  		border-radius:10px;
-  		margin:5px;
-  		font-size:25px;
-  		transition-duration: 0.4s;
-  		border:none;
-  		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  		outline:none;
 
-  	}
-  	
-  	#myPage:hover {
-  		background-color: skyblue;
-  		color: white;
-	} 
-	
-	
-	#cart-icon {
-	  position: fixed;
-	  bottom: 80px;
-	  right: 10px;
-	}
-	
-	
-	#top {
-	  position: fixed;
-	  bottom: 170px;
-	  right: 10px;
-	}
-	
-	
-	.sort{
-	    position: absolute;  /*固定在網頁上不隨卷軸移動，若要隨卷軸移動用absolute*/
-	    top: 118%;  /*設置垂直位置*/
-	    left: -17px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
-	    background: transparent;  /*背景顏色*/
-		transition-duration:1s;
-	}
-	
-	
-	.btn{
-		font-size:16px;
-		font-family:serif;
-		border-radius:0;
-	}
-	
-	.btn-dark{
-		font-size:18px;
-		font-family:serif;
-	}
-  </style>  
-  
-   
-<script>
-    <!-- ajax 載入內容 -->
-	
-    // 設定頁數
-  	var indexPage = 2;
-  
-  
-	// 啟動時載入，顯示在第一頁
-	$(function(){
-		createInitialButton(indexPage);
-		change(1);
-	})
 
-	   
-  
-	 // 換頁時更動資料
-	 function change(page){ 
-	   	indexPage = page;
-	  	load(indexPage);
-	 }
-		 
-
-  
-	// 向資料庫要取分頁資料的function
-	function load(indexPage){
-		
-		$.ajax({
-			
-			type:"post",
-			url:"/consumer/findallforConsumerByPage/" + indexPage,
-			dataType:'JSON',
-			contentType:'application/json',
-			
-			success : function(data){
-				 var json = JSON.stringify(data, null, 4);
-			     //console.log("SUCCESS : ", json);
-			     
-				 var parsedObjinArray = JSON.parse(json);
-				 
-				 
-				 // 清除div下的所有子內容
-				 $(".site-section .container .row").empty();
-				 
-				 var div =  $(".site-section .container .row");
-				
-
-				 var content =""
-				 
-				 // 資料迴圈寫出
-				 $.each(parsedObjinArray,function(i,n){
-					 
-					 content += 
-						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
-					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
-					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
-					 +  "<img src='../../EquipImg/" + n.photo +"'"
-					 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
-					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px;'>"
-					 +  "<p style='font-size:18px; font-weight:bold; color:black'>" + n.name + "<p>"
-					 +  "<p style='color:red; font-size:18px; "
-					 +  " margin-top:50px; text-align:left; font-weight:bold'> $" + n.price +"</P>"
-					 +  "</div>"
-					 +  "</div>"
-					 +  "</div>"
-					 
-				 })
-				 
-			
-	
-				 // append
-				div.append(content);		 
-			}
-		
-		})
-
-	}
-	
-	
-	// 創建button
-	function createInitialButton(indexPage){
-		
-			$("#button").empty();
-					 
-			var button = "";
-					
-			for (var i=1; i <= indexPage; i++){
-				button += "<button id='myPage' value='" + i +"'  onclick='change("+i+")'>" +i +"</button>";   
-			}
-
-			$("#button").append(button);
-	}
-	
-	
-	
-	
-	
-	// 依據輔具種類搜索，創建button，並顯示在第一頁
-	function sort(sort){
-		var indexPage = 1;
-		createSortButton(sort, indexPage);
-		sortchange(sort, 1)
-	}
-	
-	
-	// ajax依照輔具種類搜索
-	function findsort(sort, indexPage){ 
-		
-		$.ajax({
-			
-			type:"post",
-			url:"/consumer/findSortforConsumerByPage/" +  sort + "/" +indexPage,
-			dataType:'JSON',
-			contentType:'application/json',
-			
-			success : function(data){
-				 var json = JSON.stringify(data, null, 4);
-			     //console.log("SUCCESS : ", json);
-			     
-				 var parsedObjinArray = JSON.parse(json);
-				 
-				 
-				 // 清除div下的所有子內容
-				 $(".site-section .container .row").empty();
-				 
-				 var div =  $(".site-section .container .row");
-				
-
-				 var content =""
-				 
-				 // 資料迴圈寫出
-				 $.each(parsedObjinArray,function(i,n){
-					 
-					 content += 
-						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
-					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
-					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
-					 +  "<img src='../../EquipImg/" + n.photo +"'"
-					 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
-					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px;'>"
-					 +  "<p style='font-size:18px; font-weight:bold; color:black'>" + n.name + "<p>"
-					 +  "<p style='color:red; font-size:18px; "
-					 +  " margin-top:50px; text-align:left; font-weight:bold'> $" + n.price +"</P>"
-					 +  "</div>"
-					 +  "</div>"
-					 +  "</div>"
-					 
-				 })
-				// append
-				div.append(content);		 
-			}
-		
-		})
-	}
-	
-	
-
-	// 搜索後創建button
-	function createSortButton(sort, indexPage){
-		
-			$("#button").empty();
-					 
-			var button = "";
-					
-			for (var i=1; i <= indexPage; i++){
-				button += "<button  id='myPage' value='" + i + "' onclick='sortchange("+ '"'+sort + '"'+ ", " + i +" )' >" + i +  "</button>";   
-			}
-			
-			$("#button").append(button);
-	}
-	
-	
-	
-	// 點擊sort button的時候換頁
-	function sortchange(sort, indexPage){
-		findsort(sort, indexPage);
-	}
-	
-	
-	
-	// 重新使用全搜索
-	function reset(){
-		createInitialButton(2);
-		change(1);
-	}
-</script>
-  
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -380,7 +136,7 @@
 
 
     <!-- MAIN -->
-    <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-2.jpg')">
+   <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-2.jpg')">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 align-self-center">
@@ -391,62 +147,44 @@
         </div>
       </div>  
     </div>
-    
-    
 
-    <!-- 最上面 -->
-    <div id="top">
-		  <a href="#"><img src="${pageContext.request.contextPath}/images/top.png" width="50px" height="50px"/></a>
-	</div>	
-	
-	<!-- 購物車 -->
-	<div id="cart-icon">
-		  <a href="${pageContext.request.contextPath}/cart"><img src="${pageContext.request.contextPath}/images/checklist.png" width="60px" height="60px"/></a>
-	</div>	
-	
-	<!-- 搜索列 -->	
-	<div class="sort btn-group-vertical">
-		<span class="btn btn-dark btn-lg">搜索列</span>
-		<input type="button" value="全部搜索" class="btn btn-outline-secondary btn-lg" onclick="reset()">
-		<input type="button" value="個人照護輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('個人照護輔具')">
-		<input type="button" value="個人醫療輔具" class="btn btn-outline-secondary btn-lg"  onclick="sort('個人醫療輔具')"> 
-		<input type="button" value="個人行動輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('個人行動輔具')">
-		<input type="button" value="矯正輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('矯正輔具')">
-		<input type="button" value="溝通與資訊輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('溝通與資訊輔具')">
-		
-		<button type="button" class="btn btn-outline-secondary btn-lg" onclick="sort('住家及其他場所之家具與改裝組件')">
-		住家及其他場所<br>之家具與改裝組件 </button>
 
-	</div>
 
+
+  
 
     <div class="site-section">
-	    	  
       <div class="container">
-      		
         <div class="row">
-	       
+          <div class="col-lg-8 mb-5">
+            
+            <h4>我們已收到您的來信，將會盡速與您聯繫</h4>
+            <p>We have received your email, and will contact you as soon as possible</p>
+           	<img src="${pageContext.request.contextPath}/images/Thanks.jpg" style="width:300px"/>
+          </div>
+          
+          
+          <div class="col-lg-3 ml-auto">
+            <div class="mb-3">
+              <p class="mb-0 font-weight-bold text-black">聯絡地址</p>
+              <p class="mb-4">台北市大安區復興南路二段234號</p>
+
+              <p class="mb-0 font-weight-bold text-black">聯絡電話</p>
+              <p class="mb-4"><a href="#">02-8790-6146</a></p>
+
+              <p class="mb-0 font-weight-bold text-black">Email</p>
+              <p class="mb-0">youremail@domain.com</p>
+
+            </div>
+
+          </div>
         </div>
       </div>
-      
-      
     </div>
-		
-		
-
-	<div id="button">
-		<!-- 
-		<c:forEach var="i" begin="1" end="${totalPages}" step="1">
-			<button id="myPage" value="${i}" onclick="change(${i})">${i}</button>
-		</c:forEach>
-		 -->
-    </div>
-
-    
-    
-    
+  
+  
+  
     <!-- Footer -->
-
 
     <div class="site-footer bg-light">
       <div class="container">
@@ -524,8 +262,12 @@
   <script src="${pageContext.request.contextPath}/js/jquery.fancybox.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
   <script src="${pageContext.request.contextPath}/js/isotope.pkgd.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/main.js"></script>
- 
 
+
+  <script src="${pageContext.request.contextPath}/js/main.js"></script>
+  
+  <!--  sweet alert -->
+  <script src="/js/sweetalert2.all.min.js"></script>
+  
 </body>
 </html>
