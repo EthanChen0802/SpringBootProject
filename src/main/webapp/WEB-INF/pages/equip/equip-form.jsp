@@ -19,9 +19,16 @@
 <link href="/css/styles.css"
 	rel="stylesheet" />
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-	crossorigin="anonymous"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+
+<style>
+
+.error{
+	color:red;
+}
+
+</style>	
+	
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -204,7 +211,7 @@
 
 												<tr>
 													<td><label>輔具名稱</label></td>
-													<td><form:input path="name" /></td>
+													<td><form:input path="name"/></td>
 												</tr>
 												<tr>
 													<td><label>輔具類型:</label></td>
@@ -225,8 +232,7 @@
 
 												<tr>
 													<td><label></label></td>
-													<td><input type="submit" value="提交" class="save"
-														id="update" /></td>
+													<td><input type="button" value="提交"  id="update" /></td>
 												</tr>
 												<tr>
 													<td><label></label></td>
@@ -281,18 +287,15 @@
 	 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 	<script>
-		var submit = document.getElementById("submit")
-
-		submit.onsubmit = function() {
-			return false;
-		}
+		var submit = document.getElementById("submit")	
 
 		document.getElementById("update").onclick = function() {
-
+			
 			setTimeout(function() {
 				submit.submit();
 			}, 1400);
-
+			
+			
 			Swal.fire({
 				position : 'top',
 				icon : 'success',
@@ -300,6 +303,7 @@
 				showConfirmButton : false,
 				timer : 1500
 			})
+			
 		}
 		
 		

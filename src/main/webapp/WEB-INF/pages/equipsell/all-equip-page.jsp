@@ -93,7 +93,7 @@
     <!-- ajax 載入內容 -->
 	
     // 設定頁數
-  	var indexPage = 2;
+  	var indexPage = 3;
   
   
 	// 啟動時載入，顯示在第一頁
@@ -270,7 +270,7 @@
 	
 	// 重新使用全搜索
 	function reset(){
-		createInitialButton(2);
+		createInitialButton(3);
 		change(1);
 	}
 </script>
