@@ -11,7 +11,7 @@
 <h1>抱歉，您的管理者帳戶已被拒絕訪問</h1>
 
 <h2>您的管理者帳戶憑證出現錯誤或帳戶不存在</h2>
-<br><a href="/Manager/login">請重新登入</a>
+<br><a href="/iiiHealth/login">請重新登入</a>
 <br><br>
 <%
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

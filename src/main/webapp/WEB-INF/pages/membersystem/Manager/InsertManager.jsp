@@ -54,7 +54,7 @@
 					<li><a class="dropdown-item" href="#!">廠商資料表</a></li>
 					<li><hr class="dropdown-divider" /></li>
 					<li><a class="dropdown-item" href="/Manager/insertManager">註冊</a></li>
-					<li><a class="dropdown-item" href="/Manager/logout">登出</a></li>
+					<li><a class="dropdown-item" href="/iiiHealth/logout">登出</a></li>
 				</ul></li>
 		</ul>
 	</nav>

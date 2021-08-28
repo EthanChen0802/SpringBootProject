@@ -31,10 +31,6 @@ public class EquipController {
 	@Autowired
 	EquipService equipService;
 	
-	
-
-	
-	
 	// 管理者商品頁
 	@RequestMapping(path="/findall")
 	public String findAllEquip(Model model) {
@@ -54,6 +50,7 @@ public class EquipController {
 	public String QueryById(@RequestParam("eId") int eid, Model model) {
 		Equip equip = equipService.findById(eid);
 		model.addAttribute("equip", equip);
+		
 		return "equip/equip-form";
 	}
 	
@@ -70,6 +67,7 @@ public class EquipController {
 		return "equip/equip-form";
 	}
 
+	
 	
 	// 管理者刪除
 	@RequestMapping(path = "/delete", method = RequestMethod.POST)
@@ -97,10 +95,9 @@ public class EquipController {
 			// 抓取檔案名稱
 			String fileName = multipartFile.getOriginalFilename();
 			
-			// 抓取檔案格式
 			String suffixName = fileName.substring(fileName.lastIndexOf("."));
 			
-			//生成檔名稱通用方法(加入現在的時間以及亂數 0-100)
+			//生成檔名稱通用方法(加入現在的時間以及亂數100)
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
 	        Random r = new Random();
 	        StringBuilder tempName = new StringBuilder();

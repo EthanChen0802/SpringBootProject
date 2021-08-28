@@ -32,7 +32,7 @@ a {
 		<div class="divItem">
 			<h3>恭喜您，您的帳戶驗證成功!!</h3>
 			<h4>
-				<a href="/Manager/login">請點此登入</a>
+				<a href="/iiiHealth/login">請點此登入</a>
 			</h4>
 		</div>
 	</fieldset>

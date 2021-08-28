@@ -48,12 +48,12 @@
 					class="fas fa-user fa-fw"></i></a>
 				<ul class="dropdown-menu dropdown-menu-end"
 					aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="/Manager/searchAllManagerAction.controller">管理員資料表</a></li>
-					<li><a class="dropdown-item" href="#!">會員資料表</a></li>
-					<li><a class="dropdown-item" href="#!">廠商資料表</a></li>
-					<li><hr class="dropdown-divider" /></li>
-					<li><a class="dropdown-item" href="/Manager/insertManager">註冊</a></li>
-					<li><a class="dropdown-item" href="/Manager/logout">登出</a></li>
+<!-- 					<li><a class="dropdown-item" href="/Manager/searchAllManagerAction.controller">管理員資料表</a></li> -->
+<!-- 					<li><a class="dropdown-item" href="/Manager/searchAllMtoM">會員資料表</a></li> -->
+<!-- 					<li><a class="dropdown-item" href="#!">廠商資料表</a></li> -->
+<!-- 					<li><hr class="dropdown-divider" /></li> -->
+					<li><a class="dropdown-item" style="font-size:20px" href="/Manager/insertManager">註冊</a></li>
+					<li><a class="dropdown-item" style="font-size:20px" href="/iiiHealth/logout">登出</a></li>
 				</ul></li>
 		</ul>
 	</nav>
@@ -79,7 +79,7 @@
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="/Manager/searchAllManagerAction.controller">管理員資料表</a>
-								<a class="nav-link" href="#">會員資料表</a>
+								<a class="nav-link" href="/Manager/searchAllMtoM">會員資料表</a>
 								<a class="nav-link" href="#">廠商資料表</a>
 							</nav>
 						</div>
@@ -184,7 +184,7 @@
 
 					<div class="card mb-4">
 						<div class="card-header">
-							<i class="fas fa-table me-1"></i> 管理者表單總覽
+							<i class="fas fa-table me-1"></i> 管理員資料表
 						</div>
 						<div class="card-body">
 							<table id="datatablesSimple">
@@ -225,13 +225,13 @@
 											<td>
 												<form method="POST" action="/Manager/updateManager">
 													<input type="hidden" name="managerid" value="${manager.managerid}" />
-													<input type="submit" value="修改">
+													<input type="image" src="${pageContext.request.contextPath}/images/update.jpg">
 												</form>
 											</td>
 											<td>
 												<form method="POST" action="/Manager/displayDeleteManager">
 													<input type="hidden" name="managerid" value="${manager.managerid}" />
-													<input type="submit" value="刪除">
+													<input type="image" src="${pageContext.request.contextPath}/images/delete.png">
 												</form>
 											</td>
 										</tr>

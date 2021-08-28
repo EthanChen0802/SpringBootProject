@@ -57,8 +57,6 @@ public class MemberService {
 		return memberRepository.searchVerificationCode(verificationCode);
 	}
 	
-	
-	
 	// 當前登入的會員
 	public Member getCurrentlyLoggedInMember(Authentication auth) {
 		
@@ -68,5 +66,4 @@ public class MemberService {
 		
 		return member;
 	}
-	
 }

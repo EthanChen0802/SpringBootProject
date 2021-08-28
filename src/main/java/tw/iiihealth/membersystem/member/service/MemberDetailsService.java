@@ -41,5 +41,4 @@ public class MemberDetailsService implements UserDetailsService {
 		}
 
 	}
-
 }

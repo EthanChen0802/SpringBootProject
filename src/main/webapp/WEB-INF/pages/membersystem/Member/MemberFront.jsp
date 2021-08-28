@@ -26,8 +26,8 @@
 				<td>${member.memberaccount}</td>
 			</tr>
 			<tr>
-				<td>密碼:</td>
-				<td>${member.memberpwd}</td>
+				<td>使用者權限:</td>
+				<td>${member.role}</td>
 			</tr>
 			<tr>
 				<td>E-mail:</td>

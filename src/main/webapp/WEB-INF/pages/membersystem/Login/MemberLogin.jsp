@@ -1,228 +1,110 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.*"%>
-<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>健康優生網</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
-	rel="stylesheet" />
-<link href="${pageContext.request.contextPath}/css/styles.css"
-	rel="stylesheet" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-	crossorigin="anonymous"></script>
+	<title>健康悠生網</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/login/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/css/util.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/css/main.css">
+<!--===============================================================================================-->
 </head>
-<body class="sb-nav-fixed">
-
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="#">控制中心</a>
-		<!-- Sidebar Toggle-->
-		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
-			id="sidebarToggle" href="#!">
-			<i class="fas fa-bars"></i>
-		</button>
-		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="Search for..."
-					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
-					<i class="fas fa-search"></i>
-				</button>
-			</div>
-		</form>
-		<!-- Navbar-->
-		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
-					class="fas fa-user fa-fw"></i></a>
-				<ul class="dropdown-menu dropdown-menu-end"
-					aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="#!">Settings</a></li>
-					<li><a class="dropdown-item" href="#!">Activity Log</a></li>
-					<li><hr class="dropdown-divider" /></li>
-				</ul></li>
-		</ul>
-	</nav>
-
-	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">會員中心</div>
-						<a class="nav-link" href="#">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-table"></i>
-							</div> 會員系統
-						</a>
-						<div class="sb-sidenav-menu-heading">長照服務</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts1" aria-expanded="false"
-							aria-controls="collapseLayouts1">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-chart-area"></i>
-							</div> 叫車系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts1"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="#">計程車資訊</a>
-								<a class="nav-link" href="#">店家資訊</a>
-							</nav>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-columns"></i>
-							</div> 長照系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link"
-									href="#">輔具系統</a> <a
-									class="nav-link"
-									href="#">輔具訂單系統</a>
-							</nav>
-						</div>
-
-
-
-						<div class="sb-sidenav-menu-heading">營養與藥品管理</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts3" aria-expanded="false"
-							aria-controls="collapseLayouts3">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 營養管理系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts3"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="#">營養餐管理</a> <a
-									class="nav-link" href="#">食品資料管理</a>
-
-							</nav>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts4" aria-expanded="false"
-							aria-controls="collapseLayouts4">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> 用藥查詢系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts4"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="#">藥品辨識系統</a> <a
-									class="nav-link" href="#">藥品包裝變更</a>
-
-							</nav>
-						</div>
-
+<body style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form action="/Member/login" method="post" id="form1" class="login100-form validate-form" onsubmit="return checkSubBtn();">
+					<span class="login100-form-title p-b-43">
+						會員登入
+					</span>
+					
+					
+					<span style="color: red;" id="acntCheck"></span>
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="text" id="account1" name="username">
+						<span class="focus-input100"></span>
+						<span class="label-input100">帳號</span>
 					</div>
-				</div>
-				<div class="sb-sidenav-footer">
-					<div class="small">Logged in as:</div>
-					Start Bootstrap
-				</div>
-			</nav>
-		</div>
-		<div id="layoutSidenav_content">
-			<main>
-				<div class="container-fluid px-4">
-					<h1 class="mt-4">會員系統</h1>
-					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item active">會員介面</li>
-					</ol>
-
-					<div class="card mb-4">
-						<div class="card-header">
-							<i class="fas fa-table me-1"></i> 會員登入
-						</div>
-						<div class="card-body">
-
-							<div class="row">
-								<div class="col-md-6">
-										<table class="table  table-hover">
-									<form action="/Member/login" method="post" id="form1" onsubmit="return checkSubBtn();">
-											<tr>
-												<td>帳號:</td>
-												<td><input type="text" id="account1" name="username"
-													size="15" autocomplete="off"><span id="acntCheck"></span></td>
-											</tr>
-											<tr>
-												<td>密碼:</td>
-												<td><input type="password" id="pwd1" name="password" maxlength="15" size="15"> 
-												<span id="pwd1Check"></span><br>
-												<input type="checkbox" id="showPwd">顯示密碼     
-												<input type="checkbox" name="remember-me">記住我</td>
-											</tr>
-											<tr>
-												<td><span style="color: red;" id="subBtnCheck"></span></td>
-											</tr>
-											<tr>
-												<td>
-													<input type="submit" class="btn" id="subBtn" name="sublogin" value="登陸">
-												</td>
-									</form>
-												<td>
-													<form action="/HealthProject" method="post">
-														<input type="submit" class="btn" value="取消">
-													</form>
-												</td>
-											</tr>	
-										</table>
-								</div>
-								<div class="col-md-6"></div>
-							</div>
-
-						</div>
+					
+					
+					<span style="color: red;" id="pwd1Check"></span>
+					<div class="wrap-input100 validate-input">
+						<input class="input100" type="password" id="pwd1" name="password">
+						<span class="focus-input100"></span>
+						<span class="label-input100">密碼</span>
 					</div>
-				</div>
-			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2021</div>
+					
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="showPwd" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="showPwd">
+								顯示密碼
+							</label>
+						</div>
+						
+
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								記住我
+							</label>
+						</div>
+
 						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
+							<a href="#" class="txt1">
+								忘記密碼?
+							</a>
 						</div>
 					</div>
+			
+
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn" id="subBtn" name="sublogin">
+							登入
+						</button>
+					</div>
+					
+					<div class="text-center p-t-46 p-b-20">
+						<span class="txt2">
+							沒有帳戶?<a class="txt1" href="/HealthProject/insertMember">點此註冊</a>
+						</span>
+						<div class="text-center p-t-46 p-b-20">
+							<span class="txt2">
+								<a class="txt1" href="/HealthProject/">返回首頁</a>
+							</span>
+						</div>
+					</div>
+				
+				</form>
+
+				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath}/login/images/login_elder.jpg');">
 				</div>
-			</footer>
+			</div>
 		</div>
 	</div>
-
+	
+	
 
 	<script>
     let acntCheck = document.getElementById("acntCheck");
@@ -240,28 +122,11 @@
         let flag1 = false, flag2 = false;
 
         if (acntLen == "") {
-            acntCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>帳號不能為空";
+            acntCheck.innerHTML = "帳號不能為空";
             flagSubmit1 = false;
-        } else if (acntLen >= 6) {
-            for (let i = 0; i <= acntLen; i++) {
-                let ch = acntValue.charAt(i).toUpperCase();
-                if (ch >= "A" && ch <= "Z") {
-                    flag1 = true;
-                } else if (ch >= "0" && ch <= "9") {
-                    flag2 = true;
-                }
-                if (flag1 && flag2) {
-                    break;
-                }
-            } if (flag1 && flag2) {
-                acntCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
-            } else {
-                acntCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>帳號必須包含英文與數字";
-                flagSubmit1 = false;
-            }
-        } else if (acntLen < 6 && acntLen > 0) {
-            acntCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>帳號字數過少";
-            flagSubmit1 = false;
+        }else{
+        	acntCheck.innerHTML = "";
+        	flagSubmit1 = true;
         }
     }
 
@@ -274,28 +139,11 @@
         let flag1 = false, flag2 = false;
 
         if (pwd1Len == "") {
-            pwd1Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼不能為空";
+            pwd1Check.innerHTML = "密碼不能為空";
             flagSubmit2 = false;
-        } else if (pwd1Len >= 6) {
-            for (let i = 0; i <= pwd1Len; i++) {
-                let ch = pwd1Value.charAt(i).toUpperCase();
-                if (ch >= "A" && ch <= "Z") {
-                    flag1 = true;
-                } else if (ch >= "0" && ch <= "9") {
-                    flag2 = true;
-                }
-                if (flag1 && flag2) {
-                    break;
-                }
-            } if (flag1 && flag2) {
-                pwd1Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
-            } else {
-                pwd1Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼必須包含英文與數字";
-                flagSubmit2 = false;
-            }
-        } else if (pwd1Len < 6 && pwd1Len > 0) {
-            pwd1Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼字數過少";
-            flagSubmit2 = false;
+        } else{
+        	pwd1Check.innerHTML = "";
+        	flagSubmit2 = true;
         }
     }
 
@@ -318,7 +166,6 @@
         checkPwd1();
 
         if (flagSubmit1 == false || flagSubmit2 == false) {
-            subBtnCheck.innerHTML = "**資料不完整，請重新檢查**";
             return false;
         } else {
             return true;
@@ -326,22 +173,25 @@
 
     }
     </script>
+	
+	
+	
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/login/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/login/vendor/bootstrap/js/popper.js"></script>
+	<script src="${pageContext.request.contextPath}/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/login/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/login/vendor/daterangepicker/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath}/login/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/login/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/login/js/main.js"></script>
 
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath}/js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/demo/chart-area-demo.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/demo/chart-bar-demo.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/datatables-simple-demo.js"></script>
 </body>
 </html>

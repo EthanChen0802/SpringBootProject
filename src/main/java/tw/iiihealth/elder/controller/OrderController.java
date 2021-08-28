@@ -22,7 +22,6 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 	
-	
 	@Autowired
 	private OrderMailService orderMailService;
 
@@ -32,7 +31,7 @@ public class OrderController {
 		List<Order> list = orderService.findAll();
 		
 		model.addAttribute("list", list);
-		
+				
 		return "equip/order-list";
 	}
 	

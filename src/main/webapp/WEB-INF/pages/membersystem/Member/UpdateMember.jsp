@@ -223,24 +223,20 @@
 												</td>
 											</tr>
 											<tr>
-												<td><form:label path="membercity">被看護人居住地址:</form:label></td>
-												<td><form:label path="membercity">縣市:</form:label></td>
-												<td>
-													<form:select path="membercity"></form:select>
-													<span id="idsp4"></span>
-												</td>
+												<td><form:label path="membercity">居住縣市:</form:label></td>
+												<td><form:select path="membercity"></form:select> 
+												<span id="idsp4"></span></td>
+											</tr>
+											<tr>
 												<td><form:label path="membertown">鄉鎮市區:</form:label></td>
-												<td>
-													<form:select path="membertown">
-														<option value=0>請選擇</option>
-													</form:select>
-													<span id="idsp5"></span>
-												</td>
-												<td><form:label path="memberaddress">地址:</form:label></td>
-												<td>
-													<form:input path="memberaddress" />
-													<span id="idsp6"></span>
-												</td>
+												<td><form:select path="membertown">
+													<option value=0>請選擇</option>
+													</form:select> <span id="idsp5"></span></td>
+											</tr>
+											<tr>
+												<td><form:label path="memberaddress">居住地址:</form:label></td>
+												<td><form:input path="memberaddress" /> 
+												<span id="idsp6"></span></td>
 											</tr>
 											<tr>
 												<td><form:label path="handbook">身心障礙手冊/證明:</form:label></td>
@@ -300,18 +296,40 @@
 		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
 			crossorigin="anonymous"></script>
 		<script src="../js/datatables-simple-demo.js"></script>
-		<script type="text/javascript">
+		
+		
+<script type="text/javascript">
+
+var cn = "${member.membercity}"
+	var tn = "${member.membertown}"
+		
 	$(document).ready(function(){
 		$.getJSON('/json/taiwan_districts.json',function(data){
 			var resultText='';
 			resultText="<option value=0>請選擇</option>";
 			for(var i=0; i<data.length; i++){
-				resultText+="<option value='"+data[i].name+"'/>"+data[i].name
+				if(cn == (data[i].name)){
+					resultText+="<option value='"+data[i].name+"' selected>"+data[i].name+"</option>"
+				}else{
+					resultText+="<option value='"+data[i].name+"'>"+data[i].name+"</option>"
+				}
 			}
-			
 			$("#membercity").html(resultText);
+			let CN=$("select[name='membercity']").val();		
+			for(n=0; n<data.length; n++ ){
+    			if(CN == data[n].name){
+    				var resultText2='';
+    				for(var j=0; j<data[n].districts.length; j++){
+    					if(tn == data[n].districts[j].name){
+    						resultText2+="<option value='"+data[n].districts[j].name+"' selected>"+data[n].districts[j].name+"</option>"
+    					}else{
+    						resultText2+="<option value='"+data[n].districts[j].name+"'>"+data[n].districts[j].name+"</option>"
+    					}
+    				}
+    			}
+    		}	
+			$("#membertown").html(resultText2);
 		});
-
 	$("select[name='membercity']").on('change',function(){
 		$.getJSON('/json/taiwan_districts.json',function(data){	
 			let CN=$("select[name='membercity']").val();		
@@ -319,7 +337,7 @@
     			if(CN == data[n].name){
     				var resultText2='';
     				for(var j=0; j<data[n].districts.length; j++){
-    					resultText2+="<option value='"+data[n].districts[j].name+"'/>"+data[n].districts[j].name
+    					resultText2+="<option value='"+data[n].districts[j].name+"'>"+data[n].districts[j].name+"</option>"
     				}
     							    				
     			}
@@ -327,7 +345,6 @@
 			$("#membertown").html(resultText2);
 		});		
 	});
-	
 	});
 	
 	
@@ -345,6 +362,8 @@
     }
 	
 </script>
+
+
 		<script>
 	let sp1=document.getElementById("idsp1");
 	let sp3=document.getElementById("idsp3");

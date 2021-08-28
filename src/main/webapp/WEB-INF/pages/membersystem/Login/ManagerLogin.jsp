@@ -34,8 +34,6 @@
 		<!-- Navbar Search-->
 		<form
 			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-
-				<a class="navbar-brand ps-3" href="#">歡迎您，${user.managername}</a>
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -49,7 +47,7 @@
 					<li><a class="dropdown-item" href="#!">會員資料表</a></li>
 					<li><a class="dropdown-item" href="#!">廠商資料表</a></li>
 					<li><hr class="dropdown-divider" /></li>
-					<li><a class="dropdown-item" href="/Manager/login">登入</a></li>
+					<li><a class="dropdown-item" href="/iiiHealth/login">登入</a></li>
 				</ul></li>
 		</ul>
 	</nav>
@@ -182,7 +180,7 @@
 
 							<div class="row">
 								<div class="col-md-6">
-									<form action="/Manager/login" method="post" id="form1" onsubmit="return checkSubBtn();">
+									<form action="/iiiHealth/login" method="post" id="form1" onsubmit="return checkSubBtn();">
 										<table class="table  table-hover">
 											<tr>
 												<td>帳號:</td>

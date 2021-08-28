@@ -34,29 +34,15 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/Member/**","/cart/**")
 		.and()
 		.authorizeRequests().anyRequest().authenticated()
+//		.and()
+//		.rememberMe().tokenValiditySeconds(86400).key("rememberMe-key")
 		.and().formLogin().loginPage("/Member/login")
-		.defaultSuccessUrl("/Member/HealthProject")
+			.defaultSuccessUrl("/Member/HealthProject")
 			.failureUrl("/Member/login/AccessDenied")
 		.permitAll()
 		.and().logout().logoutUrl("/Member/logout").logoutSuccessUrl("/HealthProject");
 	
 		http.csrf().disable();
-		
-		
-//		http
-//		.authorizeRequests()
-//		.antMatchers(HttpMethod.GET, "/Member/**").authenticated()
-//		.antMatchers(HttpMethod.GET).permitAll()
-//		.antMatchers(HttpMethod.POST, "/Member/**").authenticated()
-//		.antMatchers(HttpMethod.POST).permitAll()
-//		.anyRequest().authenticated()
-//		.and()
-//		.rememberMe().tokenValiditySeconds(86400).key("rememberMe-key")
-//		.and()
-//		.csrf().disable()
-//		.formLogin().loginPage("/Member/login").defaultSuccessUrl("/Member/login/success",true).failureUrl("/Member/login/AccessDenied").permitAll()
-//        .and()
-//        .logout().logoutUrl("/Member/logout").logoutSuccessUrl("/Member/login");
 	
 	}
 }

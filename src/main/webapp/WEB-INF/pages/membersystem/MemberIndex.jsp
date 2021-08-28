@@ -8,23 +8,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
 
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/fonts/icomoon/style.css">
 
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.theme.default.min.css">
 
-  <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery.fancybox.min.css">
 
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-datepicker.css">
 
-  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/fonts/flaticon/font/flaticon.css">
 
-  <link rel="stylesheet" href="css/aos.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -112,6 +112,7 @@
                    <li class="has-children">
                       <a href="#">會員專區</a>
                       <ul class="dropdown">
+                        <li><a href="/Member/searchOneMemberAction.controller">會員個人資料</a></li>
                         <li><a href="/Member/logout">會員登出</a></li>
                         <li><a href="/HealthProject/insertMember">會員註冊</a></li>
                       </ul>
@@ -146,7 +147,7 @@
 
 
 
-    <div class="slide-item overlay" style="background-image: url('images/slider-1.jpg')">
+    <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-1.jpg')">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 align-self-center">
@@ -162,22 +163,22 @@
     
 </div> <!-- .site-wrap -->
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.countdown.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/jquery.animateNumber.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/jquery.sticky.js"></script>
-<script src="js/isotope.pkgd.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.easing.1.3.js"></script>
+<script src="${pageContext.request.contextPath}/js/aos.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.animateNumber.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.fancybox.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+<script src="${pageContext.request.contextPath}/js/isotope.pkgd.min.js"></script>
 
 
-<script src="js/main.js"></script>
+<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 
 

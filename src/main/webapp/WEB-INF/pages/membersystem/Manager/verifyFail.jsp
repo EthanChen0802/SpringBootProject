@@ -32,7 +32,7 @@ a {
 		<div class="divItem">
 			<h3>抱歉，此帳戶不接受驗證。請確認此帳戶是否已驗證，或驗證碼不正確。</h3>
 			<h4>
-				<a href="/Manager/login">請點此登入</a>
+				<a href="/iiiHealth/login">請點此登入</a>
 			</h4>
 		</div>
 	</fieldset>
