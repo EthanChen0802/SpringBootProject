@@ -104,10 +104,10 @@ p{
     <!-- MAIN -->
    <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/wheelchair.jpg')">
       <div class="container">
-        <div class="row justify-content-center text-center">
+        <div class="row">
           <div class="col-lg-6 align-self-center">
-            <h1 class="heading mb-3">輔具購買商城</h1>
-            <p class="lead text-white mb-5">各式各樣的輔具產品，讓生活自在得意</p>
+            <h1 class="heading mb-3" >輔具購買商城</h1>
+            <p class="lead text-white mb-5">各式各樣的輔具產品<br>讓生活自在得意</p>
             <p><a href="${pageContext.request.contextPath}/contact" class="btn btn-primary">聯絡我們</a></p>
           </div>
         </div>
