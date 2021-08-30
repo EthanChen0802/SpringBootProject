@@ -37,15 +37,15 @@
 	
 	#cart-icon {
 	  position: fixed;
-	  bottom: 80px;
-	  right: 10px;
+	  bottom: 90px;
+	  right: 20px;
 	}
 	
 	
 	#top {
 	  position: fixed;
-	  bottom: 170px;
-	  right: 10px;
+	  bottom: 180px;
+	  right: 20px;
 	}
 	
 	
@@ -256,6 +256,22 @@
 		change(1);
 	}
 </script>
+
+<!-- GetButton.io widget -->
+<script type="text/javascript">
+    (function () {
+        var options = {
+            line: "//manager.line.biz/account/@100lshyw", // Line QR code URL
+            call_to_action: "加入官方line", // Call to action
+            position: "right", // Position may be 'right' or 'left'
+        };
+        var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+</script>
+<!-- /GetButton.io widget -->
   
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
