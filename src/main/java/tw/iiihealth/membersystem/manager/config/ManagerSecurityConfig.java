@@ -16,6 +16,9 @@ public class ManagerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ManagerDetailsService managerDetailsService;
+
+	@Autowired
+	private ManagerHandler managerHandler;
 	
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -34,7 +37,7 @@ public class ManagerSecurityConfig extends WebSecurityConfigurerAdapter {
 //		.and()
 //		.rememberMe().tokenValiditySeconds(86400).key("rememberMe-key")
 		.and().formLogin().loginPage("/iiiHealth/login")
-			.defaultSuccessUrl("/Manager/searchAllManagerAction.controller")
+			.successHandler(managerHandler)
 			.failureUrl("/iiiHealth/login/AccessDenied")
 		.permitAll()
 		.and().logout().logoutUrl("/iiiHealth/logout").logoutSuccessUrl("/iiiHealth/login")

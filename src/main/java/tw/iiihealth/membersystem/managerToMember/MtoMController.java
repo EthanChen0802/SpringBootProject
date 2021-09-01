@@ -27,10 +27,10 @@ public class MtoMController {
 	@RequestMapping(path = "/Manager/searchAllMtoM", method = {RequestMethod.GET, RequestMethod.POST})
 	public String searchAllMemberAction(@ModelAttribute("member") Member member,Model m) {
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String manageraccount = auth.getName();
-		Manager user = managerService.searchUserDetails(manageraccount);
-		m.addAttribute("user", user);
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		String manageraccount = auth.getName();
+//		Manager user = managerService.searchUserDetails(manageraccount);
+//		m.addAttribute("user", user);
 		
 		List<String> handbookOption = new ArrayList<String>();
 		handbookOption.add("有");

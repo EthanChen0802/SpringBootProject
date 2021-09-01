@@ -28,6 +28,9 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/login/css/main.css">
 <!--===============================================================================================-->
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 </head>
 <body style="background-color: #666666;">
 	
@@ -91,11 +94,12 @@
 						</span>
 						<div class="text-center p-t-46 p-b-20">
 							<span class="txt2">
-								<a class="txt1" href="/HealthProject/">返回首頁</a>
+								<a class="txt1" href="/HealthProject">返回首頁</a>
 							</span>
 						</div>
 					</div>
-				
+						<a id="onekey" href="#">林家瑋/吳哲瑋</a><br>
+						<a id="twokey" href="#">林睿梅/張仲淑</a>
 				</form>
 
 				<div class="login100-more" style="background-image: url('${pageContext.request.contextPath}/login/images/login_elder.jpg');">
@@ -103,6 +107,28 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+<script type="text/javascript">
+//一鍵輸入
+$('#onekey').on('click', function(){
+	$('#account1').val('2z5fhjaxmase');
+	$('#pwd1').val('a8jbuxt8');
+}).on('dblclick', function(){
+	$('#account1').val('xchbfp5132uswuzc');
+	$('#pwd1').val('fb4swqiw');
+})
+
+//一鍵輸入
+$('#twokey').on('click', function(){
+	$('#account1').val('kpxcepbjgu3h');
+	$('#pwd1').val('df3isjbj');
+}).on('dblclick', function(){
+	$('#account1').val('cj4y24mabc7');
+	$('#pwd1').val('bp969hg8');
+})
+</script>
 	
 	
 

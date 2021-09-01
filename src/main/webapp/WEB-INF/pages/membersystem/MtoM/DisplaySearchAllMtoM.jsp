@@ -62,7 +62,7 @@
 
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="/Manager/searchAllManagerAction.controller">控制中心</a>
+		<a class="navbar-brand ps-3" href="/Manager/searchAllManagerAction.controller">健康優生網</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -399,6 +399,42 @@
 			</footer>
 		</div>
 	</div>
+	
+	
+	
+<script type="text/javascript">
+//一鍵輸入
+$('#onekey').on('click', function(){
+	$('#membername').val('張美麗');
+	$('#female').prop('checked',true)
+	$('#memberyear').val('63');
+	$('#membermonth').val('3');
+	$('#memberday').val('10');
+	$('#memberaccount').val('qwer1234');
+	$('#memberpwd').val('asdf1234');
+	$('#pwd2').val('asdf1234');
+	$('#memberemail').val('iiieeit12907@gmail.com');
+	$('#memberphone').val('0987651822');
+	$('#memberaddress').val('大安路一段17號');
+	$('#yesD').prop('checked',true)
+})
+
+
+    //顯示密碼
+    document.getElementById("showPwd").onclick=showPwd;
+        function showPwd(){
+            let pwdType=document.getElementById("memberpwd").type;
+            //pwdType現在是密碼的話，就轉成文字顯示
+            if(pwdType === "password"){
+                document.getElementById("memberpwd").type="text";
+                document.getElementById("pwd2").type="text";
+                //pwdType現在是文字的話，就轉回密碼來不顯示
+            }else{
+                document.getElementById("memberpwd").type="password";
+                document.getElementById("pwd2").type="password";
+            }
+        }
+</script>
 	
 	
 <script type="text/javascript">

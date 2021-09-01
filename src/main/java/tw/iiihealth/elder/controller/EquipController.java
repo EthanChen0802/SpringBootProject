@@ -72,9 +72,24 @@ public class EquipController {
 	// 管理者刪除
 	@RequestMapping(path = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public String delete(@RequestParam("eId") int eId) {
+	public String delete(@RequestParam("eId") int eId, HttpServletRequest request) {
 		
-		equipService.delete(eId);
+		Equip equip = equipService.findById(eId);
+		
+		// 設定檔案資料夾路徑
+		String saveDir  = request.getSession().getServletContext().getRealPath("/") + "EquipImg\\";
+		
+		//刪除資料夾圖片
+	    String deleteName = equip.getPhoto();
+	    System.out.println(deleteName);
+	    if (deleteName != "" && deleteName != null) {
+	        String deleteFilePath = saveDir + File.separator+ deleteName;
+		    File deleteFile = new File(deleteFilePath);
+		    deleteFile.delete();
+	    }
+	    
+	    // 刪除帳號
+	    equipService.delete(eId);
 		
 		return "success";
 	}
@@ -86,6 +101,7 @@ public class EquipController {
 	@PostMapping(path="save")
 	public String saveById(@ModelAttribute("equip") Equip equip, 
 						   @RequestParam("pic") MultipartFile multipartFile,
+						   @RequestParam("hot") String hot,
 						   HttpServletRequest request) throws Exception{
 		
 		
@@ -105,7 +121,7 @@ public class EquipController {
 			
 			String saveName = tempName.toString();
 			
-			// 設定檔案路徑
+			// 設定檔案資料夾路徑
 			String saveDir  = request.getSession().getServletContext().getRealPath("/") + "EquipImg\\";
 			
 			// 創建目的資料夾
@@ -116,14 +132,25 @@ public class EquipController {
 			String saveFilePath = saveDir + File.separator+ saveName;
 			File saveFile = new File(saveFilePath);
 			
+			// 刪除資料夾原本的圖片 
+		    String deleteName = equip.getPhoto();
+		    if (deleteName != "" && deleteName != null) {
+		        String deleteFilePath = saveDir + File.separator+ deleteName;
+			    File deleteFile = new File(deleteFilePath);
+			    deleteFile.delete();
+		    }
+		
 			
-			// 儲存圖片
+			// 儲存新圖片到資料夾
 			multipartFile.transferTo(saveFile);
 		
 			// 將檔名存入equip
 			equip.setPhoto(saveName);
 
 		}
+		
+		// 儲存熱門商品狀態
+		equip.setHot(hot);
 		
 		equipService.save(equip);
 		

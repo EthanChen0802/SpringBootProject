@@ -82,6 +82,39 @@
 													<td><label>輔具價格:</label></td>
 													<td><form:input path="price"/></td>
 												</tr>
+												
+												<tr>
+													<td><label>熱門商品:</label></td>
+													<td>
+														<c:choose>
+															<c:when test="${empty equip.hot}">
+																<input type="radio" id="Y" name="hot" value="Y">
+																<label for="Y">Yes</label>
+																<br>
+																<input type="radio" id="N" name="hot" value="N">
+																<label for="N">No</label>
+															</c:when>
+														
+															<c:when test="${equip.hot == 'Y'}">
+																<input type="radio" id="Y" name="hot" value="Y" checked>
+																<label for="Y">Yes</label>
+																<br>
+																<input type="radio" id="N" name="hot" value="N">
+																<label for="N">No</label>
+															</c:when>
+														
+															<c:when test="${equip.hot =='N'}">
+																<input type="radio" id="Y" name="hot" value="Y">
+																<label for="Y">Yes</label>
+																<br>
+																<input type="radio" id="N" name="hot" value="N" checked>
+																<label for="N">No</label>
+															</c:when>
+														</c:choose>
+													</td>
+												
+												</tr>
+												
 												<tr>
 													<td><label>衛生署字號:</label></td>
 													<td><form:input path="document"/></td>

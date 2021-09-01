@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import tw.iiihealth.membersystem.member.model.Member;
 import tw.iiihealth.membersystem.member.service.MemberMailService;
@@ -37,6 +39,8 @@ import tw.iiihealth.membersystem.member.service.MemberService;
 //林睿梅 帳:kpxcepbjgu3h  		密:df3isjbj
 //張仲淑 帳:cj4y24mabc7  		密:bp969hg8
 
+
+@SessionAttributes(names={"user_Member"})
 @Controller
 public class MemberController {
 
@@ -47,34 +51,61 @@ public class MemberController {
 	private MemberMailService mailService;
 	
 	
-	//首頁(有會員)
-	@RequestMapping("/Member/HealthProject")
-	public String indexMember(Model m) {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
-		
-		Member member = memberService.searchMemberId(user.getMemberid());
-		m.addAttribute("member", member);
-		
-		return "membersystem/MemberIndex";
+	
+	
+	
+//-------------------------------------------------------登入-----------------------------------------------------------------
+	
+	// 登入
+	@RequestMapping("/Member/login")
+	public ModelAndView managerLogin2(Model m) {
+		return new ModelAndView("membersystem/Login/MemberLogin");
 	}
-
-	// 查詢所有
-	@RequestMapping(path = "/Member/searchAllMemberAction.controller", method = {RequestMethod.GET, RequestMethod.POST})
-	public String searchAllMemberAction(Model m) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
-		
-		List<Member> list = memberService.searchAllMember();
-		m.addAttribute("allMember", list);
-		return "membersystem/Member/DisplaySearchAllMember";
+	
+	// 登入失敗
+	@RequestMapping("/Member/login/AccessDenied")
+	public ModelAndView adminAccessError() {
+		return new ModelAndView("membersystem/Login/MemberAccessdenied");
 	}
+	
+	
+	
+	
+//-------------------------------------------------------首頁-----------------------------------------------------------------
+	
+	
+	
+	//首頁
+	@RequestMapping("/HealthProject")
+	public ModelAndView index1() {
+		return new ModelAndView("index");
+	}
+	
+	
+	
+	
+
+
+//	// 查詢所有
+//	@RequestMapping(path = "/Member/searchAllMemberAction.controller", method = {RequestMethod.GET, RequestMethod.POST})
+//	public String searchAllMemberAction(Model m) {
+//
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		String memberaccount = auth.getName();
+//		Member user_Member = memberService.searchUserDetails(memberaccount);
+//		m.addAttribute("user_Member", user_Member);
+//		
+//		List<Member> list = memberService.searchAllMember();
+//		m.addAttribute("allMember", list);
+//		return "membersystem/Member/DisplaySearchAllMember";
+//	}
+	
+	
+
+	
+	
+//-------------------------------------------------------會員個人資料-----------------------------------------------------------------
+
 	
 	// 查詢單筆
 	@RequestMapping(path = "/Member/searchOneMemberAction.controller", method = {RequestMethod.GET, RequestMethod.POST})
@@ -82,13 +113,20 @@ public class MemberController {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
+		Member user_Member = memberService.searchUserDetails(memberaccount);
 		
-		Member member = memberService.searchMemberId(user.getMemberid());
+		Member member = memberService.searchMemberId(user_Member.getMemberid());
 		m.addAttribute("member", member);
 		return "membersystem/Member/MemberFront";
 	}
+	
+	
+	
+	
+//-------------------------------------------------------註冊-----------------------------------------------------------------
+	
+	
+	
 
 	// 註冊單筆(跳轉)
 	@RequestMapping(path = "/HealthProject/insertMember", method = {RequestMethod.GET, RequestMethod.POST})
@@ -192,16 +230,23 @@ public class MemberController {
 		return siteURL.replace(request.getServletPath(), "");
 	}
 	
+	
+	
+	
+	
+//-------------------------------------------------------修改(基本資料)-----------------------------------------------------------------
+	
+	
+	
 	// 修改單筆(跳轉)(基本資料)
 	@RequestMapping(path = "/Member/updateMember", method = {RequestMethod.GET, RequestMethod.POST})
 	public String updateMember(@ModelAttribute("member") Member member, Model m) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
+		Member user_Member = memberService.searchUserDetails(memberaccount);
 		
-		member = memberService.searchMemberId(user.getMemberid());
+		member = memberService.searchMemberId(user_Member.getMemberid());
 		
 		List<String> handbookOption = new ArrayList<String>();
 		handbookOption.add("有");
@@ -218,11 +263,6 @@ public class MemberController {
 	// 修改單筆(返回上一頁)(基本資料)
 	@PostMapping(path = "/Member/reUpdateMember")
 	public String reUpdateMember(@ModelAttribute("member") Member member, HttpServletRequest request, Model m) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
 		
 		//刪除本機舊圖
 		String saveDir = request.getSession().getServletContext().getRealPath("/") + "MemberPhoto\\";
@@ -246,11 +286,6 @@ public class MemberController {
 	public String displayUpdateMember(@ModelAttribute("member") @Validated Member member, BindingResult result,
 			Model m, @RequestParam("memberphoto") MultipartFile multipartFile, HttpServletRequest request)
 			throws IllegalStateException, IOException {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
 		
 		if (multipartFile!= null && !multipartFile.isEmpty()) {
 			// 抓取檔案名稱
@@ -296,16 +331,24 @@ public class MemberController {
 		return "redirect:/Member/searchOneMemberAction.controller";
 	}
 	
+	
+	
+	
+	
+//-------------------------------------------------------修改(帳密)-----------------------------------------------------------------
+	
+	
+	
+	
 	// 修改單筆(跳轉)(帳密)
 	@RequestMapping(path = "/Member/updateMemberAP", method = {RequestMethod.GET, RequestMethod.POST})
 	public String updateMemberAP(@ModelAttribute("member") Member member, Model m) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
+		Member user_Member = memberService.searchUserDetails(memberaccount);
 		
-		member = memberService.searchMemberId(user.getMemberid());
+		member = memberService.searchMemberId(user_Member.getMemberid());
 		
 		m.addAttribute("member", member);
 
@@ -315,11 +358,6 @@ public class MemberController {
 	// 修改單筆(返回上一頁)(帳密)
 	@PostMapping(path = "/Member/reUpdateMemberAP")
 	public String reUpdateMemberAP(@ModelAttribute("member") Member member, Model m) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
 		
 		m.addAttribute("member", member);
 		
@@ -329,11 +367,6 @@ public class MemberController {
 	// 確認修改的單筆是否正確(帳密)
 	@PostMapping(path = "/Member/displayUpdateMemberAP")
 	public String displayUpdateMemberAP(@ModelAttribute("member") Member member, Model m) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String memberaccount = auth.getName();
-		Member user = memberService.searchUserDetails(memberaccount);
-		m.addAttribute("user", user);
 		
 		m.addAttribute("member", member);
 		
@@ -351,30 +384,29 @@ public class MemberController {
 		memberService.saveMember(member);
 		
 		
-		return "redirect:/Member/searchOneMemberAction.controller";
-	}
-
-	// 確認刪除的單筆是否正確
-	@PostMapping(path = "/Member/displayDeleteMember")
-	public String displayDeleteMember(@RequestParam(name = "memberid") int memberid, Model m) {
-		
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String memberaccount = auth.getName();
-//		Member user = memberService.searchUserDetails(memberaccount);
-//		m.addAttribute("user", user);
-
-		Member member = memberService.searchMemberId(memberid);
-		m.addAttribute("member", member);
-
-		return "membersystem/Member/DisplayDeleteMember";
+		return "redirect:/Member/logout";
 	}
 	
-	// 刪除單筆
-	@PostMapping(path = "/Member/deleteMemberAction.controller")
-	public String processDeleteAction(@RequestParam(name="memberid") int memberid,Model m) {
-		
-		memberService.deleteMember(memberid);
-		
-		return "redirect:/HealthProject/MemberHealth/searchAllMemberAction.controller";
-	}
+	
+	
+	
+
+//	// 確認刪除的單筆是否正確
+//	@PostMapping(path = "/Member/displayDeleteMember")
+//	public String displayDeleteMember(@RequestParam(name = "memberid") int memberid, Model m) {
+//
+//		Member member = memberService.searchMemberId(memberid);
+//		m.addAttribute("member", member);
+//
+//		return "membersystem/Member/DisplayDeleteMember";
+//	}
+//	
+//	// 刪除單筆
+//	@PostMapping(path = "/Member/deleteMemberAction.controller")
+//	public String processDeleteAction(@RequestParam(name="memberid") int memberid,Model m) {
+//		
+//		memberService.deleteMember(memberid);
+//		
+//		return "redirect:/HealthProject/MemberHealth/searchAllMemberAction.controller";
+//	}
 }

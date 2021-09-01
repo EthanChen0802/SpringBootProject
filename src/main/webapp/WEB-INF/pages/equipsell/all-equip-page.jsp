@@ -13,6 +13,10 @@
   
   <style>
   	
+  	*{
+  		font-family:Microsoft JhengHei;
+  	}
+  	
   	#button{
   		width:200px;
   		margin: 0 auto 20px auto;
@@ -51,32 +55,38 @@
 	
 	.sort{
 	    position: absolute;  /*固定在網頁上不隨卷軸移動，若要隨卷軸移動用absolute*/
-	    top: 118%;  /*設置垂直位置*/
-	    left: -17px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
+	    top: 850px;  /*設置垂直位置*/
+	    left: -10px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
 	    background: transparent;  /*背景顏色*/
 		transition-duration:1s;
 	}
 	
 	
 	.btn{
-		font-size:16px;
-		font-family:serif;
+		font-size:20px;
 		border-radius:0;
 	}
 	
 	.btn-dark{
-		font-size:18px;
-		font-family:serif;
+		font-size:20px;
+	}
+	
+	.h{
+		width:100%;
+	}
+	
+	.h:hover{
+		background-color: rgb(30, 144, 255);
+		color:white;
+		font-weight:bold;
 	}
   </style>  
   
    
 <script>
     <!-- ajax 載入內容 -->
-	
     // 設定頁數
   	var indexPage = 3;
-  
   
 	// 啟動時載入，顯示在第一頁
 	$(function(){
@@ -85,7 +95,6 @@
 	})
 
 	   
-  
 	 // 換頁時更動資料
 	 function change(page){ 
 	   	indexPage = page;
@@ -121,31 +130,48 @@
 				 
 				 // 資料迴圈寫出
 				 $.each(parsedObjinArray,function(i,n){
-					 
-					 content += 
-						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
-					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
-					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
-					 +  "<img src='../../EquipImg/" + n.photo +"'"
-					 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
-					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px;'>"
-					 +  "<p style='font-size:18px; font-weight:bold; color:black'>" + n.name + "<p>"
-					 +  "<p style='color:red; font-size:18px; "
-					 +  " margin-top:50px; text-align:left; font-weight:bold'> $" + n.price +"</P>"
-					 +  "</div>"
-					 +  "</div>"
-					 +  "</div>"
-					 
+					 if (n.hot=="Y"){
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 + "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
+					 else{
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 +  "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
 				 })
-				 
-			
-	
-				 // append
+				// append
 				div.append(content);		 
 			}
-		
 		})
-
 	}
 	
 	
@@ -169,8 +195,8 @@
 	
 	// 依據輔具種類搜索，創建button，並顯示在第一頁
 	function sort(sort){
-		var indexPage = 1;
-		createSortButton(sort, indexPage);
+		var Page = 1;
+		createSortButton(sort, Page);
 		sortchange(sort, 1)
 	}
 	
@@ -187,35 +213,54 @@
 			
 			success : function(data){
 				 var json = JSON.stringify(data, null, 4);
-			     //console.log("SUCCESS : ", json);
-			     
 				 var parsedObjinArray = JSON.parse(json);
-				 
 				 
 				 // 清除div下的所有子內容
 				 $(".site-section .container .row").empty();
 				 
 				 var div =  $(".site-section .container .row");
 				
-
 				 var content =""
 				 
 				 // 資料迴圈寫出
 				 $.each(parsedObjinArray,function(i,n){
-					 
-					 content += 
-						"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
-					 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
-					 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
-					 +  "<img src='../../EquipImg/" + n.photo +"'"
-					 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
-					 +	"<div class='service-inner' style='padding-bottom:2px; padding-left:15px;'>"
-					 +  "<p style='font-size:18px; font-weight:bold; color:black'>" + n.name + "<p>"
-					 +  "<p style='color:red; font-size:18px; "
-					 +  " margin-top:50px; text-align:left; font-weight:bold'> $" + n.price +"</P>"
-					 +  "</div>"
-					 +  "</div>"
-					 +  "</div>"
+					 if (n.hot=="Y"){
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 + "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
+					 else{
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 +  "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
 					 
 				 })
 				// append
@@ -228,13 +273,13 @@
 	
 
 	// 搜索後創建button
-	function createSortButton(sort, indexPage){
+	function createSortButton(sort, Page){
 		
 			$("#button").empty();
 					 
 			var button = "";
 					
-			for (var i=1; i <= indexPage; i++){
+			for (var i=1; i <= Page; i++){
 				button += "<button  id='myPage' value='" + i + "' onclick='sortchange("+ '"'+sort + '"'+ ", " + i +" )' >" + i +  "</button>";   
 			}
 			
@@ -244,17 +289,321 @@
 	
 	
 	// 點擊sort button的時候換頁
-	function sortchange(sort, indexPage){
-		findsort(sort, indexPage);
+	function sortchange(sort, Page){
+		findsort(sort, Page);
 	}
 	
 	
 	
 	// 重新使用全搜索
 	function reset(){
-		createInitialButton(3);
+		createAscendButton(3);
 		change(1);
 	}
+	
+	
+	
+	
+	
+	// 依照價錢搜索(低到高)
+	function ascend(){
+		var ascendPage = 3;
+		createAscendButton(ascendPage);
+		ascendChange(1);
+	}	
+	
+	// 換頁碼
+	function ascendChange(page){
+		ascendPage = page
+		ascendSort(ascendPage);
+	}
+	
+	// 依照價錢搜索(低到高)
+	function ascendSort(ascendPage){
+
+		$.ajax({
+			
+			type:"post",
+			url:"/consumer/ascend/" + ascendPage,
+			dataType:'JSON',
+			contentType:'application/json',
+			
+			success : function(data){
+				 var json = JSON.stringify(data, null, 4);
+				 var parsedObjinArray = JSON.parse(json);
+				 
+				 // 清除div下的所有子內容
+				 $(".site-section .container .row").empty();
+				 
+				 var div =  $(".site-section .container .row");
+				
+
+				 var content =""
+				 
+				 // 資料迴圈寫出
+				 $.each(parsedObjinArray,function(i,n){
+					 if (n.hot=="Y"){
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 + "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
+					 else{
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 +  "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
+					 
+				 })
+				// append
+				div.append(content);		 
+			}
+		
+		})
+	}
+	
+	// 價錢低到高搜索後創建button
+	function createAscendButton(ascendPage){
+		
+		$("#button").empty();
+		 
+		var button = "";
+				
+		for (var i=1; i <= ascendPage; i++){
+			button += "<button id='myPage' value='" + i +"'  onclick='ascendChange("+i+")'>" +i +"</button>";   
+		}
+
+		$("#button").append(button);
+	}
+	
+	
+	
+	
+	// 依照價錢搜索(高到低)
+	function descend(){
+		var descendPage = 3;
+		createDescendButton(descendPage);
+		descendChange(1);
+	}	
+	
+	// 換頁碼
+	function descendChange(page){
+		descendPage = page
+		descendSort(descendPage);
+	}
+	
+	
+	// 依照價錢搜索(高到低)
+	function descendSort(descendPage){
+
+		$.ajax({
+			
+			type:"post",
+			url:"/consumer/descend/" + descendPage,
+			dataType:'JSON',
+			contentType:'application/json',
+			
+			success : function(data){
+				 var json = JSON.stringify(data, null, 4);
+				 var parsedObjinArray = JSON.parse(json);
+				 
+				 // 清除div下的所有子內容
+				 $(".site-section .container .row").empty();
+				 
+				 var div =  $(".site-section .container .row");
+				
+
+				 var content =""
+				 
+				 // 資料迴圈寫出
+				 $.each(parsedObjinArray,function(i,n){
+					 if (n.hot=="Y"){
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 + "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
+					 else{
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 +  "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
+				 })
+				// append
+				div.append(content);		 
+			}
+		
+		})
+	}
+	
+	// 價錢低到高搜索後創建button
+	function createDescendButton(descendPage){
+		
+		$("#button").empty();
+		 
+		var button = "";
+				
+		for (var i=1; i <= descendPage; i++){
+			button += "<button id='myPage' value='" + i +"'  onclick='descendChange("+i+")'>" +i +"</button>";   
+		}
+
+		$("#button").append(button);
+	}
+	
+	
+	
+	// 商品熱門搜索
+	function hot(){
+		var hotPage = 1;
+		createHotButton(hotPage);
+		hotChange(1);
+	}	
+	
+	// 換頁碼
+	function hotChange(page){
+		hotPage = page
+		hotSort(hotPage);
+	}
+	
+	
+	// 依照價錢搜索(高到低)
+	function hotSort(hotPage){
+
+		$.ajax({
+			
+			type:"post",
+			url:"/consumer/hot/" + hotPage,
+			dataType:'JSON',
+			contentType:'application/json',
+			
+			success : function(data){
+				 var json = JSON.stringify(data, null, 4);
+				 var parsedObjinArray = JSON.parse(json);
+				 
+				 // 清除div下的所有子內容
+				 $(".site-section .container .row").empty();
+				 
+				 var div =  $(".site-section .container .row");
+				
+				 var content =""
+				 
+				 // 資料迴圈寫出
+				 $.each(parsedObjinArray,function(i,n){
+					 if (n.hot=="Y"){
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 + "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
+					 else{
+						 content += 
+								"<div class='col-6 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-3'>" 
+							 +	"<div class='service' style='border:2px double rgba(0,0,0,.1); margin-bottom:50px; padding:0px;'>"	
+							 +	"<a href='/consumer/findByIdforCustomer/"+ n.id  + "' class='d-block'>"
+							 +  "<img src='../../EquipImg/" + n.photo +"'"
+							 +  "alt='Image' class='img-fluid' style='height:240px; width:100%;'></a>"
+							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
+							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
+							 +  "<div style='width:100%; height:30px; positon:relative'>"
+							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "onclick='collect("+ n.id +")' >"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+							 +  "</div>"
+					 }
+				 })
+				// append
+				div.append(content);		 
+			}
+		
+		})
+	}
+	
+	// 價錢低到高搜索後創建button
+	function createHotButton(hotPage){
+		
+		$("#button").empty();
+		 
+		var button = "";
+				
+		for (var i=1; i <= hotPage; i++){
+			button += "<button id='myPage' value='" + i +"'  onclick='hotChange("+i+")'>" +i +"</button>";   
+		}
+
+		$("#button").append(button);
+	}
+	
+	
+	
+	
+	
 </script>
 
 <!-- GetButton.io widget -->
@@ -326,24 +675,43 @@
 	</div>	
 	
 	<!-- 搜索列 -->	
-	<div class="sort btn-group-vertical">
-		<span class="btn btn-dark btn-lg">搜索列</span>
-		<input type="button" value="全部搜索" class="btn btn-outline-secondary btn-lg" onclick="reset()">
-		<input type="button" value="個人照護輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('個人照護輔具')">
-		<input type="button" value="個人醫療輔具" class="btn btn-outline-secondary btn-lg"  onclick="sort('個人醫療輔具')"> 
-		<input type="button" value="個人行動輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('個人行動輔具')">
-		<input type="button" value="矯正輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('矯正輔具')">
-		<input type="button" value="溝通與資訊輔具" class="btn btn-outline-secondary btn-lg" onclick="sort('溝通與資訊輔具')">
+	<div class="sort btn-group-vertical" style="width:220px">
+		<span class="btn btn-dark btn-lg">搜索</span>
 		
-		<button type="button" class="btn btn-outline-secondary btn-lg" onclick="sort('住家及其他場所之家具與改裝組件')">
-		住家及其他場所<br>之家具與改裝組件 </button>
-
+		<input type="button" value="全部搜索" class="btn btn-outline-primary" onclick="reset()" style="border-bottom:none">
+		
+ 		<button class="btn btn-outline-primary" onclick="hot()" style="padding-left:0px">
+ 		<img src="${pageContext.request.contextPath}/images/fire.png" style="width:30px;"/>熱門商品
+ 		</button>
+ 		
+ 		<button id="flip2" type="button" class="btn btn-outline-primary" style="border-top:none">
+       	價格
+   		</button>
+    	<div id="panel2" style="display:none;border-right:1px solid blue">
+			<input type="button" value="價格:低到高" class="btn h" onclick="ascend()">
+			<input type="button" value="價格:高到低" class="btn h"  onclick="descend()"> 
+		</div>
+	
+ 		
+ 		
+ 		<button id="flip" type="button" class="btn btn-outline-primary">
+       	輔具種類
+    	</button>
+    	
+    	<div id="panel" style="display:none; border-right:1px solid blue; border-bottom:1px solid blue;">
+			<input type="button" value="個人照護輔具" class="btn h" onclick="sort('個人照護輔具')"  >
+			<input type="button" value="個人醫療輔具" class="btn h"  onclick="sort('個人醫療輔具')" > 
+			<input type="button" value="個人行動輔具" class="btn h" onclick="sort('個人行動輔具')">
+			<input type="button" value="矯正輔具" class="btn h" onclick="sort('矯正輔具')" >
+			<input type="button" value="溝通與資訊輔具" class="btn h " onclick="sort('溝通與資訊輔具')" >
+			<input type="button" value="家具與改裝組件" class="btn h" onclick="sort('住家及其他場所之家具與改裝組件')" >
+ 		</div>
 	</div>
 
 
     <div class="site-section">
 	    	  
-      <div class="container">
+      <div class="container" style="width:1050px; margin-left:280px">
       		
         <div class="row">
 	       
@@ -375,6 +743,28 @@
  	</div> <!-- .site-wrap -->
 	<%@ include file="/WEB-INF/pages/user-js.jsp"%>
  
+ 
+ <script>
+ 
+ $("#flip").click(function(){
+	$("#panel").slideToggle("slide");
+ });
+ 
+ 
+ $("#flip2").click(function(){
+		$("#panel2").slideToggle("slide");
+	 });
+ 
+ 
+ 
+ <!-- 收藏 -->
+ function collect(eid){
+	 alert(eid);
+ };
+ 
+
+ 
+ </script>
 
 </body>
 </html>

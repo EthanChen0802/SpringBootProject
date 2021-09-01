@@ -60,7 +60,7 @@ public class ShoppingCartService {
 		public int updateQuantity(Integer equipId, Integer quantity, Member member) {
 			cartItemRepository.updateQuantity(quantity, equipId, member.getMemberid());
 			Equip equip = equipRepository.findById(equipId).get();
-			int subtotal = Integer.parseInt(equip.getPrice())* quantity ;
+			int subtotal = equip.getPrice() * quantity ;
 			
 			return subtotal;
 		}

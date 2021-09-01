@@ -57,4 +57,20 @@ public class EquipService {
 		return equipRepository.findSortByPage(type, pageable);
 	}
 
+
+	// 商品瀏覽分頁查詢(價格低到高)
+	public Page<Equip> findAscendByPage(Pageable pageable) {
+		return equipRepository.findAscendByPage(pageable);
+	}
+
+	// 商品瀏覽分頁查詢(價格高到低)
+	public Page<Equip> findDescendByPage(Pageable pageable) {
+		return equipRepository.findDescendByPage(pageable);
+	}
+
+
+
+	public Page<Equip> findHotByPage(String hot, Pageable pageable) {
+		return equipRepository.findHotByPage(hot, pageable);
+	}
 }

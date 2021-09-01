@@ -80,7 +80,7 @@ public class CartItem {
 	
 	@Transient
 	public Integer getSubtotal() {
-		return Integer.parseInt(this.equip.getPrice())* quantity;
+		return this.equip.getPrice() * quantity;
 	}
 	
 }

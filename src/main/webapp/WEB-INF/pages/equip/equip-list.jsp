@@ -76,6 +76,7 @@
 										<th>輔具類型</th>
 										<th>販賣商</th>
 										<th>價格</th>
+										<th>熱門</th>
 										<th>衛生署字號</th>
 										<th>更新</th>
 										<th>刪除</th>
@@ -95,6 +96,7 @@
 											<td>${equip.type}</td>
 											<td>${equip.vendor}</td>
 											<td>${equip.price}</td>
+											<td>${equip.hot}</td>
 											<td>${equip.document}</td>
 											<td>
 												<form action="showUpdate" method="post">

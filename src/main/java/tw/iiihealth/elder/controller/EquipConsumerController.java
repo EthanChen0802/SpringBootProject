@@ -82,4 +82,64 @@ public class EquipConsumerController {
 
 		return page.getContent();
 	}
+	
+	
+	// Ajax請求商品內容(價格低到高)
+	@PostMapping(path="/ascend/{pageNo}")
+	@ResponseBody
+	public List<Equip> ascend( @PathVariable("pageNo") int pageNo){
+		
+		// 每頁幾筆
+		int pageSize = 8;
+				
+		// 要查詢幾頁 (因為是從0算起，所以要減掉1)， 每頁幾筆
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+			
+		// 開始查詢
+		Page<Equip> page = equipService.findAscendByPage(pageable);
+		
+
+		return page.getContent();
+	}
+	
+	
+	// Ajax請求商品內容(價格高到低)
+	@PostMapping(path="/descend/{pageNo}")
+	@ResponseBody
+	public List<Equip> descend(@PathVariable("pageNo") int pageNo){
+		
+		// 每頁幾筆
+		int pageSize = 8;
+				
+		// 要查詢幾頁 (因為是從0算起，所以要減掉1)， 每頁幾筆
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+			
+		// 開始查詢
+		Page<Equip> page = equipService.findDescendByPage(pageable);
+		
+		return page.getContent();
+	}
+	
+	
+	
+	// Ajax請求商品內容(熱門)
+	@PostMapping(path="/hot/{pageNo}")
+	@ResponseBody
+	public List<Equip> hot(@PathVariable("pageNo") int pageNo){
+		
+		// 熱門產品
+		String hot = "Y";
+		
+		// 每頁幾筆
+		int pageSize = 8;
+				
+		// 要查詢幾頁 (因為是從0算起，所以要減掉1)， 每頁幾筆
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+			
+		// 開始查詢
+		Page<Equip> page = equipService.findHotByPage(hot, pageable);
+		
+		return page.getContent();
+	}
+
 }

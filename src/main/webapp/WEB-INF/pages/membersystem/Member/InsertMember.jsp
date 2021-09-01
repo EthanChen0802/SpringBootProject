@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -11,161 +12,46 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>健康優生網</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
-	rel="stylesheet" />
-<link href="../css/styles.css" rel="stylesheet" />
-<script type="text/javascript" src="../js/function.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous">
+
 <script src="../js/jquery-3.6.0.js"></script>
+
+<%@ include file="/WEB-INF/pages/user-css-js.jsp"%>
 </head>
 
-<body class="sb-nav-fixed">
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html">控制中心</a>
-		<!-- Sidebar Toggle-->
-		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
-			id="sidebarToggle" href="#!">
-			<i class="fas fa-bars"></i>
-		</button>
-		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="Search for..."
-					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
-					<i class="fas fa-search"></i>
-				</button>
-			</div>
-		</form>
-		<!-- Navbar-->
-		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-				role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
-					class="fas fa-user fa-fw"></i></a>
-				<ul class="dropdown-menu dropdown-menu-end"
-					aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="#!">Settings</a></li>
-					<li><a class="dropdown-item" href="#!">Activity Log</a></li>
-					<li><hr class="dropdown-divider" /></li>
-					<li><a class="dropdown-item" href="/logout">登出</a></li>
-				</ul></li>
-		</ul>
-	</nav>
-	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">會員中心</div>
-						<a class="nav-link" href="/HealthProject/ManagerHealth/searchAllManagerAction.controller">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                會員系統
-                            </a>
-						<div class="sb-sidenav-menu-heading">長照服務</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts1" aria-expanded="false"
-							aria-controls="collapseLayouts1">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-chart-area"></i>
-							</div> 叫車系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts1"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${pageContext.request.contextPath}/taxi/taximainpage.controller">計程車資訊</a>
-								<a class="nav-link" href="${pageContext.request.contextPath}/taxi/locmainpage.controller">店家資訊</a>
-							</nav>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-columns"></i>
-							</div> 長照系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-									<a class="nav-link" href="${pageContext.request.contextPath}/equip/findall">輔具系統</a> 
-									<a class="nav-link" href="${pageContext.request.contextPath}/order/findall">輔具訂單系統</a>
-                                </nav>
-						</div>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<%@ include file="/WEB-INF/pages/user-header.jsp"%>
 
 
 
-						<div class="sb-sidenav-menu-heading">營養與藥品管理</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts3" aria-expanded="false"
-							aria-controls="collapseLayouts3">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 營養管理系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts3"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link"  href="${pageContext.request.contextPath}/meals/mealView.controller">營養餐管理</a> 
-								<a class="nav-link"  href="${pageContext.request.contextPath}/diet/dietView.controller">食品資料管理</a>
+  <!-- 老人圖 -->
 
-							</nav>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts4" aria-expanded="false"
-							aria-controls="collapseLayouts4">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> 用藥查詢系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts4"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/Drug/findalldrug">藥品辨識系統</a> 
-									<a class="nav-link" href="${pageContext.request.contextPath}/DrugProduct/findalldrugproduct">藥品包裝變更</a>
-                          
-                                </nav>
-						</div>
+    <div class="slide-item overlay" style="background-image: url('${pageContext.request.contextPath}/images/slider-1.jpg')">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 align-self-center">
+            <h1 class="heading mb-3">健康悠生伴你一生</h1>
+            <p class="lead text-white mb-5">健康一生 悠活一生</p>
+            <p><a href="about.html" class="btn btn-primary">關於我們</a></p>
+          </div>
+        </div>
+      </div>  
+    </div>
 
-					</div>
-				</div>
-				<div class="sb-sidenav-footer">
-					<div class="small">Logged in as:</div>
-					Start Bootstrap
-				</div>
-			</nav>
-		</div>
+
+
+	<!-- 表單 -->
+	
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="card mb-4">
 					<div class="card-header">
-						<i class="fas fa-table me-1"></i> 店家資訊
+						<i class="fas fa-table me-1"></i> 會員系統
 						</div>
 						<div class="row">
 							
 							<div class="col-md-6">
-								<h2 style="margin: 8px 150px">請填寫註冊資料</h2>
+								<h2 style="margin: 8px 150px">會員註冊</h2>
 								<div class="card-body">
 										<table class="table  table-hover">
 									<form:form id="form1" method="POST" action="/HealthProject/displayInsertMember" modelAttribute="member" enctype="multipart/form-data">
@@ -179,9 +65,9 @@
 											<tr>
 												<td><form:label path="membergender">性別:</form:label></td>
 												<td>
-													<form:radiobutton path="membergender" value="男" label="男" />
-            										<form:radiobutton path="membergender" value="女" label="女" />
-            										<form:radiobutton path="membergender" value="其他" label="其他" />
+													<form:radiobutton id="male" path="membergender" value="男" label="男" />
+            										<form:radiobutton id="female" path="membergender" value="女" label="女" />
+            										<form:radiobutton id="other" path="membergender" value="其他" label="其他" />
             										<span id="genderCheck"></span>
             									</td>
 											</tr>
@@ -214,7 +100,7 @@
 												</td>
 											</tr>
 											<tr>
-												<td><label id="pwd2">確認密碼:</label></td>
+												<td><label>確認密碼:</label></td>
 												<td>
 													<input type="password" id="pwd2" maxlength="15" size="15" />
 													<span id="pwd2Check"></span>
@@ -263,8 +149,8 @@
 											<tr>
 												<td><form:label path="dementia">失智症確診:</form:label></td>
 												<td>
-													<form:radiobutton path="dementia" value="有" label="有" />
-            										<form:radiobutton path="dementia" value="無" label="無" />
+													<form:radiobutton id="yesD" path="dementia" value="有" label="有" />
+            										<form:radiobutton id="noD" path="dementia" value="無" label="無" />
             									</td>
 											</tr>
 											<tr>
@@ -285,16 +171,19 @@
 											</tr>
 											<tr>
 												<td style="text-align: center">
-													<input type="submit" class="btn" id="btn" value="送出" />
+													<input type="submit" class="btn" id="btn" style="font-size:20px;" value="送出" />
 												</td>
 										</form:form>
 												<td>
 													<form action="/HealthProject" method="post">
-														<input type="submit" class="btn" value="取消">
+														<input type="submit" class="btn" style="font-size:20px;" value="取消">
 													</form>
 												</td>
 											</tr>
 									</table>
+									
+									<button id="onekey">範例</button>
+									
 								</div>
 								<div class="col-md-6"></div>
 							</div>
@@ -302,17 +191,47 @@
 					</div>
 			</main>
 		</div>
+		
+		
+<%@ include file="/WEB-INF/pages/user-site-footer.jsp"%>
+<%@ include file="/WEB-INF/pages/user-js.jsp"%>
 
-<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-			crossorigin="anonymous"></script>
-		<script src="../js/scripts.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-			crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
-			crossorigin="anonymous"></script>
-		<script src="../js/datatables-simple-demo.js"></script>
+
+		
+		
+<script type="text/javascript">
+//一鍵輸入
+$('#onekey').on('click', function(){
+	$('#membername').val('張美麗');
+	$('#female').prop('checked',true)
+	$('#memberyear').val('63');
+	$('#membermonth').val('3');
+	$('#memberday').val('10');
+	$('#memberaccount').val('qwer1234');
+	$('#memberpwd').val('asdf1234');
+	$('#pwd2').val('asdf1234');
+	$('#memberemail').val('iiieeit12907@gmail.com');
+	$('#memberphone').val('0987651822');
+	$('#memberaddress').val('大安路一段17號');
+	$('#yesD').prop('checked',true)
+})
+
+
+    //顯示密碼
+    document.getElementById("showPwd").onclick=showPwd;
+        function showPwd(){
+            let pwdType=document.getElementById("memberpwd").type;
+            //pwdType現在是密碼的話，就轉成文字顯示
+            if(pwdType === "password"){
+                document.getElementById("memberpwd").type="text";
+                document.getElementById("pwd2").type="text";
+                //pwdType現在是文字的話，就轉回密碼來不顯示
+            }else{
+                document.getElementById("memberpwd").type="password";
+                document.getElementById("pwd2").type="password";
+            }
+        }
+</script>
 		
 		
 		
@@ -383,26 +302,378 @@ var cn = "${member.membercity}"
 
 
 
-		<script>
-	let sp1=document.getElementById("idsp1");
-	let sp3=document.getElementById("idsp3");
-	let sp6=document.getElementById("idsp6");
-	let type=document.getElementsByName("type")[0];
-	let city=document.getElementsByName("city")[0];
-	let town=document.getElementsByName("town")[0];
+<script>
 	
-	
-	function CheckandSub(){
+	//Check
+    let enameCheck = document.getElementById("enameCheck");
+    let sexCheck = document.getElementById("sexCheck");
+    let birthCheck = document.getElementById("birthCheck");
+    let acntCheck = document.getElementById("acntCheck");
+    let pwd1Check = document.getElementById("pwd1Check");
+    let pwd2Check = document.getElementById("pwd2Check");
+    let emailCheck = document.getElementById("emailCheck");
+    let subBtnCheck = document.getElementById("subBtnCheck");
+    
+    document.getElementById("subBtn").onclick = checkSubBtn;
 
-		
-		
-		if (true){
-			document.getElementById("newLoc").submit();
-		}else{
-			alert("請輸入完整資訊");
-		}
-		
-	}
-	</script>
+    let flagSubmit1 = true;
+    let flagSubmit2 = true;
+    let flagSubmit4 = true;
+    let flagSubmit5 = true;
+    let flagSubmit6 = true;
+    let flagSubmit7 = true;
+    let flagSubmit8 = true;
+    let flagSubmit9 = true;
+
+
+    //ename
+    function checkEname() {
+        flagSubmit1 = true;
+        let enameObj = document.getElementById("ename1");
+        let enameValue = enameObj.value;
+        let enameLen = enameValue.length;
+        let flag1 = false;
+        if (enameLen == "") {
+            enameCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>姓名不能為空";
+            flagSubmit1 = false;
+        } else if (enameLen >= 2) {
+            for (let i = 0; i <= enameLen - 1; i++) {
+                let ch = enameValue.charAt(i).toUpperCase();
+                if (ch >= "一" && ch <= "鿕") {
+                    flag1 = true;
+                } else {
+                    enameCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>姓名必須全部中文";
+                    flag1 = false;
+                    flagSubmit1 = false;
+                    break;
+                }
+            } if (flag1) {
+                enameCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
+            }
+        } else if (enameLen < 2 && enameLen > 0) {
+            enameCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>姓名長度最少二字"
+            flagSubmit1 = false;
+        }
+    }
+
+
+//sex
+function checkSex() {
+flagSubmit2 = true;
+var Total_Obj = document.getElementsByName('managergender');
+let val=false;
+for (let i = 0; i < Total_Obj.length; i++) {
+    if (Total_Obj[i].checked) {
+        val=true;
+    } 
+}
+if(val!=true) {
+    flagSubmit2 = false;
+    sexCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>請點選性別";
+
+}else{
+    flagSubmit2 = true;
+    sexCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";       
+}
+}
+
+    //checkBirth
+    function checkBirth() {
+        flagSubmit4 = true;
+        let year1Obj = document.getElementById("year1");
+        let month1Obj = document.getElementById("month1");
+        let day1Obj = document.getElementById("day1");
+        let year1Value = year1Obj.value;
+        let month1Value = month1Obj.value;
+        let day1Value = day1Obj.value;
+        let year1Len = year1Value.length;
+        let month1Len = month1Value.length;
+        let day1Len = day1Value.length;
+        let floatYear1 = parseFloat(year1Value);
+        let floatMonth1 = parseFloat(month1Value);
+        let floatDay1 = parseFloat(day1Value);
+        let re1 = /^\d{1,3}$/;
+        let re2 = /^\d{1,2}$/;
+        let re3 = /^\d{1,2}$/;
+        let flag1 = false, flag2 = false, flag3 = false;
+
+        if (year1Len == 0 || month1Len == 0 || day1Len == 0) {
+            birthCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>日期不可為空";
+            flagSubmit4 = false;
+        } else if (year1Len > 0) {
+            // for (i = 0; i <= year1Len; i++) {
+            if (re1.test(year1Value)) {
+                if (re2.test(month1Value)) {
+                    if (re3.test(day1Value)) {
+
+                        if (floatYear1 <= 0 || floatYear1 >= 999) {      //年份不超過上下限
+                            flag1 = false;
+                        } else {
+                            flag1 = true;
+                            if (floatYear1 % 4 == 1 && floatYear1 % 100 != 1) {       //閏年
+                                if (floatMonth1 == 1 || floatMonth1 == 3 || floatMonth1 == 5 || floatMonth1 == 7 || floatMonth1 == 8 || floatMonth1 == 10 || floatMonth1 == 12) {
+                                    flag2 = true;
+                                    if (floatDay1 > 0 && floatDay1 <= 31) {       //大月
+                                        flag3 = true;
+                                    } else {
+                                        flag3 = false;
+                                    }
+                                } else if (floatMonth1 == 4 || floatMonth1 == 6 || floatMonth1 == 9 || floatMonth1 == 11) {    //小月
+                                    flag2 = true;
+                                    if (floatDay1 > 0 && floatDay1 <= 30) {
+                                        flag3 = true;
+                                    } else {
+                                        flag3 = false;
+                                    }
+                                } else if (floatMonth1 == 2) {     //二月
+                                    flag2 = true;
+                                    if (floatDay1 <= 29) {
+                                        flag3 = true;
+                                    } else {
+                                        flag3 = false;
+                                    }
+                                } else {
+                                    flag2 = false;
+                                }
+                            } else {              //平年
+                                if (floatMonth1 == 1 || floatMonth1 == 3 || floatMonth1 == 5 || floatMonth1 == 7 || floatMonth1 == 8 || floatMonth1 == 10 || floatMonth1 == 12) {
+                                    flag2 = true;
+                                    if (floatDay1 > 0 && floatDay1 <= 31) {       //大月
+                                        flag3 = true;
+                                    } else {
+                                        flag3 = false;
+                                    }
+                                } else if (floatMonth1 == 4 || floatMonth1 == 6 || floatMonth1 == 9 || floatMonth1 == 11) {    //小月
+                                    flag2 = true;
+                                    if (floatDay1 > 0 && floatDay1 <= 30) {
+                                        flag3 = true;
+                                    } else {
+                                        flag3 = false;
+                                    }
+                                } else if (floatMonth1 == 2) {     //二月
+                                    flag2 = true;
+                                    if (floatDay1 <= 28) {
+                                        flag3 = true;
+                                    } else {
+                                        flag3 = false;
+                                    }
+                                } else {
+                                    flag2 = false;
+                                }
+                            }
+                        }
+                    } else {
+                        flag1 = false;
+                    }
+                } else {
+                    flag1 = false;
+                }
+            } else {
+                flag1 = false;
+            }
+            // }
+            if (flag1 && flag2 && flag3) {
+                birthCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
+            } else {
+                birthCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>無此日期";
+                flagSubmit4 = false;
+            }
+
+        }
+    }
+
+    //cname
+    function checkCname() {
+        flagSubmit5 = true;
+        let cnameObj = document.getElementById("cname1");
+        let cnameValue = cnameObj.value;
+        let cnameLen = cnameValue.length;
+
+        if (cnameValue == "") {
+            cnameCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>公司名稱不可為空";
+            flagSubmit5 = false;
+        } else {
+            cnameCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
+        }
+
+    }
+
+
+    //account1
+    function checkAccount() {
+        flagSubmit6 = true;
+        let acntObj = document.getElementById("account1");
+        let acntValue = acntObj.value;
+        let acntLen = acntValue.length;
+        let flag1 = false, flag2 = false;
+
+        if (acntLen == "") {
+            acntCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>帳號不能為空";
+            flagSubmit6 = false;
+        } else if (acntLen >= 6) {
+            for (let i = 0; i <= acntLen; i++) {
+                let ch = acntValue.charAt(i).toUpperCase();
+                if (ch >= "A" && ch <= "Z") {
+                    flag1 = true;
+                } else if (ch >= "0" && ch <= "9") {
+                    flag2 = true;
+                }
+                if (flag1 && flag2) {
+                    break;
+                }
+            } if (flag1 && flag2) {
+                acntCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
+            } else {
+                acntCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>帳號必須包含英文與數字";
+                flagSubmit6 = false;
+            }
+        } else if (acntLen < 6 && acntLen > 0) {
+            acntCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>帳號字數過少";
+            flagSubmit6 = false;
+        }
+    }
+
+    //pwd1
+    function checkPwd1() {
+        flagSubmit7 = true;
+        let pwd1Obj = document.getElementById("pwd1");
+        let pwd1Value = pwd1Obj.value;
+        let pwd1Len = pwd1Value.length;
+        let flag1 = false, flag2 = false;
+
+        if (pwd1Len == "") {
+            pwd1Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼不能為空";
+            flagSubmit7 = false;
+        } else if (pwd1Len >= 6) {
+            for (let i = 0; i <= pwd1Len; i++) {
+                let ch = pwd1Value.charAt(i).toUpperCase();
+                if (ch >= "A" && ch <= "Z") {
+                    flag1 = true;
+                } else if (ch >= "0" && ch <= "9") {
+                    flag2 = true;
+                }
+                if (flag1 && flag2) {
+                    break;
+                }
+            } if (flag1 && flag2) {
+                pwd1Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
+            } else {
+                pwd1Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼必須包含英文與數字";
+                flagSubmit7 = false;
+            }
+        } else if (pwd1Len < 6 && pwd1Len > 0) {
+            pwd1Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼字數過少";
+            flagSubmit7 = false;
+        }
+    }
+
+    //pwd2
+    function checkPwd2() {
+        flagSubmit8 = true;
+        let pwd1Obj = document.getElementById("pwd1");
+        let pwd1Value = pwd1Obj.value;
+        let pwd2Obj = document.getElementById("pwd2");
+        let pwd2Value = pwd2Obj.value;
+        let pwd2Len = pwd2Value.length;
+        let flag1 = false, flag2 = false;
+
+        if (pwd2Len == "") {
+            pwd2Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼不能為空";
+            flagSubmit8 = false;
+        } else if (pwd2Len >= 6) {
+            if (pwd2Value == pwd1Value) {
+                for (let i = 0; i <= pwd2Len; i++) {
+                    let ch = pwd2Value.charAt(i).toUpperCase();
+                    if (ch >= "A" && ch <= "Z") {
+                        flag1 = true;
+                    } else if (ch >= "0" && ch <= "9") {
+                        flag2 = true;
+                    }
+                    if (flag1 && flag2) {
+                        break;
+                    }
+                }
+                if (flag1 && flag2) {
+                    pwd2Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
+                } else {
+                    pwd2Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼必須包含英文與數字";
+                    flagSubmit8 = false;
+                }
+            } else {
+                pwd2Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>請確認密碼一樣";
+                flagSubmit8 = false;
+            }
+        } else if (pwd2Len < 6 && pwd2Len > 0) {
+            pwd2Check.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>密碼字數過少";
+            flagSubmit8 = false;
+        }
+    }
+
+    //email1
+    function checkEmail() {
+        flagSubmit9 = true;
+        let emailObj = document.getElementById("email1");
+        let emailValue = emailObj.value;
+        let emailLen = emailValue.length;
+        let re1 = /^\w+@\w+\.\w{2,3}$/;
+        let flag1 = false;
+
+        if (emailLen == "") {
+            emailCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>E-mail不可為空";
+            flagSubmit9 = false;
+        } else if (emailLen > 0) {
+            for (i = 0; i <= emailLen; i++) {
+                if (re1.test(emailValue)) {
+                    flag1 = true;
+                } else {
+                    flag1 = false;
+                }
+            }
+            if (flag1) {
+                emailCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/correct.jpg'>";
+            } else {
+                emailCheck.innerHTML = "<img src ='${pageContext.request.contextPath}/images/incorrect.jpg'>E-mail格式有誤";
+                flagSubmit9 = false;
+            }
+
+        }
+    }
+
+//     //顯示密碼
+//     document.getElementById("showPwd").onclick=showPwd;
+//         function showPwd(){
+//             let pwdType=document.getElementById("memberpwd").type;
+//             //pwdType現在是密碼的話，就轉成文字顯示
+//             if(pwdType === "password"){
+//                 document.getElementById("memberpwd").type="text";
+//                 document.getElementById("pwd2").type="text";
+//                 //pwdType現在是文字的話，就轉回密碼來不顯示
+//             }else{
+//                 document.getElementById("memberpwd").type="password";
+//                 document.getElementById("pwd2").type="password";
+//             }
+//         }
+    
+
+    //checkSubBtn
+    function checkSubBtn() {
+        checkEname();
+        checkSex();
+        checkBirth();
+        checkAccount();
+        checkPwd1();
+        checkPwd2();
+        checkEmail();
+        if (flagSubmit1 == false || flagSubmit2 == false || flagSubmit4 == false || flagSubmit5 == false || 
+            flagSubmit6 == false || flagSubmit7 == false || flagSubmit8 == false || flagSubmit9 == false ) {
+            subBtnCheck.innerHTML = "**資料不完整，請重新檢查**";
+
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+    </script>
 </body>
 </html>

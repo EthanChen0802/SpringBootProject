@@ -110,7 +110,7 @@ public class ShoppingCartController {
 			
 			OrderDetail orderDetail = new OrderDetail();
 			
-			int price = Integer.parseInt(item.getEquip().getPrice());
+			int price = item.getEquip().getPrice();
 			int quantity =  item.getQuantity();
 			int total = price * quantity;
 			String product = item.getEquip().getName();

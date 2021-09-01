@@ -19,8 +19,9 @@ public class Equip {
 	private String photo;
 	private String name;
 	private String vendor;
-	private String price;
+	private Integer price;
 	private String document;
+	private String hot;
 
 	public int getId() {
 		return id;
@@ -62,12 +63,22 @@ public class Equip {
 		this.vendor = vendor;
 	}
 
-	public String getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
+	}
+
+	
+	
+	public String getHot() {
+		return hot;
+	}
+
+	public void setHot(String hot) {
+		this.hot = hot;
 	}
 
 	public String getDocument() {
