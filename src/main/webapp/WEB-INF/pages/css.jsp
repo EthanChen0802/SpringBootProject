@@ -14,3 +14,4 @@
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="/js/datatables-simple-demo.js"></script>
 <script src="/js/sweetalert2.all.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

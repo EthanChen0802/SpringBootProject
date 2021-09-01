@@ -56,7 +56,7 @@ public class OrderMailService {
 	
 	
 	
-	// 模板mail
+	// 模板mail(出貨通知)
 	 public void sendTemplateMail(String user) throws Exception {
 		 
 	        MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -79,5 +79,33 @@ public class OrderMailService {
 	        // 寄送
 	        mailSender.send(mimeMessage);
 	    }
+	 
+	 
+	 
+	 
+		// 模板mail(訂購通知)
+	 	public void sendTemplateMail2(String name) throws Exception {
+		 
+	        MimeMessage mimeMessage = mailSender.createMimeMessage();
+	        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+	    	helper.setFrom("iiieeit12907@gmail.com");
+			helper.setTo("iiieeit12907@gmail.com");
+	        helper.setSubject("主旨：[健康悠生網] 商品訂購通知");
+	        
+	        
+	        // 塞入變數
+	        Map<String, Object> model = new HashMap<String, Object>();
+	        model.put("userName", name);
+	        
+	        // mail內容
+	        String templateString = 
+	        		FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfig.getTemplate("template2.html"), model);
+	        
+	        helper.setText(templateString,true);
+	        
+	        // 寄送
+	        mailSender.send(mimeMessage);
+	    }
+
 
 }

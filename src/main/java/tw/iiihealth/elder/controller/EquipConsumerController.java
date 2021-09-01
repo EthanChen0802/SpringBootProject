@@ -26,7 +26,6 @@ public class EquipConsumerController {
 	@Autowired
 	EquipService equipService;
 	
-	
 	// 到使用者商品頁面
 	@RequestMapping(path="/toTheFrontPage")
 	public String  toTheFrontPage() {
@@ -142,4 +141,6 @@ public class EquipConsumerController {
 		return page.getContent();
 	}
 
+	
+	
 }

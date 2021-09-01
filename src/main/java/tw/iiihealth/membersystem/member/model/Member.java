@@ -1,11 +1,23 @@
 package tw.iiihealth.membersystem.member.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import tw.iiihealth.elder.model.Equip;
 
 @Entity // 指自己就是java bean //給Hibernate看的
 @Table(name = "member") // 指bean對應到名為member的table //給Hibernate看的
@@ -66,7 +78,14 @@ public class Member {
 
 	@Column(name = "role")
 	private String role;
+	
+	/* 輔具收藏 */
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinTable(name="collect", joinColumns = @JoinColumn(name="memberid"), inverseJoinColumns = @JoinColumn(name="equipid"))
+	private  List<Equip> equips;
 
+	
 	private boolean disabled;
 
 	private boolean accountExpired;
@@ -250,4 +269,30 @@ public class Member {
 	public void setCredentialsExpired(boolean credentialsExpired) {
 		this.credentialsExpired = credentialsExpired;
 	}
+
+	
+	/* 輔具收藏 */
+	public List<Equip> getEquips() {
+		return equips;
+	}
+
+	public void setEquips(List<Equip> equips) {
+		this.equips = equips;
+	}
+	
+	public void addEquip(Equip equip) {
+		if (equips == null) {
+			equips = new ArrayList<Equip>();
+		}
+		equips.add(equip);
+	}
+	
+	public void removeEquip(Equip equip) {
+		if (equips != null) {
+			equips.remove(equip);
+		}
+	}
+	
+	
+	
 }

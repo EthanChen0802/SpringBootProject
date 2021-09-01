@@ -1,10 +1,21 @@
 package tw.iiihealth.elder.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import tw.iiihealth.membersystem.member.model.Member;
 
 
 
@@ -22,6 +33,11 @@ public class Equip {
 	private Integer price;
 	private String document;
 	private String hot;
+	
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinTable(name="collect", joinColumns = @JoinColumn(name="equipid"), inverseJoinColumns = @JoinColumn(name="memberid"))
+	private List<Member> members;
 
 	public int getId() {
 		return id;
@@ -89,4 +105,13 @@ public class Equip {
 		this.document = document;
 	}
 
+	public List<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
+	}
+
+	
 }

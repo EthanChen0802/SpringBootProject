@@ -11,12 +11,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.iiihealth.elder.cartmodel.CartItem;
 import tw.iiihealth.elder.cartmodel.ShoppingCartService;
+import tw.iiihealth.elder.model.Equip;
+import tw.iiihealth.elder.model.EquipService;
 import tw.iiihealth.elder.model.Order;
 import tw.iiihealth.elder.model.OrderDetail;
+import tw.iiihealth.elder.model.OrderMailService;
 import tw.iiihealth.elder.model.OrderService;
 import tw.iiihealth.membersystem.member.model.Member;
 import tw.iiihealth.membersystem.member.service.MemberService;
@@ -34,7 +40,11 @@ public class ShoppingCartController {
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private OrderMailService orderMailService;
 	
+	@Autowired
+	EquipService equipService;
 	
 	
 	@GetMapping("/cart")
@@ -81,7 +91,7 @@ public class ShoppingCartController {
 							, @RequestParam(name="number") String number
 							, @RequestParam(name="address") String address
 							, @RequestParam(name="email") String email
-							, @RequestParam(name="memberid") int memberId) {
+							, @RequestParam(name="memberid") int memberId) throws Exception {
 		
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -138,13 +148,68 @@ public class ShoppingCartController {
 		//取得訂單編號
 		int oId = order.getId();
 		
-		System.out.println(oId);
-		
 		// 取得訂單資料
 		orderService.findbyId(oId);
 		
 		model.addAttribute("order", order);
 		
+		//寄送
+		orderMailService.sendTemplateMail2(name);
+		
 		return "shop/success_page";
 	}
+	
+		// Ajax 會員收藏產品
+		@PostMapping(path="/cart/collect/{eid}")
+		@ResponseBody
+		public String collect(@PathVariable("eid") int eid) {
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			Member member = memberService.getCurrentlyLoggedInMember(auth);
+			
+			// 不能重複加一樣的產品
+			for (Equip tempEquip:  member.getEquips()) {
+				if (tempEquip.getId() == eid) {
+					return "duplicate";
+				}
+			}
+			
+			// 沒有重複 查詢產品
+			Equip equip= equipService.findById(eid);
+			
+			// 加到join table
+			member.addEquip(equip);
+			
+			return "success";
+		}
+		
+		
+		// 顯示會員的收藏品
+		@GetMapping(path="/cart/showcollect")
+		public String showCollect(Model model) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			Member member = memberService.getCurrentlyLoggedInMember(auth);
+			
+			List<Equip> list= member.getEquips();
+			model.addAttribute("list", list);
+			
+			return "shop/member-collection";
+		}
+		
+		
+		
+		// 會員收藏刪除
+		@PostMapping(path="/cart/deleteCollect")
+		@ResponseBody
+		public String deletCollect(@RequestParam("eId") int eId) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			Member member = memberService.getCurrentlyLoggedInMember(auth);
+			
+		    Equip equip	= equipService.findById(eId);
+			
+		    member.removeEquip(equip);
+			
+			return "success";
+		}
+		
 }

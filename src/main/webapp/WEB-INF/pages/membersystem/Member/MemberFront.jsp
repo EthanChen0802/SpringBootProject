@@ -52,6 +52,10 @@
 				<div class="card-header">
 					<i class="fas fa-table me-1"></i> 會員系統
 				</div>
+				
+				<a href="">會員訂單</a>
+				<a href="${pageContext.request.contextPath}/cart/showcollect">會員收藏</a>
+				
 				<div class="row">
 
 					<div class="col-md-6">

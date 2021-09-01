@@ -755,13 +755,42 @@
 		$("#panel2").slideToggle("slide");
 	 });
  
- 
- 
  <!-- 收藏 -->
  function collect(eid){
-	 alert(eid);
+	
+	 $.ajax({
+				type:"post",
+				url:"${pageContext.request.contextPath}/cart/collect/" + eid,
+			
+	success: function(data){
+				console.log(data);
+				
+				if (data == "success"){
+					Swal.fire('已加入收藏清單')
+				}
+				
+				else if (data == "duplicate"){
+					Swal.fire({
+						  icon: 'error',
+						  title: 'Oops...',
+						  text: '已經收藏過囉!',
+					})
+				}	
+				
+				else{
+					Swal.fire({
+						  icon: 'error',
+						  title: 'Oops...',
+						  text: '請先登入會員!',
+					})
+				}
+				
+			}
+	 })
  };
  
+ 
+
 
  
  </script>
