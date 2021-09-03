@@ -76,7 +76,7 @@ public class MemberMailService {
 	    if (member == null || member.isDisabled() == false ) {
 	        return false;
 	    } else {
-	    	member.setVerificationCode(null);
+	    	member.setVerificationCode("");
 	    	member.setDisabled(false);
 	    	member.setAccountExpired(false);
 	    	member.setAccountLocked(false);

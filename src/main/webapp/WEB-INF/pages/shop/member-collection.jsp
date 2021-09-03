@@ -72,7 +72,7 @@
 	          <div class="col-md-11">
 	          
 	          	<table class="table table-hover" >
-					<thead>
+					<thead style="background-color:#F5F5F5">
 						<tr>
 							<th>輔具照片</th>
 							<th>輔具名稱</th>
@@ -85,8 +85,11 @@
 					</thead>
 						
 				
-					<tbody>
+					
+					<c:choose>
+					<c:when test="${not empty list}">
 						<c:forEach var="equip" items="${list}">
+						<tbody>
 							<tr>
 								<td>
 									<a href="/consumer/findByIdforCustomer/${equip.id}"  >
@@ -102,9 +105,17 @@
 								<td>${equip.document}</td>
 								<td><input type="image" src="/images/delete.png" id="${equip.id}" class="delete"></td>
 							</tr>
-				
+						</tbody>
 						</c:forEach>
-					</tbody>
+					</c:when>
+		            <c:otherwise>
+						<tbody>
+							<tr>
+								<td> <span style="font-size:20px">目前沒有任何收藏喔</span> </td>
+							</tr>
+						</tbody>
+					</c:otherwise>
+					</c:choose>
 				</table>
 	         </div>
 	    </div>

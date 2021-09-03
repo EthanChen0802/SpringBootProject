@@ -11,46 +11,61 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>健康優生網</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
-	rel="stylesheet" />
-<link href="${pageContext.request.contextPath}/css/styles.css"
-	rel="stylesheet" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous">
 
-<!-- js for datatables-->
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- js for modal-->
-<script src="https://code.jquery.com/jquery-1.12.3.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script
-	src="https://www.ksia.or.kr/plugin/DataTables-1.10.15/media/js/jquery.dataTables.js"></script>
-<script
-	src="https://www.ksia.or.kr/plugin/DataTables-1.10.15/media/js/dataTables.bootstrap4.js"></script>
-<script
-	src="https://www.ksia.or.kr/plugin/DataTables-1.10.15/extensions/Responsive/js/dataTables.responsive.js"></script>
 
-<script
-	src="https://www.ksia.or.kr/plugin/DataTables-1.10.15/extensions/Responsive/js/dataTables.responsive.js"></script>
-<script
-	src="https://www.ksia.or.kr/plugin/DataTables-1.10.15/extensions/Responsive/js/responsive.bootstrap4.js"></script>
+<style>
+a.disabled {
+ 	pointer-events: none;
+ 	cursor: default;
+ } 
+</style>
 
+<link href="/css/styles.css" rel="stylesheet" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+<script src="/js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="/js/datatables-simple-demo.js"></script>
+
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
+
+
+<!-- js for datatables -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script>
+	
+<!-- js for modal -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script
+	src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap.min.js"></script>
+
+
+
+<!-- css for sweet alert2  -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- css for modal-->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://www.ksia.or.kr/plugin/DataTables-1.10.15/media/css/dataTables.bootstrap4.css">
-<link rel="stylesheet"
-	href="https://www.ksia.or.kr/plugin/DataTables-1.10.15/extensions/Responsive/css/responsive.bootstrap4.css">
+
+
+
+<!-- css for datatables  -->
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+		<link rel="stylesheet"
+			href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap5.min.css">
+			
+			
+<!-- css for modal -->			
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet"
+			href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css">
 
 </head>
 
@@ -82,10 +97,6 @@
 					class="fas fa-user fa-fw"></i></a>
 				<ul class="dropdown-menu dropdown-menu-end"
 					aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="/Manager/searchAllManagerAction.controller">管理員資料表</a></li>
-					<li><a class="dropdown-item" href="#!">會員資料表</a></li>
-					<li><a class="dropdown-item" href="#!">廠商資料表</a></li>
-					<li><hr class="dropdown-divider" /></li>
 					<li><a class="dropdown-item" href="/Manager/insertManager">註冊</a></li>
 					<li><a class="dropdown-item" href="/Manager/logout">登出</a></li>
 				</ul></li>
@@ -113,101 +124,95 @@
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="/Manager/searchAllManagerAction.controller">管理員資料表</a>
-								<a class="nav-link" href="#">會員資料表</a>
+								<a class="nav-link" href="/Manager/searchAllMtoM">會員資料表</a>
 								<a class="nav-link" href="#">廠商資料表</a>
 							</nav>
 						</div>
 						
-						<div class="sb-sidenav-menu-heading">長照服務</div>
-						
-						
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts1" aria-expanded="false"
-							aria-controls="collapseLayouts1">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-chart-area"></i>
-							</div> 叫車系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts1"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${pageContext.request.contextPath}/taxi/taximainpage.controller">計程車資訊</a>
-								<a class="nav-link" href="${pageContext.request.contextPath}/taxi/locmainpage.controller">店家資訊</a>
-							</nav>
+					<div class="sb-sidenav-menu-heading">長照服務</div>
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseLayouts1" aria-expanded="false"
+						aria-controls="collapseLayouts1">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-chart-area"></i>
+						</div> 叫車系統
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
 						</div>
-						
-						
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-columns"></i>
-							</div> 長照系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link"
-									href="${pageContext.request.contextPath}/equip/findall">輔具系統</a> <a
-									class="nav-link"
-									href="${pageContext.request.contextPath}/order/findall">輔具訂單系統</a>
-							</nav>
+					</a>
+					<div class="collapse" id="collapseLayouts1"
+						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav"> <a class="nav-link"
+							href="${pageContext.request.contextPath}/taxi/taximainpage.controller">計程車資訊</a> <a class="nav-link"
+							href="${pageContext.request.contextPath}/taxi/locmainpage.controller">店家資訊</a> </nav>
+					</div>
+
+
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseLayouts" aria-expanded="false"
+						aria-controls="collapseLayouts">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-columns"></i>
+						</div> 長照系統
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
 						</div>
+					</a>
+					<div class="collapse" id="collapseLayouts"
+						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav">  
+							<a class="nav-link" href="${pageContext.request.contextPath}/equip/findall">輔具系統</a> 
+							<a class="nav-link" href="${pageContext.request.contextPath}/order/findall">輔具訂單系統</a> 
+						</nav>
+					</div>
 
 
 
-						<div class="sb-sidenav-menu-heading">營養與藥品管理</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts3" aria-expanded="false"
-							aria-controls="collapseLayouts3">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 營養管理系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts3"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link"  href="${pageContext.request.contextPath}/meals/mealView.controller">營養餐管理</a> 
-								<a class="nav-link"  href="${pageContext.request.contextPath}/diet/dietView.controller">食品資料管理</a>									
-
-							</nav>
+					<div class="sb-sidenav-menu-heading">營養與藥品管理</div>
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseLayouts3" aria-expanded="false"
+						aria-controls="collapseLayouts3">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-tachometer-alt"></i>
+						</div> 營養管理系統
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
 						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts4" aria-expanded="false"
-							aria-controls="collapseLayouts4">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> 用藥查詢系統
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts4"
-							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="${pageContext.request.contextPath}/Drug/findalldrug">藥品辨識系統</a> <a
-									class="nav-link" href="${pageContext.request.contextPath}/DrugProduct/findalldrugproduct">藥品包裝變更</a>
+					</a>
+					<div class="collapse" id="collapseLayouts3"
+						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav"> <a class="nav-link"
+							href="${pageContext.request.contextPath}/meals/mealView.controller">營養餐管理</a> <a class="nav-link"
+							href="${pageContext.request.contextPath}/diet/dietView.controller">食品資料管理</a> </nav>
+					</div>
+					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+						data-bs-target="#collapseLayouts4" aria-expanded="false"
+						aria-controls="collapseLayouts4">
+						<div class="sb-nav-link-icon">
+							<i class="fas fa-book-open"></i>
+						</div> 用藥查詢系統
+						<div class="sb-sidenav-collapse-arrow">
+							<i class="fas fa-angle-down"></i>
+						</div>
+					</a>
+					<div class="collapse" id="collapseLayouts4"
+						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+						<nav class="sb-sidenav-menu-nested nav"> <a class="nav-link"
+							href="${pageContext.request.contextPath}/Drug/findalldrug">藥品辨識系統</a> <a class="nav-link" href="${pageContext.request.contextPath}/DrugProduct/findalldrugproduct">藥品包裝變更</a>
+
 
 							</nav>
 						</div>
 
 					</div>
 				</div>
-				<div class="sb-sidenav-footer">
-					<div class="small">Logged in as:</div>
-					Start Bootstrap
-				</div>
+
 			</nav>
 		</div>
+		
+		
+		
+		
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
@@ -215,6 +220,7 @@
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item active">管理者介面</li>
 					</ol>
+
 
 
 
@@ -265,7 +271,7 @@
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title"></h4>
+									<h4 class="modal-title">修改會員資料</h4>
 								</div>
 							<div class="modal-body">
 								<form:form id="updateForm" modelAttribute="member" enctype="multipart/form-data">
@@ -274,8 +280,11 @@
 											<td><form:label path="membername">被看護人姓名:</form:label></td>
 											<td>
 												<form:hidden path="memberid" value="${member.memberid}" /> 
+												<form:hidden path="memberaccount" value="${member.memberaccount}" />
+												<form:hidden path="memberemail" value="${member.memberemail}" />
 												<form:hidden path="role" value="${member.role}" /> 
 												<form:hidden path="disabled" value="${member.disabled}" /> 
+												<form:hidden path="verificationCode" value="${member.verificationCode}" />
 												<form:hidden path="accountExpired" value="${member.accountExpired}" />
 												<form:hidden path="accountLocked" value="${member.accountLocked}" /> 
 												<form:hidden path="credentialsExpired" value="${member.credentialsExpired}" /> 
@@ -285,11 +294,10 @@
 										</tr>
 										<tr>
 											<td><form:label path="membergender">性別:</form:label></td>
-											<td><form:radiobutton path="membergender" value="男"
-													label="男" /> <form:radiobutton path="membergender"
-													value="女" label="女" /> <form:radiobutton
-													path="membergender" value="其他" label="其他" /> <span
-												id="genderCheck"></span></td>
+											<td><form:radiobutton path="membergender" value="男" label="男" /> 
+											<form:radiobutton path="membergender" value="女" label="女" /> 
+											<form:radiobutton id="other" path="membergender" value="其他" label="其他" /> 
+											<span id="genderCheck"></span></td>
 										</tr>
 										<tr>
 											<td><form:label path="memberyear">生日日期:</form:label></td>
@@ -301,11 +309,8 @@
 											</td>
 										</tr>
 										<tr>
-											<td><form:label path="memberaccount">帳號:</form:label></td>
-											<td>
-												<form:input path="memberaccount" maxlength="15" size="15" />
-												<span id="accountCheck"></span>
-											</td>
+											<td>帳號:</td>
+											<td id="accountdisplay"></td>
 										</tr>
 										<tr>
 											<td><form:label path="memberpwd">密碼:</form:label></td>
@@ -316,10 +321,8 @@
 											</td>
 										</tr>
 										<tr>
-											<td><form:label path="memberemail">E-mail:</form:label></td>
-											<td><form:input path="memberemail" size="15"
-													placeholder="aaa@gmail.com" /> <span id="emailCheck"></span>
-											</td>
+											<td>E-mail:</td>
+											<td id="emaildisplay"></td>
 										</tr>
 										<tr>
 											<td><form:label path="memberphone">手機:</form:label></td>
@@ -373,6 +376,7 @@
 								<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
 								<button id="updateSubmit" type="button" data-dismiss="modal" class="btn btn-primary">確認修改</button>
+								<button id="onekey" type="button" class="btn btn-primary">一鍵輸入</button>
 								</div>
 							</div>
 						<!-- /.modal-content -->
@@ -406,16 +410,13 @@
 //一鍵輸入
 $('#onekey').on('click', function(){
 	$('#membername').val('張美麗');
-	$('#female').prop('checked',true)
-	$('#memberyear').val('63');
-	$('#membermonth').val('3');
-	$('#memberday').val('10');
-	$('#memberaccount').val('qwer1234');
+	$('#other').prop('checked',true)
+	$('#memberyear').val('48');
+	$('#membermonth').val('11');
+	$('#memberday').val('12');
 	$('#memberpwd').val('asdf1234');
 	$('#pwd2').val('asdf1234');
-	$('#memberemail').val('iiieeit12907@gmail.com');
 	$('#memberphone').val('0987651822');
-	$('#memberaddress').val('大安路一段17號');
 	$('#yesD').prop('checked',true)
 })
 
@@ -536,6 +537,16 @@ $('#onekey').on('click', function(){
 				
 				
 				columnDefs:[{
+					targets : 14,
+					orderable: false, // 禁用排序
+					defaultContent: "",
+					render : function (data) {
+						console.log(data)
+					return '<img src ="${pageContext.request.contextPath}/MemberPhoto/"'+data+'">';
+					}
+				},
+					
+					{
 					targets: 15,
 					orderable: false, // 禁用排序
 					defaultContent: "",
@@ -598,7 +609,9 @@ $('#onekey').on('click', function(){
 				$("#membermonth").val(res.membermonth);
 				$("#memberday").val(res.memberday);
 				$("#memberaccount").val(res.memberaccount);
+				$("#accountdisplay").html(res.memberaccount);
 				$("#memberemail").val(res.memberemail);
+				$("#emaildisplay").val(res.memberemail);
 				$("#memberphone").val(res.memberphone);
 				$("#membercity").val(res.membercity).change();
 				$("#membertown").val(res.membertown).change();
@@ -705,21 +718,6 @@ $('#onekey').on('click', function(){
 				
 	</script>
 	
-<!-- 	<script -->
-<!-- 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" -->
-<!-- 		crossorigin="anonymous"></script> -->
-	
-	<script src="${pageContext.request.contextPath}/js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/demo/chart-area-demo.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/demo/chart-bar-demo.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/datatables-simple-demo.js"></script>
+
 </body>
 </html>

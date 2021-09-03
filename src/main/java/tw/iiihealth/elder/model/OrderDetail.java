@@ -24,6 +24,9 @@ public class OrderDetail {
 	@Column(name="product")
 	private String product;
 	
+	@Column(name="photo")
+	private String photo;
+	
 	@Column(name="price")
 	private int price;
 	
@@ -56,6 +59,16 @@ public class OrderDetail {
 
 	public void setProduct(String product) {
 		this.product = product;
+	}
+
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 

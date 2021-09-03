@@ -16,6 +16,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 </head>
+<body class="sb-nav-fixed">
 
 		<div id="layoutSidenav_content">
 			<main>
@@ -110,7 +111,6 @@
 									</table>
 
 									<button id="onekey">範例</button>
-<!-- 									<button id="onekey">錯誤範例</button> -->
 
 								</div>
 								<div class="col-md-6"></div>
@@ -146,16 +146,6 @@ $('#onekey').on('click', function(){
 	$('#manageryear').val('77');
 	$('#managermonth').val('5');
 	$('#managerday').val('15');
-	$('#manageremail').val('iiieeit12907@gmail.com');
-}).on('dblclick', function(){
-	$('#managername').val('黃薇聿');
-	$('#female').prop('checked',true)
-	$('#manageraccount').val('dds16585');
-	$('#managerpwd').val('rosd28asdfa');
-	$('#pwd2').val('rosd28asdfa');
-	$('#manageryear').val('73');
-	$('#managermonth').val('8');
-	$('#managerday').val('9');
 	$('#manageremail').val('iiieeit12907@gmail.com');
 })
 </script>

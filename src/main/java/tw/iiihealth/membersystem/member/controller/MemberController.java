@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,7 +39,6 @@ import tw.iiihealth.membersystem.member.service.MemberService;
 //張仲淑 帳:cj4y24mabc7  		密:bp969hg8
 
 
-@SessionAttributes(names={"user_Member"})
 @Controller
 public class MemberController {
 
@@ -119,6 +117,26 @@ public class MemberController {
 		m.addAttribute("member", member);
 		return "membersystem/Member/MemberFront";
 	}
+	
+	
+//	// 查詢單筆
+//	@RequestMapping(path = "/test", method = {RequestMethod.GET, RequestMethod.POST})
+//	public String test(@ModelAttribute("member") Member member,Model m) {
+//
+//		return "membersystem/test";
+//	}
+//	
+//	// 查詢單筆
+//	@GetMapping(path = "/Member/searchOneRestMemberAction.controller/{memberid}")
+//	@ResponseBody
+//	public Member searchOneRestMemberAction(@PathVariable Integer memberid) throws Exception {
+//		
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		String memberaccount = auth.getName();
+//		Member user_Member = memberService.searchUserDetails(memberaccount);
+//		
+//		return memberService.searchMemberId(user_Member.getMemberid());
+//	}
 	
 	
 	

@@ -50,8 +50,8 @@
 						</div>
 						<div class="row">
 							
-							<div class="col-md-6">
-								<h2 style="margin: 8px 150px">更新密碼如下請確認</h2>
+							<div class="col-md-6" style="margin: 0 auto;">
+								<h2 style="margin: 8px 150px;  text-align:center;">更新密碼如下請確認</h2>
 								<div class="card-body">
 										<table class="table  table-hover">
 										<tr>	

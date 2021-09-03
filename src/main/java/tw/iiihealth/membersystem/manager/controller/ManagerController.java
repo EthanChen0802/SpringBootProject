@@ -73,6 +73,19 @@ public class ManagerController {
 		m.addAttribute("allManager", list);
 		return "membersystem/Manager/DisplaySearchAllManager";
 	}
+	
+	
+//	@RequestMapping(path = "/test", method = {RequestMethod.GET, RequestMethod.POST})
+//	public String test(Model m) {
+//		return "membersystem/test";
+//	}
+	
+	
+//	@PostMapping(path = "/Manager/searchAllRestManagerAction.controller")
+//	@ResponseBody
+//	public List<Manager> searchAllRestManagerAction(){
+//		return managerService.searchAllManager();
+//	}
 
 	
 	

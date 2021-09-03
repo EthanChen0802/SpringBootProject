@@ -50,8 +50,8 @@
 						</div>
 						<div class="row">
 							
-							<div class="col-md-6">
-								<h2 style="margin: 8px 150px">註冊會員資料如下請確認</h2>
+							<div class="col-md-6" style="margin: 0 auto;">
+								<h2 style="margin: 8px 150px;  text-align:center;">註冊會員資料如下請確認</h2>
 								<div class="card-body">
 										<table class="table  table-hover">
 										<tr>

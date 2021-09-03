@@ -84,7 +84,7 @@ public class ShoppingCartController {
 	
 	
 	
-	
+	// 確認購買後開始儲存訂單，並清理資料庫
 	@GetMapping("/cart/saveOrder")
 	public String  saveOrder(Model model 
 							, @RequestParam(name="name") String name
@@ -109,7 +109,9 @@ public class ShoppingCartController {
 		order.setAddress(address);
 		order.setEmail(email);
 		order.setStatus("尚未出貨");
-		order.setMemberId(memberId);
+		
+		// mapping member的id
+		order.setMemberId(member);
 		
 		
 		// 將會員的購物車存入訂單細項
@@ -120,11 +122,13 @@ public class ShoppingCartController {
 			
 			OrderDetail orderDetail = new OrderDetail();
 			
+			String photo = item.getEquip().getPhoto();
 			int price = item.getEquip().getPrice();
 			int quantity =  item.getQuantity();
 			int total = price * quantity;
 			String product = item.getEquip().getName();
 			
+			orderDetail.setPhoto(photo);
 			orderDetail.setPrice(price);
 			orderDetail.setQuantity(quantity);
 			orderDetail.setProduct(product);
@@ -156,8 +160,14 @@ public class ShoppingCartController {
 		//寄送
 		orderMailService.sendTemplateMail2(name);
 		
+		
+		// 會員專區儲存訂單紀錄
+		member.addOrder(order);
+		
 		return "shop/success_page";
 	}
+	
+	
 	
 		// Ajax 會員收藏產品
 		@PostMapping(path="/cart/collect/{eid}")
@@ -211,5 +221,20 @@ public class ShoppingCartController {
 			
 			return "success";
 		}
+		
+		
+		// 顯示會員的訂單
+		@GetMapping(path="/cart/order")
+		public String showMemberOrder(Model model) {
+			Authentication auth  =SecurityContextHolder.getContext().getAuthentication();
+			Member Member = memberService.getCurrentlyLoggedInMember(auth);
+			
+			List<Order> orders = Member.getOrders();
+			
+			model.addAttribute("orders", orders);
+			
+			return "shop/member-order";
+		}
+		
 		
 }

@@ -53,9 +53,9 @@
 											<tr>
 												<td><form:label path="managergender">性別:</form:label></td>
 												<td>
-													<form:radiobutton path="managergender" value="男" label="男" />
-            										<form:radiobutton path="managergender" value="女" label="女" />
-            										<form:radiobutton path="managergender" value="其他" label="其他" />
+													<form:radiobutton path="managergender" id="male" value="男" label="男" />
+            										<form:radiobutton path="managergender" id="female" value="女" label="女" />
+            										<form:radiobutton path="managergender" id="other" value="其他" label="其他" />
             										<span id="genderCheck"></span>
             									</td>
 											</tr>
@@ -116,6 +116,9 @@
 													</form>
 												</td>
 										</table>
+										
+										<button id="onekey">範例</button>
+										
 								</div>
 								<div class="col-md-6"></div>
 							</div>
@@ -141,7 +144,25 @@
 
 
 
-	<script>
+	<script type="text/javascript">
+	
+	
+	
+//一鍵輸入
+$('#onekey').on('click', function(){
+	$('#managername').val('黃薇聿');
+	$('#other').prop('checked',true)
+	$('#manageraccount').val('dds16585');
+	$('#managerpwd').val('rosd28asdfa');
+	$('#pwd2').val('rosd28asdfa');
+	$('#manageryear').val('69');
+	$('#managermonth').val('95');
+	$('#managerday').val('23');
+	$('#manageremail').val('iiieeit12907@gmail.com');
+})
+
+
+
 	
     //顯示密碼
     document.getElementById("showPwd").onclick=showPwd;
@@ -159,6 +180,13 @@
         }
 	
 	
+
+
+</script>
+
+
+	<script>
+
 	//Check
     let enameCheck = document.getElementById("enameCheck");
     let sexCheck = document.getElementById("sexCheck");

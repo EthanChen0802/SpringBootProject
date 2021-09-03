@@ -50,8 +50,8 @@
 						</div>
 						<div class="row">
 							
-							<div class="col-md-6">
-								<h2 style="margin: 8px 150px">會員資料更新</h2>
+							<div class="col-md-6" style="margin: 0 auto;">
+								<h2 style="margin: 8px 150px;  text-align:center;">會員資料更新</h2>
 								<div class="card-body">
 										<table class="table  table-hover">
 									<form:form id="newLoc" method="POST" action="/Member/displayUpdateMember" modelAttribute="member" enctype="multipart/form-data" onsubmit="return checkSubBtn();">
@@ -59,6 +59,7 @@
 												<td><form:label path="membername">被看護人姓名:</form:label></td>
 												<td>
 													<form:hidden path="memberid" value="${member.memberid}" />
+													<form:hidden path="memberemail" value="${member.memberemail}" />
 													<form:hidden path="verificationCode" value="${member.verificationCode}" />
 													<form:hidden path="role" value="${member.role}" />
 													<form:hidden path="disabled" value="${member.disabled}" />
@@ -76,7 +77,7 @@
 												<td>
 													<form:radiobutton path="membergender" value="男" label="男" />
             										<form:radiobutton path="membergender" value="女" label="女" />
-            										<form:radiobutton path="membergender" value="其他" label="其他" />
+            										<form:radiobutton id="other" path="membergender" value="其他" label="其他" />
             										<span id="genderCheck"></span>
             									</td>
 											</tr>
@@ -95,10 +96,7 @@
 											</tr>
 											<tr>
 												<td><form:label path="memberemail">E-mail:</form:label></td>
-												<td>
-													<form:input path="memberemail" size="15" placeholder="aaa@gmail.com" />
-													<span id="emailCheck"></span>
-												</td>
+												<td>${ member.memberemail }</td>
 											</tr>
 											<tr>
 												<td><form:label path="memberphone">手機:</form:label></td>
@@ -136,8 +134,8 @@
 											<tr>
 												<td><form:label path="dementia">失智症確診:</form:label></td>
 												<td>
-													<form:radiobutton path="dementia" value="有" label="有" />
-            										<form:radiobutton path="dementia" value="無" label="無" />
+													<form:radiobutton id="yesD" path="dementia" value="有" label="有" />
+            										<form:radiobutton id="yesD" path="dementia" value="無" label="無" />
             									</td>
 											</tr>
 											<tr>
@@ -163,6 +161,9 @@
 												</td>
 											</tr>
 										</table>
+										
+										<button id="onekey">範例</button>
+										
 								</div>
 								<div class="col-md-6"></div>
 							</div>
@@ -174,6 +175,23 @@
 		
 <%@ include file="/WEB-INF/pages/user-site-footer.jsp"%>
 <%@ include file="/WEB-INF/pages/user-js.jsp"%>
+		
+		
+<script type="text/javascript">
+
+//一鍵輸入
+$('#onekey').on('click', function(){
+	$('#membername').val('張美麗');
+	$('#other').prop('checked',true)
+	$('#memberyear').val('54');
+	$('#membermonth').val('8');
+	$('#memberday').val('8');
+	$('#memberphone').val('0985465892');	
+	$('#handbook').val('申請中');
+	$('#yesD').prop('checked',true);
+})
+
+</script>
 		
 		
 <script type="text/javascript">

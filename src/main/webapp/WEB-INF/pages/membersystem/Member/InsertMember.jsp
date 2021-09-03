@@ -50,8 +50,8 @@
 						</div>
 						<div class="row">
 							
-							<div class="col-md-6">
-								<h2 style="margin: 8px 150px">會員註冊</h2>
+							<div class="col-md-6" style="margin: 0 auto;">
+								<h2 style="margin: 8px 150px;  text-align:center;">會員註冊</h2>
 								<div class="card-body">
 										<table class="table  table-hover">
 									<form:form id="form1" method="POST" action="/HealthProject/displayInsertMember" modelAttribute="member" enctype="multipart/form-data">
@@ -122,7 +122,7 @@
 											</tr>
 											<tr>
 												<td><form:label path="membercity">居住縣市:</form:label></td>
-												<td><form:select path="membercity"></form:select> 
+												<td id="errorcity"><form:select path="membercity"></form:select> 
 												<span id="idsp4"></span></td>
 											</tr>
 											<tr>
@@ -200,6 +200,7 @@
 		
 		
 <script type="text/javascript">
+
 //一鍵輸入
 $('#onekey').on('click', function(){
 	$('#membername').val('張美麗');
@@ -211,9 +212,11 @@ $('#onekey').on('click', function(){
 	$('#memberpwd').val('asdf1234');
 	$('#pwd2').val('asdf1234');
 	$('#memberemail').val('iiieeit12907@gmail.com');
-	$('#memberphone').val('0987651822');
-	$('#memberaddress').val('大安路一段17號');
-	$('#yesD').prop('checked',true)
+	$('#memberphone').val('0987651822');	
+	$('#membercity').val("臺北市").change()
+	$('#handbook').val('有');
+	$('#memberaddress').val('民大道三段8號');
+	$('#yesD').prop('checked',true);
 })
 
 
@@ -243,7 +246,7 @@ var cn = "${member.membercity}"
 	$(document).ready(function(){
 		$.getJSON('/json/taiwan_districts.json',function(data){
 			var resultText='';
-			resultText="<option value=0>請選擇</option>";
+			resultText="<option id='0' value=0>請選擇</option>";
 			for(var i=0; i<data.length; i++){
 				if(cn == (data[i].name)){
 					resultText+="<option value='"+data[i].name+"' selected>"+data[i].name+"</option>"

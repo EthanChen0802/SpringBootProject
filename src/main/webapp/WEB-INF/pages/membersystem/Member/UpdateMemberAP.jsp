@@ -50,14 +50,16 @@
 						</div>
 						<div class="row">
 							
-							<div class="col-md-6">
-								<h2 style="margin: 8px 150px">修改密碼</h2>
+							<div class="col-md-6" style="margin: 0 auto;">
+								<h2 style="margin: 8px 150px;  text-align:center;">修改密碼</h2>
 								<div class="card-body">
 										<table class="table  table-hover">
 									<form:form method="POST" action="/Member/displayUpdateMemberAP" modelAttribute="member" enctype="multipart/form-data">
 											<tr>
-												<td><form:label path="memberaccount">帳號:</form:label></td>
+												<td>帳號:</td>
 												<td>
+													${ member.memberaccount }
+													<form:hidden path="memberaccount" value="${member.memberaccount}" />
 													<form:hidden path="memberid" value="${member.memberid}" />
 													<form:hidden path="verificationCode" value="${member.verificationCode}" />
 													<form:hidden path="role" value="${member.role}" />
@@ -78,8 +80,6 @@
 													<form:hidden path="handbook" value="${member.handbook}" />
 													<form:hidden path="dementia" value="${member.dementia}" />
 													<form:hidden path="memberphoto" value="${member.memberphoto}" />
-													<form:input path="memberaccount" maxlength="15" size="15" />
-													<span id="accountCheck"></span>
 												</td>
 											</tr>
 											<tr>
@@ -109,6 +109,9 @@
 												</td>
 											</tr>
 										</table>
+										
+										<button id="onekey">範例</button>
+										
 								</div>
 								<div class="col-md-6"></div>
 							</div>
@@ -167,7 +170,16 @@
     }
 	
 </script>
+
 		<script>
+		
+		
+		//一鍵輸入
+		$('#onekey').on('click', function(){
+			$('#memberpwd').val('test1234');
+			$('#pwd2').val('test1234');
+		})
+		
 		
 	    //顯示密碼
 	    document.getElementById("showPwd").onclick=showPwd;

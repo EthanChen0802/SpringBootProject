@@ -116,10 +116,10 @@ public class MailService {
 	public boolean verify(String verificationCode) {
 		Manager manager = managerService.searchMailCode(verificationCode);
 	     
-	    if (manager == null || manager.isDisabled() == false ) {
+	    if (manager == null || manager.isDisabled() == false) {
 	        return false;
 	    } else {
-	    	manager.setVerificationCode(null);
+	    	manager.setVerificationCode("");
 	    	manager.setDisabled(false);
 	    	manager.setAccountExpired(false);
 	    	manager.setAccountLocked(false);

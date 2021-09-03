@@ -75,7 +75,8 @@
 <!-- 							</a><br> -->
 					<a class="txt1" id="onekey" href="#">紀岱昀/林昱伸</a><br>
 					<a class="txt1" id="twokey" href="#">林羽墨/陳厚丞</a><br>
-					<a class="txt1" id="threekey" href="#">陳宥芸</a>
+					<a class="txt1" id="threekey" href="#">陳宥芸</a><br>
+					<a class="txt1" id="fourkey" href="#">林政達</a>
 						</div>
 					</div>
 
@@ -118,6 +119,12 @@ $('#twokey').on('click', function(){
 $('#threekey').on('click', function(){
 	$('#account1').val('eeit12905');
 	$('#pwd1').val('password05');
+})
+
+//一鍵輸入
+$('#fourkey').on('click', function(){
+	$('#account1').val('1258wsdq3');
+	$('#pwd1').val('8755koisnmw3');
 })
 </script>	
 	

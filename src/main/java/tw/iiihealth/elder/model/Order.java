@@ -10,8 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import tw.iiihealth.membersystem.member.model.Member;
 
 
 @Entity
@@ -38,15 +42,14 @@ public class Order {
 	@Column(name="status")
 	private String status;
 	
-	@Column(name="memberid")
-	private int memberId;
-	
 	
 	@OneToMany(mappedBy = "order", cascade = { CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH },
 	fetch = FetchType.EAGER)
 	private List<OrderDetail> orderDetail;
 
-	
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+	@JoinColumn(name="memberid")
+	private Member memberId;
 	
 	
 	public int getId() {
@@ -100,13 +103,11 @@ public class Order {
 	}
 
 	
-	
-	
-	public int getMemberId() {
+	public Member getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Member memberId) {
 		this.memberId = memberId;
 	}
 
