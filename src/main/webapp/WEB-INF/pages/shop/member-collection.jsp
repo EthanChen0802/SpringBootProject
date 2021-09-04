@@ -37,7 +37,7 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-
+  </div>
     
   <%@ include file="/WEB-INF/pages/user-header.jsp"%>
 
@@ -57,75 +57,95 @@
 
 
 
-
-  
-   <div class="site-section">
-      <div class="container">
-      
-			
-
-
-		  <!-- 第二列 -->	
-	      <div class="row" style="margin-top:50px">
-	          <div class="col-md-1"></div>
-	   
-	          <div class="col-md-11">
-	          
-	          	<table class="table table-hover" >
-					<thead style="background-color:#F5F5F5">
-						<tr>
-							<th>輔具照片</th>
-							<th>輔具名稱</th>
-							<th>輔具類型</th>
-							<th>販賣商</th>
-							<th>價格</th>
-							<th>衛生署字號</th>
-							<th></th>
-						</tr>
-					</thead>
-						
+<div id="layoutSidenav_content">
+		<main>
+				<div class="card-header" style="margin-bottom:60px;">
+					<i class="fas fa-table me-1"></i> 會員系統
+				</div>
 				
+				
+				<!-- 第一列 -->
+				<div class=row  style="margin-bottom:18px">
+				<div class="col-md-3"></div>
+				<div class="col-md-8" style="margin: 0 auto;">
+					<h3 style="text-align:center;">會員輔具收藏</h3>
+				</div>
+				<div class="col-md-1"></div>
+				
+				</div>
+				
+				
+				<!-- 第二列 -->
+				<div class="row" style="margin-bottom:100px">
+				
+				<div class="col-md-3">
+					<!-- 會員資料索引 -->	
+					<div class="sort btn-group-vertical">
+						<span class="btn btn-dark btn-lg" style="font-size:20px; display: flex; align-items: center;" class="btn btn-outline-secondary btn-lg">會員資料索引</span>
+						<a class="btn btn-outline-secondary btn-lg" style="font-size:20px; display: flex; align-items: center;" href="/Member/updateMember">修改個人資料</a>
+						<a class="btn btn-outline-secondary btn-lg" style="font-size:20px; display: flex; align-items: center;" href="/Member/updateMemberAP">修改密碼</a>
+						<a class="btn btn-outline-secondary btn-lg" style="font-size:20px; display: flex; align-items: center;" href="#">健康資料表</a>
+						<a class="btn btn-outline-secondary btn-lg" style="font-size:20px; display: flex; align-items: center;" href="${pageContext.request.contextPath}/cart/order">會員訂單</a>
+						<a class="btn btn-outline-secondary btn-lg" style="font-size:20px; display: flex; align-items: center;" href="${pageContext.request.contextPath}/cart/showcollect">會員收藏</a>
+						<a class="btn btn-outline-secondary btn-lg" style="font-size:20px; display: flex; align-items: center;" href="#">加甚麼看你</a>
+					</div>
+				</div>
+
+						<div class="col-md-8" style="margin: 0 auto;">
+						
+						
+						
+						<table class="table table-hover" >
+							<thead style="background-color:#F5F5F5">
+								<tr>
+									<th>輔具照片</th>
+									<th>輔具名稱</th>
+									<th>輔具類型</th>
+									<th>販賣商</th>
+									<th>價格</th>
+									<th>衛生署字號</th>
+									<th></th>
+								</tr>
+							</thead>
 					
-					<c:choose>
-					<c:when test="${not empty list}">
-						<c:forEach var="equip" items="${list}">
-						<tbody>
-							<tr>
-								<td>
-									<a href="/consumer/findByIdforCustomer/${equip.id}"  >
-										<img src="${pageContext.request.contextPath}/EquipImg/${equip.photo}"
-											onerror="this.style.display='none'" width="120px"
-											height="120px" />
-									</a>	
-								</td>
-								<td>${equip.name}</td>
-								<td>${equip.type}</td>
-								<td>${equip.vendor}</td>
-								<td>${equip.price}</td>
-								<td>${equip.document}</td>
-								<td><input type="image" src="/images/delete.png" id="${equip.id}" class="delete"></td>
-							</tr>
-						</tbody>
-						</c:forEach>
-					</c:when>
-		            <c:otherwise>
-						<tbody>
-							<tr>
-								<td> <span style="font-size:20px">目前沒有任何收藏喔</span> </td>
-							</tr>
-						</tbody>
-					</c:otherwise>
-					</c:choose>
-				</table>
-	         </div>
-	    </div>
+						<c:choose>
+						<c:when test="${not empty list}">
+							<c:forEach var="equip" items="${list}">
+							<tbody>
+								<tr>
+									<td>
+										<a href="/consumer/findByIdforCustomer/${equip.id}"  >
+											<img src="${pageContext.request.contextPath}/EquipImg/${equip.photo}"
+												onerror="this.style.display='none'" width="120px"
+												height="120px" />
+										</a>	
+									</td>
+									<td>${equip.name}</td>
+									<td>${equip.type}</td>
+									<td>${equip.vendor}</td>
+									<td>${equip.price}</td>
+									<td>${equip.document}</td>
+									<td><input type="image" src="/images/delete.png" id="${equip.id}" class="delete"></td>
+								</tr>
+							</tbody>
+							</c:forEach>
+						</c:when>
+			            <c:otherwise>
+							<tbody>
+								<tr>
+									<td colspan=7 style="text-align:center;"> <span style="font-size:25px;">目前沒有任何收藏喔</span> </td>
+								</tr>
+							</tbody>
+						</c:otherwise>
+						</c:choose>
+					</table>
+				</div>
+				<div class="col-md-1"></div>
 
-
-
-
-
-      </div>
-    </div>
+			</div>
+		</main>
+	</div>
+  
   
   
   
@@ -135,7 +155,6 @@
     
   <%@ include file="/WEB-INF/pages/user-site-footer.jsp"%>
 
-  </div> <!-- .site-wrap -->
 
   <%@ include file="/WEB-INF/pages/user-js.jsp"%>
 	

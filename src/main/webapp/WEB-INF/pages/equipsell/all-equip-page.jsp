@@ -76,9 +76,28 @@
 	}
 	
 	.h:hover{
-		background-color: rgb(30, 144, 255);
+		background-color: rgb(36,160,237);
 		color:white;
-		font-weight:bold;
+	}
+	
+	.btn-outline-primary {
+	  color:rgb(36,160,237);
+	  background-color: #fff;
+	  border-color: rgb(36,160,237);
+	}
+	
+	.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active:hover{
+	  color: #fff;
+	  background-color: rgb(36,160,237);
+	  border-color: rgb(36,160,237);
+	}
+	
+	.heart{
+		-webkit-filter:opacity(0.2);
+	}
+	
+	.heart:hover{
+		-webkit-filter:opacity(1);
 	}
   </style>  
   
@@ -140,9 +159,9 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 + "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
 							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -159,8 +178,8 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 +  "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -234,9 +253,9 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 + "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
 							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png'class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -253,8 +272,8 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 +  "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -352,9 +371,9 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 + "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
 							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -371,8 +390,8 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 +  "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -453,9 +472,9 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 + "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
 							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -472,8 +491,8 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 +  "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -518,7 +537,7 @@
 	}
 	
 	
-	// 依照價錢搜索(高到低)
+	// 熱門搜索
 	function hotSort(hotPage){
 
 		$.ajax({
@@ -551,9 +570,9 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 + "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
 							 +  "<img src='${pageContext.request.contextPath}/images/fire.png' style='width:40px; height:25px; position:absolute; bottom:4px; right:30px;'>"	
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -570,8 +589,8 @@
 							 +	"<div class='service-inner'style='padding-top:3px; padding-bottom:0px'>"
 							 +  "<p style='font-size:16px; font-weight:bold; color:black'>" + n.name + "<p>"
 							 +  "<div style='width:100%; height:30px; positon:relative'>"
-							 +  "<span style='color:red; font-size:18px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
-							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
+							 +  "<span style='color:rgb(36,160,237);font-size:20px;position:absolute; left:5px; font-weight:bold'> NT$" + n.price  + "</span>"
+							 +  "<img src='${pageContext.request.contextPath}/images/heart.png' class='heart' style='width:22px; position:absolute; bottom:4px; right:10px; cursor:pointer'"
 							 +  "onclick='collect("+ n.id +")' >"
 							 +  "</div>"
 							 +  "</div>"
@@ -586,7 +605,7 @@
 		})
 	}
 	
-	// 價錢低到高搜索後創建button
+	// 熱門搜索後創建button
 	function createHotButton(hotPage){
 		
 		$("#button").empty();
@@ -678,13 +697,13 @@
 	<div class="sort btn-group-vertical" style="width:220px">
 		<span class="btn btn-dark btn-lg">搜索</span>
 		
-		<input type="button" value="全部搜索" class="btn btn-outline-primary" onclick="reset()" style="border-bottom:none">
+		<input type="button" value="全部搜索" class="btn btn-outline-primary" onclick="reset()">
 		
  		<button class="btn btn-outline-primary" onclick="hot()" style="padding-left:0px">
  		<img src="${pageContext.request.contextPath}/images/fire.png" style="width:30px;"/>熱門商品
  		</button>
  		
- 		<button id="flip2" type="button" class="btn btn-outline-primary" style="border-top:none">
+ 		<button id="flip2" type="button" class="btn btn-outline-primary">
        	價格
    		</button>
     	<div id="panel2" style="display:none;border-right:1px solid blue">
@@ -766,7 +785,7 @@
 				console.log(data);
 				
 				if (data == "success"){
-					Swal.fire('已加入收藏清單')
+					Swal.fire('已為您加入收藏清單')
 				}
 				
 				else if (data == "duplicate"){
@@ -788,7 +807,6 @@
 			}
 	 })
  };
- 
  
 
 
