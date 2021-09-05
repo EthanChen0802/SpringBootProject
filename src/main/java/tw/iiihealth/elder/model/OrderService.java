@@ -37,4 +37,11 @@ public class OrderService {
 		orderRepository.save(order);
 	}
 
+
+
+
+	public void deleteById(int oId) {
+		orderRepository.deleteById(oId);
+	}
+
 }

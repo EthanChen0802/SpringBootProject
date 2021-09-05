@@ -1,330 +1,268 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>健康優生網</title>
 
-    <!-- Title Page-->
-    <title>健康優生網</title>
 
+<style>
+a.disabled {
+ 	pointer-events: none;
+ 	cursor: default;
+ } 
+</style>
+
+<link href="/css/styles.css" rel="stylesheet" />
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+<script src="/js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="/js/datatables-simple-demo.js"></script>
+
+
+<!-- js for datatables -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script>
+	
+<!-- js for modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script> 
+<script
+	src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script
+	src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+
+
+<!-- css for sweet alert2  -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
+<!-- css for datatables  -->
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+		<link rel="stylesheet"
+			href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap5.min.css">
+			
+			
+<!-- css for modal -->			
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+		<link rel="stylesheet"
+			href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap5.min.css">
+		<link rel="stylesheet"
+			href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
 
 </head>
 
-<body>
-        <div class="wrapper wrapper--w790">
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">會員註冊</h2>
-                </div>
-                <div class="card-body">
-                
-                <form:form id="form1" method="POST" action="/HealthProject/displayInsertMember" modelAttribute="member" enctype="multipart/form-data" onsubmit="return checkSubBtn();">
-                       
-                       
-                       <!-- 被看護人姓名 -->
-                        <div class="form-row">
-                            <div class="name">
-                            	<form:label path="membername">被看護人姓名</form:label>
-                            </div>
-                            <div class="value">
-                                <div class="input-group">
-                                <form:input path="membername" class="input--style-5" size="10"/>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 性別 -->
-                        <div class="form-row p-t-20">
-                       		<form:label class="label label--block" path="membergender">性別</form:label>
-                            <div class="p-t-15">
-                                <label class="radio-container m-r-55">
-                                	<form:radiobutton path="membergender" value="男" label="男" />
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="radio-container m-r-55">
-                                    <form:radiobutton path="membergender" value="女" label="女" />
-                                    <span class="checkmark"></span>
-                                </label>
-                                 <label class="radio-container m-r-55">
-                                    <form:radiobutton path="membergender" value="其他" label="其他" />
-                                    <span class="checkmark"></span>
-                                </label>
-                                    <span id="genderCheck"></span>
-                            </div>
-                        </div>
-                        
-                        
-						<!-- 生日日期 -->
-                        <div class="form-row m-b-55">
-                            <div class="name">
-                           		<form:label path="memberyear">生日日期</form:label>
-                            </div>
-                            <div class="value">
-                                <div class="row row-space">
-                                    <div class="col-3">
-                                        <div class="input-group-desc">
-                                        	<form:input class="input--style-5" path="memberyear" placeholder="70" />
-                                            <label class="label--desc">民國年</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="input-group-desc">
-                                        	<form:input class="input--style-5" path="membermonth" placeholder="7" />
-                                            <label class="label--desc">月</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="input-group-desc">
-                                        	<form:input class="input--style-5" path="membermonth" placeholder="7" />
-                                            <label class="label--desc">日</label>
-                                        </div>
-                                    </div>
-                                    <span id="birthCheck"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 帳號 -->
-                        <div class="form-row">
-                        <div class="name">
-                        	<form:label path="memberaccount">帳號</form:label>
-                        </div>
-                            <div class="value">
-                                <div class="input-group">
-                                	<form:input path="memberaccount" class="input--style-5"/>
-                                    <span id="accountCheck"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 密碼 -->
-                        <div class="form-row">
-                        <div class="name">
-                        	<form:label path="memberpwd">密碼</form:label>
-                        </div>
-                            <div class="value">
-                                <div class="input-group">
-                                	<form:password path="memberpwd" class="input--style-5"/>
-                                    <span id="pwd1Check"></span>
-                                     <label class="radio-container m-r-55">
-                                	<input type="checkbox" id="showPwd" />顯示密碼
-                                    <span class="checkmark"></span>
-                                </label>
-                                </div>
-                            </div>
-                        </div>
-									
-                        
-                        <!-- 確認密碼 -->
-                        <div class="form-row">
-                        <div class="name">
-                        	<label id="pwd2">確認密碼</label>
-                        </div>
-                            <div class="value">
-                                <div class="input-group">
-                                	<input type="password" id="pwd2" class="input--style-5"/>
-                                    <span id="pwd2Check"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- E-mail -->
-                        <div class="form-row">
-                            <div class="name">
-                            	<form:label path="memberemail">E-mail</form:label>
-                            </div>
-                            <div class="value">
-                                <div class="input-group">
-                                	<form:input path="memberemail" class="input--style-5" placeholder="aaa@gmail.com" />
-                                	<span id="emailCheck"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 手機 -->
-                        <div class="form-row">
-                            <div class="name">
-                            	<form:label path="memberphone">手機</form:label>
-                            </div>
-                            <div class="value">
-                                <div class="input-group">
-                                	<form:input path="memberphone" class="input--style-5"/>
-                                	<span id="phoneCheck"></span>
-                                </div>
-                            </div>
-                        </div>
 
 
 
-					<div class="form-row">
-						<div class="name">
-							<form:label path="membercity">居住縣市:</form:label>
-						</div>
-						<div class="value">
-							<div class="input-group">
-								<div class="rs-select2 js-select-simple select--no-search">
-									<form:select path="membercity"></form:select>
-									<span id="idsp4"></span>
-									<div class="select-dropdown"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+
+<body class="sb-nav-fixed">
 
 
 
-					<div class="form-row">
-						<div class="name">
-							<form:label path="membertown">鄉鎮市區:</form:label>
-						</div>
-						<div class="value">
-							<div class="input-group">
-								<div class="rs-select2 js-select-simple select--no-search">
-									<form:select path="membertown">
-										<option value=0>請選擇</option>
-									</form:select>
-									<span id="idsp5"></span>
-									<div class="select-dropdown"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-                        <!-- 居住地址 -->
-                        <div class="form-row">
-                            <div class="name">
-                            	<form:label path="memberaddress">居住地址</form:label>
-                            </div>
-                            <div class="value">
-                                <div class="input-group">
-                                	<form:input path="memberaddress" class="input--style-5"/>
-                                	<span id="idsp6"></span>
-                                </div>
-                            </div>
-                        </div>
-
-
-					<!-- 身心障礙手冊/證明 -->
-					<div class="form-row">
-                            <div class="name"><form:label path="handbook">身心障礙手冊/證明</form:label></div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <form:select path="handbook">
-                                        <form:option value="-1" label="--請選擇--" />
-											<form:options items="${handbookOption}" />
-										</form:select>
-										<span id="idsp2"></span>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- 失智症確診 -->
-                        <div class="form-row p-t-20">
-                       		<form:label class="label label--block" path="dementia">失智症確診</form:label>
-                            <div class="p-t-15">
-                                <label class="radio-container m-r-55">
-                                	<form:radiobutton path="dementia" value="有" label="有" />
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="radio-container m-r-55">
-                                    <form:radiobutton path="dementia" value="無" label="無" />
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 大頭照預覽 -->
-                        <div class="form-row">
-                        <div class="name">
-                        	大頭照預覽
-                        </div>
-                            <div class="value">
-                                <div class="input-group">
-                                	<img id="sourceImage"  width="200px" height="200px">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                        <!-- 新增大頭照 -->
-                        <div class="form-row">
-                        <div class="name">
-                        	新增大頭照
-                        </div>
-                            <div class="value">
-                                <div class="input-group">
-                                	<input type="file" name="memberphoto" accept="image/*" id="inputImageFile" />
-									<form:hidden path="memberphoto" />
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </form:form>
-                        <div style="display: inline-block;">
-                            <button class="btn btn--radius-2 btn--red" type="submit" id="btn">送出</button>
-						</div>
-						<div style="display: inline-block;">
-							<form action="/HealthProject" method="post">
-								<button class="btn btn--radius-2 btn--red" type="submit" id="btn">取消</button>
-							</form>
-						</div>
-                </div>
-            </div>
-        </div>
-        
-        
-        <script type="text/javascript">
-
-var cn = "${member.membercity}"
-	var tn = "${member.membertown}"
+<%@ include file="/WEB-INF/pages/left-top-bar.jsp"%>
 		
+		
+		
+		
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4">
+					<h1 class="mt-4">會員系統</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item active">管理者介面</li>
+					</ol>
+
+
+
+
+				<!-- 表單總覽 -->
+					<div class="card mb-4">
+						<div class="card-header">
+							<i class="fas fa-table me-1"></i> 管理者資料表
+						</div>
+						
+						<div class="card-body">
+							<table id="managerTable" class="table table-striped table-bordered nowrap" style="width:100%">
+								<thead>
+									<tr>
+										<th>管理者編號</th>
+										<th>管理者姓名</th>
+										<th>權限</th>
+										<th>性別</th>
+										<th>民國年</th>
+										<th>月</th>
+										<th>日</th>
+										<th>帳號</th>
+										<th>E-mail</th>
+										<th>功能</th>
+									</tr>
+								</thead>
+								<tbody>
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					
+					
+			<!-- "修改表單"的互動視窗 Modal -->
+					<div class="modal fade" tabindex="-1" role="dialog"
+						id="updateMtoMShow">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">修改會員資料</h4>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close">
+									</button>
+								</div>
+							<div class="modal-body">
+								<form:form id="updateForm" modelAttribute="manager" enctype="multipart/form-data">
+									<table class="table  table-hover">
+										<tr>
+											<td><form:label path="managername">被看護人姓名:</form:label></td>
+											<td>
+												<form:hidden path="managerid" value="${manager.managerid}" /> 
+												<form:hidden path="memberaccount" value="${manager.manageraccount}" />
+												<form:hidden path="memberemail" value="${manager.manageremail}" />
+												<form:hidden path="role" value="${manager.role}" /> 
+												<form:hidden path="disabled" value="${manager.disabled}" /> 
+												<form:hidden path="verificationCode" value="${manager.verificationCode}" />
+												<form:hidden path="accountExpired" value="${manager.accountExpired}" />
+												<form:hidden path="accountLocked" value="${manager.accountLocked}" /> 
+												<form:hidden path="credentialsExpired" value="${manager.credentialsExpired}" /> 
+												<form:input path="membername" size="10" placeholder="例如:王衍申" autofocus="autofocus" /> 
+												<span id="nameCheck"></span>
+											</td>
+										</tr>
+										<tr>
+											<td><form:label path="managergender">性別:</form:label></td>
+											<td><form:radiobutton path="managergender" value="男" label="男" /> 
+											<form:radiobutton path="managergender" value="女" label="女" /> 
+											<form:radiobutton id="other" path="managergender" value="其他" label="其他" /> 
+											<span id="genderCheck"></span></td>
+										</tr>
+										<tr>
+											<td><form:label path="manageryear">生日日期:</form:label></td>
+											<td>
+												 民國 <form:input path="manageryear" maxlength="3" size="3" placeholder="70" />
+												  年 <form:input path="managermonth" maxlength="2" size="2" placeholder="7" />
+												  月 <form:input path="managerday" maxlength="2" size="2" placeholder="7" />
+												  日 <span id="birthCheck"></span>
+											</td>
+										</tr>
+										<tr>
+											<td>帳號:</td>
+											<td id="accountdisplay"></td>
+										</tr>
+										<tr>
+											<td><form:label path="managerpwd">密碼:</form:label></td>
+											<td>
+												<form:password path="managerpwd" maxlength="15" size="15" />
+												<span id="pwd1Check"></span><br>
+												<input type="checkbox" id="showPwd" />顯示密碼
+											</td>
+										</tr>
+										<tr>
+											<td>E-mail:</td>
+											<td id="emaildisplay"></td>
+										</tr>
+									</table>
+								</form:form>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-bs-dismiss="modal">關閉</button>
+								<button id="updateSubmit" type="button" data-bs-dismiss="modal" class="btn btn-primary">確認修改</button>
+								<button id="onekey" type="button" class="btn btn-primary">一鍵輸入</button>
+								</div>
+							</div>
+						<!-- /.modal-content -->
+						</div>
+					<!-- /.modal-dialog -->
+					</div>
+				<!-- /.modal -->
+
+
+
+
+					</div></main>
+			<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid px-4">
+					<div
+						class="d-flex align-items-center justify-content-between small">
+						<div class="text-muted">Copyright &copy; Your Website 2021</div>
+						<div>
+							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
+								&amp; Conditions</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	
+	
+	
+<script type="text/javascript">
+//一鍵輸入
+$('#onekey').on('click', function(){
+	$('#membername').val('張美麗');
+	$('#other').prop('checked',true)
+	$('#memberyear').val('48');
+	$('#membermonth').val('11');
+	$('#memberday').val('12');
+	$('#memberpwd').val('asdf1234');
+	$('#pwd2').val('asdf1234');
+	$('#memberphone').val('0987651822');
+	$('#yesD').prop('checked',true)
+})
+
+
+    //顯示密碼
+    document.getElementById("showPwd").onclick=showPwd;
+        function showPwd(){
+            let pwdType=document.getElementById("memberpwd").type;
+            //pwdType現在是密碼的話，就轉成文字顯示
+            if(pwdType === "password"){
+                document.getElementById("memberpwd").type="text";
+                document.getElementById("pwd2").type="text";
+                //pwdType現在是文字的話，就轉回密碼來不顯示
+            }else{
+                document.getElementById("memberpwd").type="password";
+                document.getElementById("pwd2").type="password";
+            }
+        }
+</script>
+	
+	
+<script type="text/javascript">
 	$(document).ready(function(){
 		$.getJSON('/json/taiwan_districts.json',function(data){
 			var resultText='';
 			resultText="<option value=0>請選擇</option>";
 			for(var i=0; i<data.length; i++){
-				if(cn == (data[i].name)){
-					resultText+="<option value='"+data[i].name+"' selected>"+data[i].name+"</option>"
-				}else{
-					resultText+="<option value='"+data[i].name+"'>"+data[i].name+"</option>"
-				}
+				resultText+="<option value='"+data[i].name+"'>"+data[i].name+"</option>"
 			}
+			
 			$("#membercity").html(resultText);
-			let CN=$("select[name='membercity']").val();		
-			for(n=0; n<data.length; n++ ){
-    			if(CN == data[n].name){
-    				var resultText2='';
-    				for(var j=0; j<data[n].districts.length; j++){
-    					if(tn == data[n].districts[j].name){
-    						resultText2+="<option value='"+data[n].districts[j].name+"' selected>"+data[n].districts[j].name+"</option>"
-    					}else{
-    						resultText2+="<option value='"+data[n].districts[j].name+"'>"+data[n].districts[j].name+"</option>"
-    					}
-    				}
-    			}
-    		}	
-			$("#membertown").html(resultText2);
 		});
+
 	$("select[name='membercity']").on('change',function(){
 		$.getJSON('/json/taiwan_districts.json',function(data){	
 			let CN=$("select[name='membercity']").val();		
@@ -340,6 +278,7 @@ var cn = "${member.membercity}"
 			$("#membertown").html(resultText2);
 		});		
 	});
+	
 	});
 	
 	
@@ -357,22 +296,224 @@ var cn = "${member.membercity}"
     }
 	
 </script>
-       
-       
-       
-        
-        
+	
+	
+	
+	
+	<script>
 
-<!--     Jquery JS -->
-<%--     <script src="${pageContext.request.contextPath}/memberInsert/vendor/jquery/jquery.min.js"></script> --%>
-<!--     Vendor JS -->
-<%--     <script src="${pageContext.request.contextPath}/memberInsert/vendor/select2/select2.min.js"></script> --%>
-<%--     <script src="${pageContext.request.contextPath}/memberInsert/vendor/datepicker/moment.min.js"></script> --%>
-<%--     <script src="${pageContext.request.contextPath}/memberInsert/vendor/datepicker/daterangepicker.js"></script> --%>
+		var table;
+		$(function () {
+			createdatatable();
+		});
+		
+		//datatable 
+		function createdatatable() {
+			table = $("#managerTable").DataTable({
+				responsive: true,
+				
+				ajax:{
+					url: "/Manager/searchAllRestManagerAction.controller",
+					dataSrc: ""
+				},
 
-<!--     Main JS -->
-<%--     <script src="${pageContext.request.contextPath}/memberInsert/js/global.js"></script> --%>
+				rowId: "managerid",
+				
+				columns:[					
+					{data: "managerid"},
+					{data: "managername"},
+					{data: "role"},
+					{data: "managergender"},
+					{data: "manageryear"},
+					{data: "managermonth"},
+					{data: "managerday"},
+					{data: "manageraccount"},
+					{data: "manageremail"},
+					{data: "managerid"},
+// 					{
+//                         //這裡的data變數值為sysid，相等於row.sysid
+//                         data: "formId",//資料行繫結屬性
+//                         orderable: false, // 禁用排序
+//                         render: function (data) { 
+//                            //row指的是資料列物件 data變數相等於row.sysid
+//                             return "<input type='button' onclick='editModal(" + data + ")'  value='Edit' />"
+//                                 + "<input type='button' onclick='deleteModal(" + data + ")'  value='Delete' />";
+//                         }
+// 					}
+				],
+				
+				
+				columnDefs:[{
+					targets: 9,
+					orderable: false, // 禁用排序
+					defaultContent: "",
+					render: function (data) {
+// 						return '<button id="' + data + '" onclick="editModal(this.id)"  data-bs-dismiss="modal" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i>修改</button>' 
+// 						+ '<button id="' + data + '" onclick="deleteModal(this.id)"  data-bs-dismiss="modal" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>刪除</button>';
+
+						return '<input type="image" id="' + data + '" onclick="editModal(this.id)"  data-bs-dismiss="modal" src="${pageContext.request.contextPath}/images/update.jpg">' 
+						+ '<input type="image" id="' + data + '" onclick="deleteModal(this.id)"  data-bs-dismiss="modal" src="${pageContext.request.contextPath}/images/delete.png">';
+					}
+				}],
+
+// 				initComplete: function () {
+// 						console.log("table created");
+// 						$(".btn-info").on("click", function (e) {
+// 							console.log("button clicked");
+// 							console.log(e.target.id);
+// 							editModal(e.target.id)});						
+// 						$(".btn-danger").on("click", function (e) {
+// 							console.log("button clicked2");
+// 							deleteModal(e.target.id)});
+// 				},
+				
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal( {
+                    header: function ( row ) {
+                        var data = row.data();
+                        return '';
+                    }
+                } ),
+                renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+                    tableClass: 'table'
+                } )
+            }
+        },
+				
+	})
+}
+		
+		
+// 		// "新增"按鈕叫出 Modal
+// 		$('#addTestdriveButton').click(function (e) {
+// 			e.preventDefault();
+// 			$('#addTestdriveModal').modal('show');
+// 		})		
+		
+		// 1送出前總檢查 2一鍵輸入  3送出  寫在 adminTestdrive.js裡
+		
+		
+		// "修改"按鈕抓出資料，叫出 Modal
+		function editModal(memberid) {
+			$('#updateForm')[0].reset();
+			let fillWithOrigin = function (res) {
+				$("#memberid").val(res.memberid);
+				$("#membername").val(res.membername);
+				$("[name=membergender]").val([res.membergender]);
+				$("#memberyear").val(res.memberyear);
+				$("#membermonth").val(res.membermonth);
+				$("#memberday").val(res.memberday);
+				$("#memberaccount").val(res.memberaccount);
+				$("#accountdisplay").html(res.memberaccount);
+				$("#memberemail").val(res.memberemail);
+				$("#emaildisplay").val(res.memberemail);
+				$("#memberphone").val(res.memberphone);
+				$("#membercity").val(res.membercity).change();
+				$("#membertown").val(res.membertown).change();
+				$("#memberaddress").val(res.memberaddress);
+				$("#handbook").val(res.handbook).change();
+				$("[name=dementia]").val([res.dementia]);
+				$("#memberphoto").val(res.memberphoto);
+				$('#sourceImage').attr('src',"../MemberPhoto/"+res.memberphoto);
+				$("#verificationCode").val(res.verificationCode);
+				$("#role").val(res.role);
+				$("#disabled").val(res.disabled);
+				$("#accountExpired").val(res.accountExpired);
+				$("#accountLocked").val(res.accountLocked);
+				$("#credentialsExpired").val(res.credentialsExpired);
+			}
+
+			findById(memberid, fillWithOrigin)
+			$('#updateMtoMShow').modal('show');
+			$('#updateMtoMShow').css('overflow-y', 'auto');
+// 			$(".btn-info").on("click", function (e) {
+// 				console.log("button clicked");
+// 				console.log(e.target.id);
+// 				editModal(e.target.id)});						
+// 			$(".btn-danger").on("click", function (e) {
+// 				console.log("button clicked2");
+// 				deleteModal(e.target.id)});
+		}			
+				
+		// 啟用"修改"按鈕前置準備，尋找單筆
+		function findById(memberid, fillWithOrigin) {
+			$.ajax({
+				url: "/Manager/searchOneMtoMAction.controller/" + memberid,
+				method: "GET",
+				dataType: "json",
+				success: function (res) {
+					fillWithOrigin(res)
+				},
+				error: function (err) {
+					alert(err)
+				}
+			});
+		}		
+		
+		// "確認修改"按鈕，儲存資料
+		$("#updateSubmit").click(
+			function () {
+				var updateFormData = new FormData($('#updateForm')[0]);
+				$.ajax({
+					url: "/Manager/updateMemberAction.controller",
+					method: "POST",
+					data: updateFormData,
+					contentType: false,
+					processData: false,
+					success: function (res) {
+						$("#updateForm")[0].reset();   // 修改的彈出model清空
+						table.ajax.reload();     // data table刷新
+					},
+					error: function (err) {
+						alert('更新失敗' + err);
+					}
+				});
+
+			})
+
+		
+		
+
+		// "刪除"按鈕按下後執行
+		function deleteModal(memberid) {
+			console.log('delete id=' + memberid);
+			Swal.fire({
+				title: '確定要刪除?',
+				text: "刪除後，資料將不再存在",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: '是',
+				cancelButtonText: '否'
+			}).then((torf) => {
+				if (torf.isConfirmed) {
+					$.ajax({
+						url: "/Manager/deleteMtoMAction.controller/" + memberid,
+						method: "POST",
+						dataType: "json",
+						success: function (res) {
+							console.log('恭喜您成功刪除');
+							table.ajax.reload();
+						},
+						error: function (err) {
+							alert('刪除失敗' +err)
+						}
+					});
+					Swal.fire(
+						'刪除',
+						'此筆紀錄已被刪除',
+						'成功'
+					)
+				}
+			})
+		}
+				
+
+				
+	</script>
+	
 
 </body>
-
 </html>

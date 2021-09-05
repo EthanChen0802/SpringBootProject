@@ -43,8 +43,8 @@ public class Order {
 	private String status;
 	
 	
-	@OneToMany(mappedBy = "order", cascade = { CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH },
-	fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "order", cascade = { CascadeType.ALL},
+	fetch = FetchType.LAZY)
 	private List<OrderDetail> orderDetail;
 
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})

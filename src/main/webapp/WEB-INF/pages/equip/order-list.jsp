@@ -58,13 +58,14 @@
 							<table id="datatablesSimple">
 								<thead>
 									<tr>
-										<th>訂單編號</th>
-										<th>訂購人姓名</th>
-										<th>訂購人電話</th>
-										<th>訂購人信箱</th>
-										<th>訂購人地址</th>
+										<th>編號</th>
+										<th>姓名</th>
+										<th>電話</th>
+										<th>信箱</th>
+										<th>地址</th>
 										<th>出貨狀態</th>
-										<th>訂購品項</th>
+										<th>品項</th>
+										<th>刪除</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -104,6 +105,9 @@
 													<input type="hidden" name="oId" value="${order.id}"/> 
 													<input type="image" src="/images/detail.png" />
 												</form>
+											</td>
+											<td>
+												<input type="image" src="/images/delete.png" id="${order.id}" class="delete">
 											</td>
 										</tr>
 									</c:forEach>
@@ -167,6 +171,63 @@
 				
 })
 
+
+
+
+<!-- 刪除訂單 -->
+	
+	$(".delete").each(function(){
+		
+		var id = $(this).attr("id")
+			
+		$(document).on('click', "#"+ id, function() { 
+
+
+			Swal.fire({
+				  title: '確定刪除?',
+				  text: "資料無法復原!",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '刪除!',
+				  cancelButtonText: '取消'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					  
+					$.ajax({
+						  url: "/order/delete",
+						  type: "post",
+						  data:  {
+							  "oId" : id
+						  },
+					  	  success: function(data){
+					  		 
+					  		console.log(data);  
+					  		 
+					  		Swal.fire({
+					  		  position: 'top',
+					  		  icon: 'success',
+					  		  title: '訂單已刪除',
+					  		  showConfirmButton: false,
+					  		  timer: 1500
+					  		})
+							    
+							setTimeout(function (){
+								window.location.href ="/order/findall"
+							}, 1400);
+					  		
+					  	
+						 }
+
+					  })       
+					   
+				  }
+			 })
+
+		})
+
+	})	
 
 
 

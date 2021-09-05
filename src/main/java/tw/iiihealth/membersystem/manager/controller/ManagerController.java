@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import tw.iiihealth.membersystem.manager.model.Manager;
 import tw.iiihealth.membersystem.manager.service.MailService;
 import tw.iiihealth.membersystem.manager.service.ManagerService;
+import tw.iiihealth.membersystem.member.model.Member;
 
 //	紀岱昀 帳:eeit12901  密:password01
 //	林昱伸 帳:eeit12902  密:password02
@@ -75,17 +77,17 @@ public class ManagerController {
 	}
 	
 	
-//	@RequestMapping(path = "/test", method = {RequestMethod.GET, RequestMethod.POST})
-//	public String test(Model m) {
-//		return "membersystem/test";
-//	}
+	@RequestMapping(path = "/Manager/test", method = {RequestMethod.GET, RequestMethod.POST})
+	public String test(@ModelAttribute("manager") Manager manager, Model m) {
+		return "membersystem/test";
+	}
 	
 	
-//	@PostMapping(path = "/Manager/searchAllRestManagerAction.controller")
-//	@ResponseBody
-//	public List<Manager> searchAllRestManagerAction(){
-//		return managerService.searchAllManager();
-//	}
+	@PostMapping(path = "/Manager/searchAllRestManagerAction.controller")
+	@ResponseBody
+	public List<Manager> searchAllRestManagerAction(){
+		return managerService.searchAllManager();
+	}
 
 	
 	

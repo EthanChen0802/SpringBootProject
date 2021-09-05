@@ -14,6 +14,47 @@
 <title>健康優生網</title>
 <%@ include file="/WEB-INF/pages/css.jsp"%>
 
+<script src="/js/jquery-3.6.0.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.js"></script>
+
+
+<style>
+p {
+	font-size:20px;
+}
+
+table.dataTable thead th {
+  border-bottom: 0;
+  padding-left: 5px !important;
+}
+
+table.dataTable.no-footer {
+  border-bottom: 0;
+}
+
+th, td{
+	text-align: left;
+}
+
+
+
+td{
+  font-size:18px;
+}
+</style>
+
+
+<script>
+$(document).ready( function () {
+    $('#mytable').DataTable();
+   
+} );
+
+
+</script>
+
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -31,29 +72,15 @@
 							<i class="fas fa-table me-1"></i> 訂單資料
 						</div>
 						<div class="card-body">
+							
+							<ul>
+								<li><p>訂單編號: ${order.id}</p></li>
+								<li><p>訂購人: ${order.name}</p></li>
+							</ul>
 
-							<br />
-
-							<table id="datatablesSimple">
+							<table id="mytable" class="compact hover" style="margin-bottom:30px;margin-top:30px;width:1000px; margin-left:15px">
 								
-								<thead>
-									<tr>
-										<th>訂購人姓名</th>
-										<th>訂購人電話</th>
-										<th>訂購人信箱</th>
-										<th>訂購人地址</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>${order.name}</td>
-										<td>${order.number}</td>
-										<td>${order.email}</td>
-										<td>${order.address}</td>
-									</tr>
-								</tbody>
-								
-								<thead>
+								<thead style="background-color:#F5F5F5;">
 									<tr>
 										<th>訂購產品</th>
 										<th>訂購價格</th>
@@ -103,7 +130,7 @@
 			</footer>
 		</div>
 	
-<script src="/js/jquery-3.6.0.js"></script>
+
 	
 	
 <script>
@@ -117,9 +144,13 @@
 			
 		});	
 			
-		$("#all").text(result).attr("style", "color:red");
+		$("#all").text(result).attr("style", "color:red; font-weight:bold;");
 		
 	})
+	
+	
+	
+	$('#mytable').dataTable({searching: false, paging: false, info: false, ordering:false});
 	
 </script>
 	

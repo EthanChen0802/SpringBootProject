@@ -2,6 +2,8 @@ package tw.iiihealth.elder.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import tw.iiihealth.elder.model.OrderService;
 
 @Controller
 @RequestMapping(path="/order")
+@Transactional
 public class OrderController {
 	
 	
@@ -26,6 +29,7 @@ public class OrderController {
 	private OrderMailService orderMailService;
 
 	
+	// 全部訂單
 	@RequestMapping(path = "/findall")
 	public String findAllOrder(Model model) {
 		List<Order> list = orderService.findAll();
@@ -36,6 +40,7 @@ public class OrderController {
 	}
 	
 	
+	// 訂單細項
 	@PostMapping(path="/orderdetail")
 	public String findOrderDetailbyId(@RequestParam("oId") int oId, Model model) {
 		
@@ -44,6 +49,17 @@ public class OrderController {
 		model.addAttribute("order", order);
 		
 		return "equip/order-detail";
+	}
+	
+	
+	//訂單刪除
+	@PostMapping(path="/delete")
+	@ResponseBody
+	public String deleteOrderbyId(@RequestParam("oId") int oId) {
+		
+		orderService.deleteById(oId);
+		
+		return "success";
 	}
 	
 	
