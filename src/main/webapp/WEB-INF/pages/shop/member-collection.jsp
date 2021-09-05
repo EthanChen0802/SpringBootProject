@@ -66,8 +66,8 @@
 				
 				<!-- 第一列 -->
 				<div class=row  style="margin-bottom:18px">
-				<div class="col-md-3"></div>
-				<div class="col-md-8" style="margin: 0 auto;">
+				<div class="col-md-2"></div>
+				<div class="col-md-9" style="margin: 0 auto;">
 					<h3 style="text-align:center;">會員輔具收藏</h3>
 				</div>
 				<div class="col-md-1"></div>
@@ -78,7 +78,7 @@
 				<!-- 第二列 -->
 				<div class="row" style="margin-bottom:100px">
 				
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<!-- 會員資料索引 -->	
 					<div class="sort btn-group-vertical">
 						<span class="btn btn-dark btn-lg" style="font-size:20px; display: flex; align-items: center;" class="btn btn-outline-secondary btn-lg">會員資料索引</span>
@@ -91,7 +91,7 @@
 					</div>
 				</div>
 
-						<div class="col-md-8" style="margin: 0 auto;">
+						<div class="col-md-9" style="margin: 0 auto;">
 						
 						
 						

@@ -292,18 +292,22 @@ p{
 						})
 					}
 					
-				else{
-					
+				else if (data == "reject"){
 					Swal.fire({
 						  icon: 'error',
 						  title: 'Oops...',
 						  text: '請先登入會員!',
 						})
-				}
+					}
 				
+				else {
+					Swal.fire({
+						  icon: 'error',
+						  title: 'Oops...',
+						  text: '請先登入會員!',
+						})
+					}
 				}
-
-				
 		})
 	})
 

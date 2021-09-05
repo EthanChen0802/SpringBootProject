@@ -34,12 +34,14 @@ public class ShoppingCartRestController {
 										
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
-	
 		Member member = memberService.getCurrentlyLoggedInMember(auth);
 		
-		shoppingCartService.addProduct(equipId, quantity, member);
-
-		return "success";
+		if (member != null) {
+			shoppingCartService.addProduct(equipId, quantity, member);
+			return "success";
+		}
+		
+		return "reject";
 	}
 	
 	
