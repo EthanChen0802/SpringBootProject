@@ -83,7 +83,7 @@
 											<td> 
 											<c:choose>
 												<c:when test="${order.status =='尚未出貨'}">
-													<select name="status" id="${order.id}" class="switch">
+													<select name="status" id="s${order.id}" class="switch">
 														<option value="尚未出貨" selected>尚未出貨</option >
 														<option value="已經出貨">已經出貨</option>
 													</select>
@@ -136,13 +136,7 @@
 <script>
 	$(".switch").each(function(){
 		
-		/*
-			console.log(this);
-			console.log($(this).attr("id"));
-		*/		
-		
 		var id = $(this).attr("id")
-		/* console.log(id); */
 		
 		$(document).on('change', "#"+ id, function() { 
 				
@@ -156,12 +150,12 @@
 			
 			$("#"+ id).attr("disabled", true);
 			
-			
+			var sid = id.substring(1,);
 
 			$.ajax({
 				  url: "/order/changestatus",
 				  type: "post",
-				  data:  { "oId" : id },
+				  data:  { "oId" : sid },
 			  	  success: function(data){
 			  		console.log(data);  	
 			  	  }
@@ -181,7 +175,7 @@
 		var id = $(this).attr("id")
 			
 		$(document).on('click', "#"+ id, function() { 
-
+	
 
 			Swal.fire({
 				  title: '確定刪除?',

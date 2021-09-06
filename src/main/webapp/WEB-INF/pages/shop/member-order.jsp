@@ -104,7 +104,7 @@
 					<div class="col-md-8" style="margin: 0 auto;">
 						
 				          <c:choose>
-					          <c:when test="${not empty cartItems}">
+					          <c:when test="${not empty orders}">
 					          
 					          <c:forEach var="order" items="${orders}">
 					          <div style="margin-bottom:100px">

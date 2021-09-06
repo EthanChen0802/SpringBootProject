@@ -1,5 +1,7 @@
 package tw.iiihealth.elder.model;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,5 +23,8 @@ public interface EquipRepository extends JpaRepository<Equip, Integer> {
 
 	@Query("SELECT e FROM Equip e where e.hot = ?1")
 	Page<Equip> findHotByPage(String hot, Pageable pageable);
+
+	@Query("SELECT e FROM Equip e where e.hot = ?1")
+	List<Equip> findByHot(String hot);
 
 }

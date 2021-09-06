@@ -73,4 +73,10 @@ public class EquipService {
 	public Page<Equip> findHotByPage(String hot, Pageable pageable) {
 		return equipRepository.findHotByPage(hot, pageable);
 	}
+
+
+
+	public List<Equip> findByHot(String hot) {
+		return equipRepository.findByHot(hot);
+	}
 }

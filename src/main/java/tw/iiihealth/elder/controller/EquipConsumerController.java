@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import tw.iiihealth.elder.model.Equip;
 import tw.iiihealth.elder.model.EquipService;
@@ -28,8 +29,18 @@ public class EquipConsumerController {
 	
 	// 到使用者商品頁面
 	@RequestMapping(path="/toTheFrontPage")
-	public String  toTheFrontPage() {
-		return "equipsell/all-equip-page";
+	public ModelAndView  toTheFrontPage() {
+		ModelAndView  mAndView = new ModelAndView();
+		
+		
+		// 查詢熱門商品並顯示在Modal上
+		String hot = "Y";
+		List<Equip> list= equipService.findByHot(hot);
+		
+		mAndView.addObject("list", list);
+		mAndView.setViewName("equipsell/all-equip-page");
+		
+		return mAndView;
 	}
 	
 	
@@ -141,6 +152,4 @@ public class EquipConsumerController {
 		return page.getContent();
 	}
 
-	
-	
 }
