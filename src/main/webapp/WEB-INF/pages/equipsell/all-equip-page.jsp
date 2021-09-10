@@ -119,6 +119,8 @@
 	#span{
 		font-size: 30px;
 		font-weight:bold;
+		text-family:Microsoft JhengHei ;
+		text-shadow: 0.1em 0.1em  lightgrey;
 		
 	}
 	
@@ -143,7 +145,11 @@
 	}
 	
 	
-	
+	 .modal-backdrop.in
+	{
+	    opacity:0.9 !important;
+	}
+		
   </style>  
   
    
@@ -263,12 +269,12 @@
 		
 		<div class="owl-carousel owl-theme">
 			<c:forEach var="equip" items="${list}">
-				<img src="${pageContext.request.contextPath}/EquipImg/${equip.photo}" style="width:250px;height:260px">
+				<img src="${pageContext.request.contextPath}/EquipImg/${equip.photo}" style="width:260px;height:260px;">
 			</c:forEach>
 		</div>
 		
-		<div style=" position: absolute;bottom:25px; left:500px">
-			<input type="button" value="關閉" id="close" style="font-size:15px">
+		<div style=" position: absolute;bottom:25px; left:505px">
+			<input type="button" value="close" id="close" class="btn btn-outline-info" style="font-size:10px;padding:4px 8px;  text-transform: none;">
 		</div>
 	</div>
 		
@@ -367,10 +373,10 @@
 	    	        $(event.target).parent().css('top', '30%');
 	    	        $(event.target).parent().css('left', '18%');
 	    	    }
-	     
-	  
-	    	
 	     });
+		
+	     //頁面黑色
+	     $('.ui-widget-overlay').css({ background:"rgb(0, 0, 0)", opacity: '.7' });
 		 
 		 //移除標題列
 	     $('.dialogstyle div.ui-dialog-titlebar').hide();
@@ -383,11 +389,12 @@
 
 		 
 		 
+		 // 輪播圖
 		 $('.owl-carousel').owlCarousel({
 			    center: true,
 			    items:2,
 			    loop:true,
-			    margin:20,
+			    margin:0,
 			    responsive:{
 			        600:{
 			            items:4

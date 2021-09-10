@@ -38,9 +38,13 @@ th, td{
 }
 
 
+td {
+	font-size:18px;
+}
 
-td{
-  font-size:18px;
+
+#all {
+	font-size:20px;
 }
 </style>
 
@@ -78,10 +82,10 @@ $(document).ready( function () {
 								<li><p>訂購人: ${order.name}</p></li>
 							</ul>
 
-							<table id="mytable" class="compact hover" style="margin-bottom:30px;margin-top:30px;width:1000px; margin-left:15px">
+							<table class="table table-hover table-bordered" style="margin-bottom:30px;margin-top:30px;width:1000px; margin-left:15px">
 								
-								<thead style="background-color:#F5F5F5;">
-									<tr>
+								<thead>
+									<tr class="table-primary">
 										<th>訂購產品</th>
 										<th>訂購價格</th>
 										<th>訂購數量</th>

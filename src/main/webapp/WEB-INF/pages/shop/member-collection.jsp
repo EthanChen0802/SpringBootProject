@@ -59,13 +59,13 @@
 
 <div id="layoutSidenav_content">
 		<main>
-				<div class="card-header" style="margin-bottom:60px;">
+				<div class="card-header" style="margin-bottom:25px;">
 					<i class="fas fa-table me-1"></i> 會員系統
 				</div>
 				
 				
 				<!-- 第一列 -->
-				<div class=row  style="margin-bottom:18px">
+				<div class=row  style="margin-bottom:30px">
 				<div class="col-md-2"></div>
 				<div class="col-md-9" style="margin: 0 auto;">
 					<h3 style="text-align:center;">會員輔具收藏</h3>
@@ -95,9 +95,9 @@
 						
 						
 						
-						<table class="table table-hover" >
-							<thead style="background-color:#F5F5F5">
-								<tr>
+						<table class="table table-hover">
+							<thead>
+								<tr class="table-primary">
 									<th>輔具照片</th>
 									<th>輔具名稱</th>
 									<th>輔具類型</th>

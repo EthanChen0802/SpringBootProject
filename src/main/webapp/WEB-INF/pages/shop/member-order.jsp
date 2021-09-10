@@ -119,7 +119,7 @@
 						          <input type="button" class="btn btn-outline-info" style="font-size:16px; font-weight:bold" value="訂單內容" onclick="show(${order.id})">
 						     		 <div style="display:none" id="${order.id}">
 							          	<table class="table table-hover" >
-											<thead style="background-color:#F5F5F5"> 
+											<thead class="table-primary"> 
 												<tr>
 													<th>輔具照片</th>
 													<th>輔具名稱</th>
