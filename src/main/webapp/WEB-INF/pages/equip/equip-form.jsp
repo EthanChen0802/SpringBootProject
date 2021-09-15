@@ -91,7 +91,7 @@
 																<input type="radio" id="Y" name="hot" value="Y">
 																<label for="Y">Yes</label>
 																<br>
-																<input type="radio" id="N" name="hot" value="N">
+																<input type="radio" id="N" name="hot" value="N" checked>
 																<label for="N">No</label>
 															</c:when>
 														

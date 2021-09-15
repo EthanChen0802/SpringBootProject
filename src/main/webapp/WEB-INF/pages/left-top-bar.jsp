@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
          pageEncoding="UTF-8" import="java.util.*,tw.iiihealth.membersystem.manager.model.*"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 	<!-- Navbar Brand--> <a class="navbar-brand ps-3 disabled" href="#">健康優生網</a>
 	<!-- Sidebar Toggle-->
@@ -21,11 +22,10 @@
 					class="fas fa-user fa-fw"></i></a>
 				<ul class="dropdown-menu dropdown-menu-end"
 					aria-labelledby="navbarDropdown">
-<!-- 					<li><a class="dropdown-item" href="/Manager/searchAllManagerAction.controller">管理員資料表</a></li> -->
+<!-- 					<li><a class="dropdown-item" href="/Manager/searchAllManagerAction">管理員資料表</a></li> -->
 <!-- 					<li><a class="dropdown-item" href="/Manager/searchAllMtoM">會員資料表</a></li> -->
-<!-- 					<li><a class="dropdown-item" href="#!">廠商資料表</a></li> -->
 <!-- 					<li><hr class="dropdown-divider" /></li> -->
-					<li><a class="dropdown-item" style="font-size:20px" href="/Manager/insertManager">註冊</a></li>
+					<li><a class="dropdown-item" id="gotoInsert" style="font-size:20px" href="/Manager/insertManager">註冊</a></li>
 					<li><a class="dropdown-item" style="font-size:20px" href="/iiiHealth/logout">登出</a></li>
 				</ul></li>
 		</ul>
@@ -51,9 +51,8 @@
 						<div class="collapse" id="collapseLayouts0"
 							aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/Manager/searchAllManagerAction.controller">管理員資料表</a>
+								<a class="nav-link" href="/Manager/searchAllManagerAction">管理員資料表</a>
 								<a class="nav-link" href="/Manager/searchAllMtoM">會員資料表</a>
-								<a class="nav-link" href="#">廠商資料表</a>
 							</nav>
 						</div>
 						
@@ -70,9 +69,10 @@
 					</a>
 					<div class="collapse" id="collapseLayouts1"
 						aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-						<nav class="sb-sidenav-menu-nested nav"> <a class="nav-link"
-							href="${pageContext.request.contextPath}/taxi/taximainpage.controller">計程車資訊</a> <a class="nav-link"
-							href="${pageContext.request.contextPath}/taxi/locmainpage.controller">店家資訊</a> </nav>
+						<nav class="sb-sidenav-menu-nested nav"> 
+						<a class="nav-link" href="${pageContext.request.contextPath}/taxi/taximainpage.controller">計程車資訊</a> 
+						<a class="nav-link" href="${pageContext.request.contextPath}/taxi/locmainpage.controller">店家資訊</a> 
+						</nav>
 					</div>
 
 
@@ -130,9 +130,15 @@
 
 						</nav>
 					</div>
-
-				</div>
+ <div class="sb-sidenav-menu-heading">線上客服</div>
+                         
+                            <a class="nav-link" href="${pageContext.request.contextPath}/chat">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                聊天室
+                            </a>
+                        </div>
 			</div>
 			
 			</nav>
 		</div>
+

@@ -35,7 +35,7 @@ public class Equip {
 	private String hot;
 	
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinTable(name="collect", joinColumns = @JoinColumn(name="equipid"), inverseJoinColumns = @JoinColumn(name="memberid"))
 	private List<Member> members;
 

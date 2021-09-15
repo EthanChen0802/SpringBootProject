@@ -214,7 +214,7 @@
 	
 	// 重新使用全搜索
 	function reset(){
-		createAscendButton(3);
+		createInitialButton(3);
 		change(1);
 	}
 	

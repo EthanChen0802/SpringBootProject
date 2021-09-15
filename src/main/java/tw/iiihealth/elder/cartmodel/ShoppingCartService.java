@@ -23,6 +23,7 @@ public class ShoppingCartService {
 		private EquipRepository equipRepository;
 		
 		
+		// 依照會員查找購物車
 		public List<CartItem> listCartItems(Member member){
 			return cartItemRepository.findByMember(member);
 		}

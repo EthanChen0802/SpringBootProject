@@ -2,6 +2,7 @@ package tw.iiihealth.elder.cartmodel;
 
 import java.beans.Transient;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class CartItem {
 	private Equip equip;
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="member_id")
 	private Member member;
 	

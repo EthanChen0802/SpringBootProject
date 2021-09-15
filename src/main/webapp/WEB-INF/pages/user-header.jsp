@@ -21,20 +21,21 @@
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="/HealthProject" class="active nav-link">首頁</a></li>
 
+	  
+              <li class="has-children">
+                  <a href="#" class="nav-link">便利專區</a>
+                  <ul class="dropdown">
+                    <li><a href="/taxiFront/frontlocmainpage.controller" class="nav-link">尋找醫療機構</a></li>
+                    <li class="has-children">
+                      <a href="/taximap/fronttaximap.controller" class="nav-link">叫車資訊</a>
+                      <ul class="dropdown">
+                        <li><a href="/taximap/fronttaximap.controller">計程車即時動態地圖</a></li>
+                        <li><a href="/taxiFront/fronttaximainpage.controller">預約叫車</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
 
-
-
-
-
-
-
-			  <li class="has-children">
-                <a href="#" class="nav-link">便利專區</a>
-                <ul class="dropdown">
-                  <li><a href="/taxiFront/fronttaximainpage.controller" class="nav-link">叫車資訊</a></li>
-                  <li><a href="/taxiFront/frontlocmainpage.controller" class="nav-link">尋找醫療機構</a></li>
-                </ul>
-              </li>
 
      		    <li class="has-children">
                   <a href="#" class="nav-link">長者專區</a>
@@ -60,11 +61,7 @@
                     <li><a href="${pageContext.request.contextPath}/Drugfront/findalldrugproductFront" class="nav-link">藥品包裝</a></li>
                   </ul>
                 </li>
-                
-                
-                
-
-
+            
 <c:if test="${not empty user_Member}">
    
 
@@ -77,13 +74,6 @@
                         <li><a href="/Member/searchOneMemberAction.controller">會員個人資料</a></li>
                         <li><a href="/Member/logout">會員登出</a></li>
                         <li><a href="/HealthProject/insertMember">會員註冊</a></li>
-                      </ul>
-                    </li>
-                    <li class="has-children">
-                      <a href="#">廠商專區</a>
-                      <ul class="dropdown">
-                        <li><a href="#">廠商登入</a></li>
-                        <li><a href="#">廠商註冊</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -101,13 +91,7 @@
                       <ul class="dropdown">
                         <li><a href="/Member/login">會員登入</a></li>
                         <li><a href="/HealthProject/insertMember">會員註冊</a></li>
-                      </ul>
-                    </li>
-                    <li class="has-children">
-                      <a href="#">廠商專區</a>
-                      <ul class="dropdown">
-                        <li><a href="#">廠商登入</a></li>
-                        <li><a href="#">廠商註冊</a></li>
+                        <li><a href="/Member/logout">重新整理</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -115,10 +99,21 @@
 
 </c:if>
 
-
+                
 <!--                 <li><a href="about.html" class="nav-link">關於我們</a></li> -->
-                <li><a href="${pageContext.request.contextPath}/contact" class="nav-link">聯絡我們</a></li>
+          <li class="has-children">
+                  <a href="#" class="nav-link">留言專區</a>
+                  <ul class="dropdown">
+                    <li><a href="${pageContext.request.contextPath}/comment" class="nav-link">留言板</a></li>
+                    <li><a href="${pageContext.request.contextPath}/contact"  class="nav-link">聯絡我們</a></li>
+                    <li><a href="${pageContext.request.contextPath}/chat"  class="nav-link">線上客服</a></li>
+                  </ul>
+                </li>
+                
 
+
+
+          
               </ul>
 
             </nav>

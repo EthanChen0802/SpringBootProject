@@ -15,11 +15,15 @@
   <!-- 引用ajax商品頁面 -->
   <script src="${pageContext.request.contextPath}/js/equipsellfront.js"></script>
   
+  <!-- Sakura -->
+  <link type="text/css" rel="stylesheet" media="screen" href="${pageContext.request.contextPath}/css/sakura.min.css" />
   
   <!-- owl.carousel -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"></link>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"></link>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"></link>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"></link>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  
+  
   
   <style>
   	
@@ -29,7 +33,9 @@
   	
   	#button{
   		width:200px;
-  		margin: 0 auto 20px auto;
+  	    position: absolute; 
+	    top: 920px;  
+	    left: 700px; 
   	}
   	
   	#myPage{
@@ -65,7 +71,7 @@
 	
 	.sort{
 	    position: absolute;  /*固定在網頁上不隨卷軸移動，若要隨卷軸移動用absolute*/
-	    top: 850px;  /*設置垂直位置*/
+	    top: 90px;  /*設置垂直位置*/
 	    left: -10px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
 	    background: transparent;  /*背景顏色*/
 		transition-duration:1s;
@@ -111,10 +117,10 @@
 	}
 	
 	#dialog{
-		background:white;
 		background-image: url("${pageContext.request.contextPath}/images/background.jpg");
 		background-size: cover;
 	}
+	
 	
 	#span{
 		font-size: 30px;
@@ -145,11 +151,58 @@
 	}
 	
 	
-	 .modal-backdrop.in
-	{
+	.modal-backdrop.in {
 	    opacity:0.9 !important;
 	}
+
+	.a{
+          font-size: 30px;
+          color: #333;
+          cursor: pointer;
+          text-align:center;
+          margin-top:10px;
+          margin-bottom:10px;
+          font-family:"Microsoft JhengHei";
+          font-weight:bold;
+      }
+      
+   
+      
+     .a span {
+         transition: .5s;
+         transition-delay: calc(var(--i)*.08s);
+      }
+      
+     .a:hover span{
+         color: rgb(36,160,237) ;
+        
+     
+      }
+      
+      #sakura{
+       position: relative;
+       top:0px; 
+      }
 		
+	  #outer{
+	  	height:1000px;
+	  }	
+		      
+      #cat{
+        position: absolute; 
+	    top: 827px;  
+	    left: 120px; 
+	    background: transparent;  
+      }
+      
+      #cat2{
+        position: absolute;  
+	    top: 815px;  
+	    right: 80px; 
+	    background-image: transparent;  
+	    z-index:0;
+      }
+      
   </style>  
   
    
@@ -169,7 +222,8 @@
     })();
  <!-- /GetButton.io widget -->   
  
-    
+ 	
+ 
   </script>
 
   
@@ -207,13 +261,14 @@
           <div class="col-lg-8 align-self-center">
             <h1 class="heading mb-3">輔具購買商城</h1>
             <p class="lead text-white mb-5">提供各式各樣的輔具產品 <br>讓生活自在得意</p>
-            <p><a href="${pageContext.request.contextPath}/contact" class="btn btn-primary">聯絡我們</a></p>
           </div>
         </div>
       </div>  
     </div>
     
-    
+  
+<div id="sakura">  
+<div id="outer">
 
     <!-- 最上面 -->
     <div id="top">
@@ -263,8 +318,15 @@
 	
 	<!--  產品推銷頁 -->
 	<div id="dialog" >
-		<div style="width:500px; margin:0px auto 20px auto;text-align:center">
-			<span id="span">熱銷產品</span>
+		<div class="a">
+			<!--  <span id="span">熱銷產品</span> -->
+			<span style='--i:1'>當</span> 
+			<span style="--i:2">月</span> 
+			<span style="--i:3">熱</span> 
+			<span style="--i:4">賣</span> 
+			<span style="--i:5">商</span>
+			<span style="--i:6">品</span>
+		
 		</div>
 		
 		<div class="owl-carousel owl-theme">
@@ -274,11 +336,10 @@
 		</div>
 		
 		<div style=" position: absolute;bottom:25px; left:505px">
-			<input type="button" value="close" id="close" class="btn btn-outline-info" style="font-size:10px;padding:4px 8px;  text-transform: none;">
+			<input type="button" value="Exit" id="close" class="btn btn-outline-info" style="font-size:5px;padding:2px 6px;  text-transform: none;">
 		</div>
 	</div>
 		
-
 
 
     <div class="site-section">
@@ -289,10 +350,16 @@
 	       
         </div>
       </div>
-      
-      
     </div>
-		
+	
+	<div id="cat">
+		<img src="${pageContext.request.contextPath}/images/cat.jpg" style="width:160px; height:170px">
+	</div>
+	
+	<div id="cat2">
+		<img src="${pageContext.request.contextPath}/images/cat2.jpg" style="width:220px; height:180px">
+	</div>
+	
 
 	<div id="button">
 		<!-- 
@@ -301,20 +368,22 @@
 		</c:forEach>
 		 -->
     </div>
-
-    
+</div>
     
     
     <!-- Footer -->
 	<%@ include file="/WEB-INF/pages/user-site-footer.jsp"%>
 
 
-    
-
  	</div> <!-- .site-wrap -->
 	<%@ include file="/WEB-INF/pages/user-js.jsp"%>
- 
- 
+	
+</div>  
+  
+  
+ 	<!--  sakura -->
+ 	<script src="${pageContext.request.contextPath}/js/sakura.min.js"></script>  
+ 	
  <script>
  <!-- 搜索列滑動 -->
  $("#flip").click(function(){
@@ -401,6 +470,40 @@
 			        }
 			    }
 			});
+		 
+		 
+		 
+		
+	    // 櫻花 
+	 	var sakura = new Sakura('#sakura', {
+		    colors: [
+		        {
+		            gradientColorStart: 'rgba(255, 183, 197, 0.9)',
+		            gradientColorEnd: 'rgba(255, 197, 208, 0.9)',
+		            gradientColorDegree: 120,
+		        },
+		        {
+		            gradientColorStart: 'rgba(255,189,189)',
+		            gradientColorEnd: 'rgba(227,170,181)',
+		            gradientColorDegree: 120,
+		        },
+		        {
+		            gradientColorStart: 'rgba(212,152,163)',
+		            gradientColorEnd: 'rgba(242,185,196)',
+		            gradientColorDegree: 120,
+		        },
+		    ],
+		    fallspeed: 2,
+		    delay: 400,
+		    maxSize: 15,
+		});
+	   
+	   
+	   
+		  setTimeout(function(){
+			  	sakura.stop(graceful=true);
+		  	  }, 10000
+		  );
  </script>
 
 </body>
